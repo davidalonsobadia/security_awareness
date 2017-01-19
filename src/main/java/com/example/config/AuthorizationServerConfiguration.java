@@ -19,15 +19,12 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
-import com.example.security.UserDetailsServiceImpl;
-
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter implements EnvironmentAware {
 
     private static final String ENV_OAUTH = "authentication.oauth.";
     private static final String PROP_CLIENTID = "clientid";
-    private static final String PROP_SECRET = "secret";
     private static final String PROP_TOKEN_VALIDITY_SECONDS = "tokenValidityInSeconds";
 
     private RelaxedPropertyResolver propertyResolver;

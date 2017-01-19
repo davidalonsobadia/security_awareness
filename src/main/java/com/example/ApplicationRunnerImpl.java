@@ -1,7 +1,15 @@
 package com.example;
+import java.util.ArrayList;
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -14,9 +22,6 @@ import com.example.repository.UserRepository;
 @Component
 public class ApplicationRunnerImpl implements ApplicationRunner{
 	
-	//TODO: REALIZAR TESTS PARA NO TENER QUE ESTAR COGIENDO EL MALDITO 
-	//      TOKEN CADA VEZ
-
 	@Autowired
 	private UserRepository userRepository;
 	
@@ -28,12 +33,13 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 	
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
+		loadSecurityContext();
 		loadUsersData();
 		
 	}
 	
 	private void loadUsersData(){
-		
+				
 		Authority admin = new Authority(Role.ADMIN);
 		Authority user = new Authority(Role.USER);
 		Authority superAdmin = new Authority(Role.SUPERADMIN);
@@ -72,5 +78,21 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				"victor_50",
 				user)
 		);
+	}
+	
+	void loadSecurityContext(){
+		
+		Collection<GrantedAuthority> authorities = new ArrayList<>();
+		
+		Role[] roles = Role.values();
+		for(Role role: roles){
+			authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
+		}
+		
+		org.springframework.security.core.userdetails.User springUser = new org.springframework.security.core.userdetails.User(
+				"test", "test", authorities);
+		Authentication authentication = new UsernamePasswordAuthenticationToken(springUser, null,
+			      springUser.getAuthorities());
+		SecurityContextHolder.getContext().setAuthentication(authentication);
 	}
 }
