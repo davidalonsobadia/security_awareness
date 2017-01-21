@@ -28,7 +28,7 @@ public class CustomLogoutSuccessHandler
 
     @Autowired
     private TokenStore tokenStore;
-
+    
     @Override
     public void onLogoutSuccess(HttpServletRequest request,
                                 HttpServletResponse response,

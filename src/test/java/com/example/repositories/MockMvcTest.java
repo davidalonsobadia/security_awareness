@@ -9,7 +9,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.example.config.AuthenticationClient;
 import com.example.config.AuthenticationUser;
-import com.example.config.OAuthHelper;
+import com.example.utils.OAuthHelper;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

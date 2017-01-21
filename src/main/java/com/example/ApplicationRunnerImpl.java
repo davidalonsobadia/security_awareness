@@ -40,43 +40,43 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 	
 	private void loadUsersData(){
 				
-		Authority admin = new Authority(Role.ADMIN);
 		Authority user = new Authority(Role.USER);
-		Authority superAdmin = new Authority(Role.SUPERADMIN);
-		Authority god = new Authority(Role.GOD);
+		Authority anonymous = new Authority(Role.ANONYMOUS);
+		Authority admin = new Authority(Role.ADMIN);
+		Authority superadmin = new Authority(Role.SUPERADMIN);
 		
-		authorityRepository.save(admin);
 		authorityRepository.save(user);
-		authorityRepository.save(superAdmin);
-		authorityRepository.save(god);
+		authorityRepository.save(anonymous);
+		authorityRepository.save(admin);
+		authorityRepository.save(superadmin);
 		
 		userRepository.save(new User(
 				"David", // first name
 				"Alonso", // last name
 				passwordEncoder.encode("123456"), // password
 				"alonso_50", // username
-				god) //Role
+				superadmin) //Role
 		);
 		userRepository.save(new User(
 				"Sergi", 
 				"Alonso", 
 				passwordEncoder.encode("123456"), 
 				"sergi_50",
-				admin)
+				user)
 		);
 		userRepository.save(new User(
 				"Juan", 
 				"Caubet", 
 				passwordEncoder.encode("123456"), 
 				"juan_50",
-				user)
+				anonymous)
 		);
 		userRepository.save(new User(
 				"Victor",
 				"Pomareda",
 				passwordEncoder.encode("123456"),
 				"victor_50",
-				user)
+				anonymous)
 		);
 	}
 	
@@ -84,10 +84,12 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 		
 		Collection<GrantedAuthority> authorities = new ArrayList<>();
 		
-		Role[] roles = Role.values();
-		for(Role role: roles){
-			authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
-		}
+//		Role[] roles = Role.values();
+//		for(Role role: roles){
+//			authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
+//		}
+		
+		authorities.add(new SimpleGrantedAuthority(Role.SUPERADMIN.getRoleName()));
 		
 		org.springframework.security.core.userdetails.User springUser = new org.springframework.security.core.userdetails.User(
 				"test", "test", authorities);

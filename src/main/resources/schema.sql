@@ -9,7 +9,7 @@ CREATE TABLE oauth_access_token (
   refresh_token varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS oauth_refresh_token;z
+DROP TABLE IF EXISTS oauth_refresh_token;
 CREATE TABLE oauth_refresh_token (
   token_id varchar(256) DEFAULT NULL,
   token blob,

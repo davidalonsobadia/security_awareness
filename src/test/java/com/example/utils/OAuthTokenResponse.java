@@ -1,4 +1,4 @@
-package com.example.test.security;
+package com.example.utils;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

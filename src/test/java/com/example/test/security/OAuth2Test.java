@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import com.example.utils.OAuthTokenResponse;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -46,7 +47,7 @@ public class OAuth2Test {
 	 */
     @Test
 	public void Should_getValidTokens_When_ValidCredentials() throws Exception{
-    	OAuthTokenResponse tokenResponse = getAccessToken("alonso_50", "123456", "davidapp");
+    	OAuthTokenResponse tokenResponse = getAccessToken("alonso_50", "123456", "security_awareness_app");
     	
     	assertNotNull(tokenResponse.accessToken);
     	assertNotNull(tokenResponse.refreshToken);
@@ -61,7 +62,7 @@ public class OAuth2Test {
 	 */
 	@Test
 	public void Should_getInvalidCredentialsMessage_When_InvalidCredentials() throws Exception{
-		OAuthTokenResponse tokenResponse = getAccessToken("alonso_50", "wrongPassword", "davidapp");
+		OAuthTokenResponse tokenResponse = getAccessToken("alonso_50", "wrongPassword", "security_awareness_app");
     	
     	assertNull(tokenResponse.accessToken);
     	assertNull(tokenResponse.refreshToken);

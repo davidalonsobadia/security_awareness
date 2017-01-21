@@ -1,16 +1,13 @@
 package com.example.config;
 
-import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.junit.runners.Suite;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
+import com.example.repositories.UserRepositoryTest;
+import com.example.test.security.OAuth2Test;
+
+@RunWith(Suite.class)
+@Suite.SuiteClasses({OAuth2Test.class, UserRepositoryTest.class})
 public class MyOauthExampleApplicationTests {
-
-	@Test
-	public void contextLoads() {
-	}
 
 }

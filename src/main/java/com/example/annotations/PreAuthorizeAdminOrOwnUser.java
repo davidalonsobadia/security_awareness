@@ -7,14 +7,14 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.springframework.security.access.prepost.PostFilter;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
-@PostFilter("hasRole('ADMIN') or "
-		+ "filterObject.getUsername() == principal.getUsername()")
-public @interface PostFilterAdminOrOwnUser {
+@PreAuthorize("hasRole('ROLE_ADMIN') or "
+		+ "principal.username == #user.username")
+public @interface PreAuthorizeAdminOrOwnUser {
 
 }

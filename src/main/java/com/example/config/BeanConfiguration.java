@@ -23,30 +23,29 @@ public class BeanConfiguration {
 
     @Bean
     public RoleHierarchy roleHierarchy(){
-    	String hierarchy = Role.GOD.getRoleName() + " > " + Role.SUPERADMIN.getRoleName() + " "
-    			+ Role.SUPERADMIN.getRoleName() + " > "  + Role.ADMIN.getRoleName() + " "
-    			+ Role.ADMIN.getRoleName() + " > " + Role.USER.getRoleName();
+    	String hierarchy = Role.SUPERADMIN.getRoleName() + " > " + Role.ADMIN.getRoleName() + " "
+    			+ Role.ADMIN.getRoleName() + " > "  + Role.USER.getRoleName() + " "
+    			+ Role.USER.getRoleName() + " > " + Role.ANONYMOUS.getRoleName();
     	RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
     	roleHierarchy.setHierarchy(hierarchy);
     	return roleHierarchy;
     }
     
-  @Bean
-  AccessDecisionManager accessDecisionManager(){
+    @Bean
+    AccessDecisionManager accessDecisionManager(){
   	
-  	List<AccessDecisionVoter<? extends Object>> decisionVoters = new ArrayList<>();
-  	WebExpressionVoter webExpressionVoter = new WebExpressionVoter();
-  	webExpressionVoter.setExpressionHandler(expressionHandler());
-  	decisionVoters.add(webExpressionVoter);
-  	
-  	AffirmativeBased accessDecisionManager = new AffirmativeBased(decisionVoters);
-  	
-  	return accessDecisionManager;
+	  	List<AccessDecisionVoter<? extends Object>> decisionVoters = new ArrayList<>();
+	  	WebExpressionVoter webExpressionVoter = new WebExpressionVoter();
+	  	webExpressionVoter.setExpressionHandler(expressionHandler());
+	  	decisionVoters.add(webExpressionVoter);
+	  	
+	  	AffirmativeBased accessDecisionManager = new AffirmativeBased(decisionVoters);  	
+	  	return accessDecisionManager;
   }
   
-  private SecurityExpressionHandler<FilterInvocation> expressionHandler() {
-      DefaultWebSecurityExpressionHandler defaultWebSecurityExpressionHandler = new OAuth2WebSecurityExpressionHandler();
-      defaultWebSecurityExpressionHandler.setRoleHierarchy(roleHierarchy());
-      return defaultWebSecurityExpressionHandler;
-  }
+	 private SecurityExpressionHandler<FilterInvocation> expressionHandler() {
+		DefaultWebSecurityExpressionHandler defaultWebSecurityExpressionHandler = new OAuth2WebSecurityExpressionHandler();
+		defaultWebSecurityExpressionHandler.setRoleHierarchy(roleHierarchy());
+		return defaultWebSecurityExpressionHandler;
+	 }
 }

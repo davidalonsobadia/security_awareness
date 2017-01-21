@@ -9,7 +9,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.persistence.Entity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -22,7 +25,9 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.request.RequestPostProcessor;
 
 import com.example.model.User;
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -54,27 +59,23 @@ public class UserRepositoryTest extends AbstractRepositoryTest{
     			.andExpect(status().isOk())
     			.andReturn().getResponse();
     	
-    	JSONObject json = new JSONObject(response.getContentAsString());    	    	
-    	JSONArray arrays = json.getJSONObject("_embedded").getJSONArray("users");
     	
-    	List<User> users = mapper.readValue(arrays.toString(), new TypeReference<List<User>>(){});
-    	
+    	List<? extends Entity> users = getEntitiesList(response.getContentAsString());    	
     	assertNotNull(users);
-    	assertEquals(users.size(), 1);
-    	assertEquals(users.get(0).getUsername(), authenticationUser.user().getUsername());
     }
 	
+    
 	/*
 	 * Test 2. Get details of other user from registered User with Role User
 	 */
     @Test
-    public void Should_getErrorMessage_When_UserDetailsFromANotherUserWithRoleUser() throws Exception{
+    public void Should_getUserDetails_When_UserDetailsFromANotherUserWithRoleUser() throws Exception{
     	RequestPostProcessor bearerToken = oauthHelper.bearerToken(authenticationClient.client(), authenticationUser.user());
     	mvc.perform(
     			get("/" + getResourceName() + "/1")
     				.with(bearerToken)
     			)		
-    			.andExpect(status().isForbidden());
+    			.andExpect(status().isOk());
     }
 	
 	/*
@@ -103,7 +104,7 @@ public class UserRepositoryTest extends AbstractRepositoryTest{
 	public void Should_getErrorMessage_When_DeleteUserWithRoleUser() throws Exception{ 
 		RequestPostProcessor bearerToken = oauthHelper.bearerToken(authenticationClient.client(), authenticationUser.user());
     	mvc.perform(
-    			delete("/" + getResourceName() + "/1")
+    			delete("/" + getResourceName() + "/2")
     				.with(bearerToken)
     			)		
     			.andExpect(status().isForbidden());
@@ -126,10 +127,7 @@ public class UserRepositoryTest extends AbstractRepositoryTest{
 	    			.with(bearerToken))
 	    		.andReturn().getResponse();			 
 		 
-    	JSONObject json = new JSONObject(response.getContentAsString());    	    	
-    	JSONArray arrays = json.getJSONObject("_embedded").getJSONArray("users");
-    	
-    	List<User> users = mapper.readValue(arrays.toString(), new TypeReference<List<User>>(){});
+    	List<? extends Entity> users = getEntitiesList(response.getContentAsString());
     	
     	assertEquals(response.getStatus(), 200);
     	assertNotNull(users);
@@ -166,8 +164,8 @@ public class UserRepositoryTest extends AbstractRepositoryTest{
 		RequestPostProcessor bearerToken = oauthHelper.bearerToken(authenticationClient.client(), authenticationUser.admin());
 	    mvc.perform(
     		post("/"+ getResourceName())
-    		.with(bearerToken)
-    		.content(content)
+    			.with(bearerToken)
+    			.content(content)
     		)
 			.andExpect(status().isCreated())
 			.andDo(print())

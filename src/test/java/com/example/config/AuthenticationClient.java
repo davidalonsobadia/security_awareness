@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuthenticationClient {
 	
-    public static final String CLIENT_ID = "davidapp";
+    public static final String CLIENT_ID = "security_awareness_app";
 	
     @Autowired
     private ClientDetailsService clientDetailsService;
