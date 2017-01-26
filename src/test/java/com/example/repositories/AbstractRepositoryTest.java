@@ -82,4 +82,7 @@ public abstract class AbstractRepositoryTest extends MockMvcTest{
 	protected ResultMatcher isConflict(){
 		return status().isConflict();
 	}
+	protected ResultMatcher isNotFound(){
+		return status().isNotFound();
+	}
 }
