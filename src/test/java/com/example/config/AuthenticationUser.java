@@ -13,10 +13,12 @@ import com.example.model.Role;
 @Component
 public class AuthenticationUser {
 	
-    public static final String ADMIN_NAME = "alonso_50";
+    public static final String ADMIN_NAME = "alonso_50@mail.com";
     public static final String ADMIN_PASSWORD = "123456";
-    public static final String USER_NAME = "victor_50";
+    public static final String USER_NAME = "txema_50@mail.com";
     public static final String USER_PASSWORD = "123456";
+    public static final String ANONYMOUS_NAME = "victor_50@mail.com";;
+    public static final String ANONYMOUS_PASSWORD = "123456";
     
 	public User admin(){
 		
@@ -36,6 +38,16 @@ public class AuthenticationUser {
 				USER_PASSWORD,
 				new ArrayList<GrantedAuthority>(
 						Arrays.asList(new SimpleGrantedAuthority(Role.USER.getRoleName()))));
+		return userDetails;
+	}
+
+	public User anonymous() {
+
+		User userDetails = new User(
+				ANONYMOUS_NAME,
+				ANONYMOUS_PASSWORD,
+				new ArrayList<GrantedAuthority>(
+						Arrays.asList(new SimpleGrantedAuthority(Role.ANONYMOUS.getRoleName()))));
 		return userDetails;
 	}
 }

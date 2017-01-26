@@ -37,12 +37,22 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
              .and()
 	            .authorizeRequests()
 	            	.accessDecisionManager(accessDecisionManager)
-	            	.antMatchers("/**")
-	            		.authenticated()
-	            	.antMatchers("/register")
-	            		.hasRole(Role.ANONYMOUS.name())
+	            	.antMatchers("/authorities/**")
+            			.hasRole(Role.ADMIN.name())
 	            	.antMatchers("/users/**")
-	            		.hasRole(Role.USER.name());
+	            		.hasRole(Role.USER.name())
+	            	.antMatchers("/activities/**")
+	            		.hasRole(Role.USER.name())
+	            	.antMatchers("/notifications/**")
+	            		.hasRole(Role.USER.name())
+	            	.antMatchers("/resources/**")
+	            		.hasRole(Role.USER.name())
+	            	.antMatchers("/zones/**")
+	            		.hasRole(Role.USER.name())
+		            .antMatchers("/register")
+	            		.hasRole(Role.ANONYMOUS.name())
+		            .anyRequest()
+	            		.authenticated();
     }     
 }
 

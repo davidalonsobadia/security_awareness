@@ -51,6 +51,14 @@ public class Authority {
 		this.role = role;
 	}
 
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
+	}
+
 //	public User getUser() {
 //		return user;
 //	}

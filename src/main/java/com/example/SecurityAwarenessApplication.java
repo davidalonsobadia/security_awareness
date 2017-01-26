@@ -8,9 +8,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @EntityScan(basePackages="com.example.model")
 @EnableJpaRepositories(basePackages="com.example.repository")
-public class MyOauthExampleApplication {
+public class SecurityAwarenessApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MyOauthExampleApplication.class, args);
+		SpringApplication.run(SecurityAwarenessApplication.class, args);
 	}
 }

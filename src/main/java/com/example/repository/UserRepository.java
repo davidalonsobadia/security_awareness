@@ -21,5 +21,5 @@ public interface UserRepository extends CrudRepository<User, Long> {
 	@Override
 	void deleteAll();
 	
-	User findByUsername(@Param("username") String username);
+	User findByEmail(@Param("email") String email);
 }
