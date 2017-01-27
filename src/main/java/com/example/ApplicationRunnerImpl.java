@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,18 +20,20 @@ import org.springframework.stereotype.Component;
 import com.example.model.Activity;
 import com.example.model.Authority;
 import com.example.model.Notification;
+import com.example.model.Password;
 import com.example.model.Resource;
 import com.example.model.Role;
 import com.example.model.User;
 import com.example.model.UserConfiguration;
 import com.example.model.Zone;
-import com.example.repository.ActivityRepository;
 import com.example.repository.AuthorityRepository;
 import com.example.repository.NotificationRepository;
+import com.example.repository.PasswordRepository;
 import com.example.repository.ResourceRepository;
 import com.example.repository.UserConfigurationRepositry;
 import com.example.repository.UserRepository;
 import com.example.repository.ZoneRepository;
+import com.example.service.ActivityService;
 
 @Component
 public class ApplicationRunnerImpl implements ApplicationRunner{
@@ -48,16 +49,16 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 	
 	@Autowired
 	private UserConfigurationRepositry userConfigurationRepository;
-	
-	@Autowired
-	private ActivityRepository activityRepository;
-	
+		
 	@Autowired
 	private NotificationRepository notificationRepository;
 	
 	@Autowired
 	private ResourceRepository resourceRepository;
 	
+	
+	@Autowired
+	private ActivityService activityService;	
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -158,7 +159,6 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 			notificationRepository.save(notification5);
 			
 		
-		
 		} catch (ParseException e) {
 			e.printStackTrace();
 			
@@ -183,14 +183,14 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 			usersActivity1.add(userRepository.findByEmail(GONZALO));
 			usersActivity1.add(userRepository.findByEmail(JUAN));
 			activity1.setUsers(usersActivity1);
-			activityRepository.save(activity1);
+			activityService.save(activity1);
 			
 			// Activity 2		
 			Activity activity2 = new Activity();
 			activity2.setName("Hack a Car!");
 			activity2.setDescription("Tech congress");		
-			activity2.setDateTimeStart(DATE_FORMAT.parse("21/01/2017 18:00"));
-			activity2.setDateTimeEnd(DATE_FORMAT.parse("21/01/2017 21:00"));
+			activity2.setDateTimeStart(DATE_FORMAT.parse("21/01/2017 11:00"));
+			activity2.setDateTimeEnd(DATE_FORMAT.parse("21/01/2017 12:00"));
 			activity2.setPlace("Barcelona Imagina Building");
 			activity2.setManager(userRepository.findByEmail(GONZALO));
 			activity2.setType(2);
@@ -198,14 +198,14 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 			usersActivity2.add(userRepository.findByEmail(VICTOR));
 			usersActivity2.add(userRepository.findByEmail(MARCOS));
 			activity2.setUsers(usersActivity2);
-			activityRepository.save(activity2);	
+			activityService.save(activity2);	
 			
 			// Activity 3	
 			Activity activity3 = new Activity();
 			activity3.setName("Security Of Things");
 			activity3.setDescription("World conference");	
 			activity3.setDateTimeStart(DATE_FORMAT.parse("23/01/2017 18:00"));
-			activity3.setDateTimeEnd(DATE_FORMAT.parse("26/01/2017 21:00"));
+			activity3.setDateTimeEnd(DATE_FORMAT.parse("23/01/2017 21:00"));
 			activity3.setPlace("Barcelona Hall Congress");
 			activity3.setManager(userRepository.findByEmail(GONZALO));
 			activity3.setType(2);
@@ -213,7 +213,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 			Set<User> usersActivity3 = new HashSet<>();
 			usersActivity3.add(userRepository.findByEmail(ALONSO));
 			activity3.setUsers(usersActivity3);
-			activityRepository.save(activity3);
+			activityService.save(activity3);
 		
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -250,6 +250,9 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 		
 	}
 
+	@Autowired
+	PasswordRepository passwordRepository;
+	
 	private void loadUsersData(){
 						
 		Authority user = new Authority(Role.USER);
@@ -266,7 +269,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 		User user1 = new User(
 				"David", // first name
 				"Alonso", // last name
-				passwordEncoder.encode("123456"), // password
+				new Password(passwordEncoder.encode("123456")), // password
 				ALONSO, // email
 				superadmin,
 				userConfigurationRepository.save(new UserConfiguration(0,0)));
@@ -276,7 +279,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 		User user2 = new User(
 				"Gonzalo", 
 				"Asensio", 
-				passwordEncoder.encode("123456"), 
+				new Password(passwordEncoder.encode("123456")), 
 				GONZALO,
 				admin,
 				userConfigurationRepository.save(new UserConfiguration(0,0)));
@@ -286,7 +289,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 		User user3 = new User(
 				"Mario", 
 				"Reyes", 
-				passwordEncoder.encode("123456"), 
+				new Password(passwordEncoder.encode("123456")), 
 				MARIO,
 				admin,
 				userConfigurationRepository.save(new UserConfiguration(0,0)));
@@ -297,7 +300,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 		User user4 = new User(
 				"Sergi", 
 				"Alonso", 
-				passwordEncoder.encode("123456"), 
+				new Password(passwordEncoder.encode("123456")), 
 				SERGI,
 				user,
 				userConfigurationRepository.save(new UserConfiguration(0,0)));
@@ -307,7 +310,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 		User user5 = new User(
 				"Samuel", 
 				"Exposito", 
-				passwordEncoder.encode("123456"), 
+				new Password(passwordEncoder.encode("123456")), 
 				"samuel_50@mail.com",
 				user,
 				userConfigurationRepository.save(new UserConfiguration(0,0)));
@@ -318,7 +321,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 		User user6 = new User(
 				"Diego", 
 				"Delgado", 
-				passwordEncoder.encode("123456"), 
+				new Password(passwordEncoder.encode("123456")), 
 				"diego_50@mail.com",
 				user,
 				userConfigurationRepository.save(new UserConfiguration(0,0)));
@@ -329,7 +332,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 		User user7 = new User(
 				"Marcos", 
 				"Repolles", 
-				passwordEncoder.encode("123456"), 
+				new Password(passwordEncoder.encode("123456")), 
 				MARCOS,
 				user,
 				userConfigurationRepository.save(new UserConfiguration(0,0)));
@@ -340,7 +343,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 		User user8 = new User(
 				"Txema", 
 				"Romeria", 
-				passwordEncoder.encode("123456"), 
+				new Password(passwordEncoder.encode("123456")), 
 				"txema_50@mail.com",
 				user,
 				userConfigurationRepository.save(new UserConfiguration(0,0)));
@@ -351,7 +354,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 		User user9 = new User(
 				"Juan", 
 				"Caubet", 
-				passwordEncoder.encode("123456"), 
+				new Password(passwordEncoder.encode("123456")), 
 				JUAN,
 				anonymous,
 				userConfigurationRepository.save(new UserConfiguration(0,0)));
@@ -362,7 +365,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 		User user10 = new User(
 				"Victor",
 				"Pomareda",
-				passwordEncoder.encode("123456"),
+				new Password(passwordEncoder.encode("123456")),
 				VICTOR,
 				anonymous,
 				userConfigurationRepository.save(new UserConfiguration(0,0)));

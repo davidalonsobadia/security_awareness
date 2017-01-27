@@ -1,12 +1,15 @@
 package com.example.model;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -26,6 +29,10 @@ public class Activity {
 	private Date dateTimeEnd;
 	
 	private String place;
+	
+	@OneToMany(cascade = CascadeType.REMOVE)
+	@JoinColumn(name="activity_id")
+	List<ActivityBlock> activitiesBlock;
 	
 	@ManyToOne
 	private Zone zone;
@@ -125,5 +132,13 @@ public class Activity {
 
 	public void setNumRepeats(int numRepeats) {
 		this.numRepeats = numRepeats;
+	}
+	
+	public List<ActivityBlock> getActivitiesBlock() {
+		return activitiesBlock;
+	}
+
+	public void setActivitiesBlock(List<ActivityBlock> activitiesBlock) {
+		this.activitiesBlock = activitiesBlock;
 	}
 }

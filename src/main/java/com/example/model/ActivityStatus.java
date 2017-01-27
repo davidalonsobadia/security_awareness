@@ -1,4 +1,4 @@
-package com.example.repository;
+package com.example.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,9 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-
-import com.example.model.Activity;
-import com.example.model.User;
 
 @Entity
 @Table(name="activity_status", uniqueConstraints={@UniqueConstraint(columnNames={"user_id", "activity_id"}, name="UK_user_activity")})

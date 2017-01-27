@@ -1,4 +1,4 @@
-package com.example.test.security;
+package com.example.test.controller;
 
 import org.junit.Test;
 

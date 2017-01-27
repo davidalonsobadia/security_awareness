@@ -31,7 +31,7 @@ public class UserDetailsServiceImpl implements org.springframework.security.core
 		org.springframework.security.core.userdetails.User userDetails = 
 				new org.springframework.security.core.userdetails.User(
 						userFromDatabase.getEmail(),
-						userFromDatabase.getPassword(), 
+						userFromDatabase.getPassword().getString(), 
 						grantedAuthorities);
 		
 		return userDetails;

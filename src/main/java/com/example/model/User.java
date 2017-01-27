@@ -65,9 +65,9 @@ public class User {
 	@OneToOne
 	private UserConfiguration configuration;
 	
-	@JsonDeserialize(using = BCryptPasswordDeserializer.class )
+	@OneToOne(cascade=CascadeType.PERSIST)
 	@JsonIgnore
-	private String password;
+	private Password password;
 		
 	@NotEmpty
 	@NotNull
@@ -79,7 +79,7 @@ public class User {
 	
 	public User(){}
 	
-	public User(String firstName, String lastName, String password, 
+	public User(String firstName, String lastName, Password password, 
 			String username, Authority authority, UserConfiguration configuration) {
 		super();
 		this.firstName = firstName;
@@ -110,11 +110,11 @@ public class User {
 		return id;
 	}
 
-	public String getPassword() {
+	public Password getPassword() {
 		return password;
 	}
 
-	public void setPassword(String password) {
+	public void setPassword(Password password) {
 		this.password = password;
 	}
 
