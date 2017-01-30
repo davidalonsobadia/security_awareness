@@ -1,10 +1,10 @@
 package com.example.repositories;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.List;
 
 import javax.persistence.Entity;
-
-import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.springframework.test.web.servlet.ResultActions;

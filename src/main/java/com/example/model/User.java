@@ -22,6 +22,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+
 @Entity
 @Table(name="users",
 	uniqueConstraints={@UniqueConstraint(name="unique_email", columnNames={"email"})})
@@ -45,12 +46,13 @@ public class User {
 	// Child relation
 	@ManyToMany
 	@JoinTable(name="user_zone", 
-		joinColumns=@JoinColumn(name="user_id"), 
-		inverseJoinColumns=@JoinColumn(name="zone_id"))
+		joinColumns = @JoinColumn(name="user_id"), 
+		inverseJoinColumns = @JoinColumn(name="zone_id"))
 	private Set<Zone> zones;	
 	
-	@OneToMany
-	private Set<Notification> notifications;
+	@OneToMany(mappedBy="user")
+	@JsonIgnore
+	private Set<NotificationStatus> notificationStatus;
 	
 	//Parent relation
 	@ManyToMany(mappedBy = "users")
@@ -155,14 +157,6 @@ public class User {
 		this.zones = zones;
 	}
 
-	public Set<Notification> getNotifications() {
-		return notifications;
-	}
-
-	public void setNotifications(Set<Notification> notifications) {
-		this.notifications = notifications;
-	}
-
 	public Set<Activity> getActivities() {
 		return activities;
 	}
@@ -193,5 +187,13 @@ public class User {
 
 	public void setRegistered(boolean registered) {
 		this.registered = registered;
+	}
+
+	public Set<NotificationStatus> getNotificationStatus() {
+		return notificationStatus;
+	}
+
+	public void setNotificationStatus(Set<NotificationStatus> notificationStatus) {
+		this.notificationStatus = notificationStatus;
 	}
 }

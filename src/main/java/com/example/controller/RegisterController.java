@@ -12,10 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.example.model.Authority;
 import com.example.model.Role;
 import com.example.model.User;
-import com.example.repository.AuthorityRepository;
 import com.example.service.AuthorityService;
 import com.example.service.UserServiceImpl;
 
@@ -51,6 +49,7 @@ public class RegisterController {
     	}
     	
     	userFromDatabase.setAuthority(authorityService.findByRole(Role.USER));
+    	userFromDatabase.setRegistered(true);
     	userService.save(userFromDatabase);
     	
     	HttpHeaders headers = new HttpHeaders();

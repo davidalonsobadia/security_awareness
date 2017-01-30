@@ -1,7 +1,7 @@
 package com.example.repositories;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -11,13 +11,13 @@ import javax.persistence.Entity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.RequestPostProcessor;
 
-import org.springframework.security.core.userdetails.User;
 import com.fasterxml.jackson.core.type.TypeReference;
+
 
 public abstract class AbstractRepositoryTest extends MockMvcTest{
 	

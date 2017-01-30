@@ -1,5 +1,6 @@
 package com.example.model;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,7 +10,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="notification_status", uniqueConstraints={@UniqueConstraint(columnNames={"recipient_id", "notification_id"}, 
+@Table(name="notification_status", uniqueConstraints={@UniqueConstraint(columnNames={"user_id", "notification_id"}, 
 		name="UK_user_notification")})
 public class NotificationStatus {
 
@@ -17,13 +18,15 @@ public class NotificationStatus {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
+	// Deleted (0), Read(1), Not read(2)
 	private int status;
 	
 	@ManyToOne
+	@Embedded
 	private Notification notification;
 	
 	@ManyToOne
-	private User recipient;
+	private User user;
 
 	public int getStatus() {
 		return status;
@@ -41,12 +44,12 @@ public class NotificationStatus {
 		this.notification = notification;
 	}
 
-	public User getRecipient() {
-		return recipient;
+	public User getUser() {
+		return user;
 	}
 
-	public void setRecipient(User recipient) {
-		this.recipient = recipient;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public long getId() {

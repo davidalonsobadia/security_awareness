@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Component;
 import com.example.model.Activity;
 import com.example.model.Authority;
 import com.example.model.Notification;
+import com.example.model.NotificationStatus;
 import com.example.model.Password;
 import com.example.model.Resource;
 import com.example.model.Role;
@@ -28,6 +30,7 @@ import com.example.model.UserConfiguration;
 import com.example.model.Zone;
 import com.example.repository.AuthorityRepository;
 import com.example.repository.NotificationRepository;
+import com.example.repository.NotificationStatusRepository;
 import com.example.repository.PasswordRepository;
 import com.example.repository.ResourceRepository;
 import com.example.repository.UserConfigurationRepositry;
@@ -55,6 +58,12 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 	
 	@Autowired
 	private ResourceRepository resourceRepository;
+	
+	@Autowired
+	private NotificationStatusRepository notificationStatusRepository;
+	
+	@Autowired
+	PasswordRepository passwordRepository;
 	
 	
 	@Autowired
@@ -158,6 +167,16 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 			notification5.setSender(userRepository.findByEmail(JUAN)); 
 			notificationRepository.save(notification5);
 			
+			for(User user : userRepository.findAll()){
+				for(Notification notification: notificationRepository.findAll()){
+					NotificationStatus notificationStatus = new NotificationStatus();
+					notificationStatus.setNotification(notification);
+					notificationStatus.setUser(user);
+					Random random = new Random();
+					notificationStatus.setStatus(random.nextInt(3));
+					notificationStatusRepository.save(notificationStatus);
+				}
+			}
 		
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -283,8 +302,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 		
 	}
 
-	@Autowired
-	PasswordRepository passwordRepository;
+
 	
 	private void loadUsersData(){
 						

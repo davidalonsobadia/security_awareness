@@ -10,4 +10,5 @@ import com.example.model.Notification;
 public interface NotificationRepository extends CrudRepository<Notification, Long>{
 	
 	Set<Notification> findBySender_Email(@Param("sender") String sender);
+		
 }
