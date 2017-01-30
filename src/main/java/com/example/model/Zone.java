@@ -6,8 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -22,15 +23,16 @@ public class Zone {
 	@ManyToOne
 	private User manager;
 	
-	@OneToMany
-	private Set<User> users;
+	// Parent relation
+//	@ManyToMany
+//	private Set<User> users;
 	
 	public Zone() {}
 	
 	public Zone(String name, User manager, Set<User> users){
 		this.name = name;
 		this.manager = manager;
-		this.users = users;
+		//this.users = users;
 	}
 
 	public String getName() {
@@ -49,13 +51,13 @@ public class Zone {
 		this.manager = manager;
 	}
 
-	public Set<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(Set<User> users) {
-		this.users = users;
-	}
+//	public Set<User> getUsers() {
+//		return users;
+//	}
+//
+//	public void setUsers(Set<User> users) {
+//		this.users = users;
+//	}
 
 	public long getId() {
 		return id;

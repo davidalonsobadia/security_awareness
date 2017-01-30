@@ -16,8 +16,25 @@ public interface ActivityRepository extends CrudRepository<Activity, Long>{
 			+ "ORDER BY ab.startDate ASC")
 	Set<Activity> findAllByMonthAndYear(@Param("month") Integer month, @Param("year") Integer year);
 	
-	//TODO: repasar y mejorar
-	@Query("SELECT a FROM Activity a WHERE MONTH(a.dateTimeStart) = ?1 AND YEAR(a.dateTimeStart) = ?2 AND a.zone.name LIKE ?3 ORDER BY a.dateTimeStart ASC")
-	Set<Activity> findAllByMonthAndYearAndZone(@Param("month") Integer month, @Param("year") Integer year, @Param("zone") String zone);
+	@Query("SELECT a FROM Activity a "
+			+ "JOIN a.activitiesBlock ab "
+			+ "JOIN a.zone z "
+			+ "WHERE MONTH(ab.startDate) = :month AND YEAR(ab.startDate) = :year "
+			+ "AND z.name LIKE :zone "
+			+ "ORDER BY ab.startDate ASC")
+	Set<Activity> findAllByMonthAndYearAndZone(@Param("month") Integer month, 
+			@Param("year") Integer year, @Param("zone") String zone);
+	
+	
+	@Query("SELECT a FROM Activity a, User u "
+			+ "JOIN a.activitiesBlock ab "
+			+ "JOIN a.zone az "
+			+ "JOIN u.zones uz "
+			+ "WHERE MONTH(ab.startDate) = :month AND YEAR(ab.startDate) = :year "
+			+ "AND uz.name LIKE az.name "
+			+ "AND u.email LIKE :user "
+			+ "ORDER BY ab.startDate ASC")
+	Set<Activity> findAllByMonthAndYearAndUserZones(@Param("month") Integer month, 
+			@Param("year") Integer year, @Param("user") String user);
 	
 }

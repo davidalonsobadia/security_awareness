@@ -48,17 +48,17 @@ public abstract class AbstractRepositoryTest extends MockMvcTest{
 	}
 	protected ResultActions read(org.springframework.security.core.userdetails.User user, String... params) throws Exception{
     	RequestPostProcessor bearerToken = oauthHelper.bearerToken(client(), user);
-    	String varId = params.length > 0 ? params[0] : "";
+    	String route = params.length > 0 ? "/" + params[0] : "";
     	return mvc.perform(
-    			get("/" + getResourceName() + "/" + varId)
+    			get("/" + getResourceName() + route)
     				.with(bearerToken)
     			);
 	}
 	protected ResultActions remove(User user, String... params) throws Exception{
 		RequestPostProcessor bearerToken = oauthHelper.bearerToken(client(), user);
-		String varId = params.length > 0 ? params[0] : "";
+		String route = params.length > 0 ?  "/" + params[0] : "";
     	return mvc.perform(
-    			delete("/" + getResourceName() + "/" + varId)
+    			delete("/" + getResourceName() + route)
     				.with(bearerToken)
     			);
 	}

@@ -5,10 +5,12 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -18,9 +20,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import com.example.utils.BCryptPasswordDeserializer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @Entity
 @Table(name="users",
@@ -42,21 +42,18 @@ public class User {
 	@OneToOne
 	private User manager;
 	
-	public boolean isRegistered() {
-		return registered;
-	}
-
-	public void setRegistered(boolean registered) {
-		this.registered = registered;
-	}
-
-	@OneToMany
+	// Child relation
+	@ManyToMany
+	@JoinTable(name="user_zone", 
+		joinColumns=@JoinColumn(name="user_id"), 
+		inverseJoinColumns=@JoinColumn(name="zone_id"))
 	private Set<Zone> zones;	
 	
 	@OneToMany
 	private Set<Notification> notifications;
 	
-	@OneToMany
+	//Parent relation
+	@ManyToMany(mappedBy = "users")
 	private Set<Activity> activities;
 	
 	@OneToMany
@@ -188,5 +185,13 @@ public class User {
 
 	public void setConfiguration(UserConfiguration configuration) {
 		this.configuration = configuration;
-	}	
+	}
+	
+	public boolean isRegistered() {
+		return registered;
+	}
+
+	public void setRegistered(boolean registered) {
+		this.registered = registered;
+	}
 }

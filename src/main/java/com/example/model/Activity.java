@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -47,7 +49,10 @@ public class Activity {
 	@ManyToOne
 	private User manager;
 	
-	@OneToMany
+	@ManyToMany
+	@JoinTable(name="activity_user",
+		joinColumns=@JoinColumn(name="activity_id"),
+		inverseJoinColumns=@JoinColumn(name="user_id"))
 	private Set<User> users;
 
 	public String getName() {

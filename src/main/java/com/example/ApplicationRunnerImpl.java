@@ -174,6 +174,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 			activity1.setName("New years Eve Security!");
 			activity1.setDescription("Tech meeting");
 			activity1.setPlace("Barcelona Forum");
+			activity1.setZone(zoneRepository.findByName("Barcelona"));
 			activity1.setManager(userRepository.findByEmail(ALONSO));
 			activity1.setType(2);
 			activity1.setNumRepeats(4);
@@ -188,10 +189,11 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 			// Activity 2		
 			Activity activity2 = new Activity();
 			activity2.setName("Hack a Car!");
-			activity2.setDescription("Tech congress");		
+			activity2.setDescription("Tech congress");
+			activity2.setPlace("Barcelona Imagina Building");
+			activity2.setZone(zoneRepository.findByName("Barcelona"));
 			activity2.setDateTimeStart(DATE_FORMAT.parse("21/01/2017 11:00"));
 			activity2.setDateTimeEnd(DATE_FORMAT.parse("21/01/2017 12:00"));
-			activity2.setPlace("Barcelona Imagina Building");
 			activity2.setManager(userRepository.findByEmail(GONZALO));
 			activity2.setType(2);
 			Set<User> usersActivity2 = new HashSet<>();
@@ -203,10 +205,11 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 			// Activity 3	
 			Activity activity3 = new Activity();
 			activity3.setName("Security Of Things");
-			activity3.setDescription("World conference");	
+			activity3.setDescription("World conference");
+			activity3.setPlace("Barcelona Hall Congress");
+			activity3.setZone(zoneRepository.findByName("Barcelona"));
 			activity3.setDateTimeStart(DATE_FORMAT.parse("23/01/2017 18:00"));
 			activity3.setDateTimeEnd(DATE_FORMAT.parse("23/01/2017 21:00"));
-			activity3.setPlace("Barcelona Hall Congress");
 			activity3.setManager(userRepository.findByEmail(GONZALO));
 			activity3.setType(2);
 			activity3.setNumRepeats(3);
@@ -214,6 +217,24 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 			usersActivity3.add(userRepository.findByEmail(ALONSO));
 			activity3.setUsers(usersActivity3);
 			activityService.save(activity3);
+			
+			// Activity 4	
+			Activity activity4 = new Activity();
+			activity4.setName("Tech Capital Congress");
+			activity4.setDescription("Madrid capital");
+			activity4.setPlace("Madrid Palacio de Deportes");
+			activity4.setZone(zoneRepository.findByName("Madrid"));
+			activity4.setDateTimeStart(DATE_FORMAT.parse("31/01/2017 09:00"));
+			activity4.setDateTimeEnd(DATE_FORMAT.parse("31/01/2017 14:00"));
+			activity4.setManager(userRepository.findByEmail(GONZALO));
+			activity4.setType(2);
+			activity4.setNumRepeats(3);
+			Set<User> usersActivity4 = new HashSet<>();
+			usersActivity4.add(userRepository.findByEmail(GONZALO));
+			usersActivity4.add(userRepository.findByEmail(MARCOS));
+			usersActivity4.add(userRepository.findByEmail(MARIO));
+			activity4.setUsers(usersActivity4);
+			activityService.save(activity4);
 		
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -228,6 +249,18 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 		zones.add(zoneRepository.findByName("Madrid"));
 		user.setZones(zones);
 		userRepository.save(user);
+		
+		Set<Zone> zones2 = new HashSet<>();
+		zones2.add(zoneRepository.findByName("Barcelona"));
+		User user2 = userRepository.findByEmail(JUAN);
+		user2.setZones(zones2);
+		userRepository.save(user2);
+		
+		User user3 = userRepository.findByEmail(MARIO);
+		user3.setZones(zones2);
+		userRepository.save(user3);
+		
+		
 				
 	}
 
