@@ -85,4 +85,7 @@ public abstract class AbstractRepositoryTest extends MockMvcTest{
 	protected ResultMatcher isNotFound(){
 		return status().isNotFound();
 	}
+	protected ResultMatcher isUnauthorized(){
+		return status().isUnauthorized();
+	}
 }

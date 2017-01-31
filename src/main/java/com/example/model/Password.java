@@ -18,7 +18,6 @@ public class Password {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
-	@JsonDeserialize(using = BCryptPasswordDeserializer.class )
 	@JsonIgnore
 	private String password;
 	
@@ -37,6 +36,7 @@ public class Password {
 		return password;
 	}
 
+	@JsonDeserialize(using = BCryptPasswordDeserializer.class )
 	public void setPassword(String password) {
 		this.password = password;
 	}
