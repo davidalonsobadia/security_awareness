@@ -11,11 +11,11 @@ public interface UserRepository extends CrudRepository<User, Long> {
 			
 	@PreAuthorizeAdminOrOwnUser
 	@Override
-	<S extends User> S save(S user);
+	<S extends User> S save(S entity);
 
 	@PreAuthorizeAdminOrOwnUser
 	@Override
-	void delete(User user);
+	void delete(User entity);
 	
 	@PreAuthorizeAdmin
 	@Override

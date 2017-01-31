@@ -41,7 +41,7 @@ public class RegisterController {
     	// Upgrade users from role ANONYMOUS to role USER
     	User userFromDatabase = userService.findByEmail(user.getEmail());
     	
-    	//check current role
+    	//check current role    	
     	Role roleFromDatabase = userFromDatabase.getAuthority().getRole();
     	if(!roleFromDatabase.equals(Role.ANONYMOUS)){
     		logger.warn("User " + user.getEmail() + " already registered.");

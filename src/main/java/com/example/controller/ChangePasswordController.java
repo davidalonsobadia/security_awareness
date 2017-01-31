@@ -11,6 +11,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +35,11 @@ public class ChangePasswordController {
 	
 	@Autowired
 	private AuthenticationManager authenticationManager;
+	
+	
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	
 	@RequestMapping(value= "/changePassword", method = RequestMethod.POST)
@@ -61,7 +67,6 @@ public class ChangePasswordController {
 		    authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, oldPassword));
 		    
 		    Password password = userFromDatabase.getPassword();
-		    
 		    password.setPassword(newPassword);
 		    passwordService.save(password);	    
 		    

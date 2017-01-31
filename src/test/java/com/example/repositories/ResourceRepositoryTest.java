@@ -2,6 +2,8 @@ package com.example.repositories;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import org.springframework.test.web.servlet.ResultActions;
@@ -18,8 +20,7 @@ public class ResourceRepositoryTest extends AbstractMvcTest{
 		String route = "search/findAllByOrderByCreationDateDesc";
 		ResultActions result = read(user(), route);
 		
-		@SuppressWarnings("unchecked")
-		List<Resource> resource = (List<Resource>) getEntitiesList(result.andReturn().getResponse().getContentAsString());
+		List<? extends Entity> resource = getEntitiesList(result.andReturn().getResponse().getContentAsString());
 		
 		assertEquals(resource.size(), 3);
 	}

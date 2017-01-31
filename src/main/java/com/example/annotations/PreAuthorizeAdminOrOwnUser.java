@@ -15,7 +15,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 @Inherited
 //@PreAuthorize("hasRole('ADMIN') or "
 //		+ "(hasRole('USER') and principal.username == #user.email)")
-@PreAuthorize("hasRole('ADMIN') or principal.username == #user.email")
+@PreAuthorize("hasRole('ADMIN') or principal.username == #entity.email")
 public @interface PreAuthorizeAdminOrOwnUser {
 
 }
