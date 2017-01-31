@@ -1,4 +1,4 @@
-package com.example.repositories;
+package com.example.config;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -19,7 +19,7 @@ import org.springframework.test.web.servlet.request.RequestPostProcessor;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 
-public abstract class AbstractRepositoryTest extends MockMvcTest{
+public abstract class AbstractMvcTest extends MockMvcTest{
 	
 	abstract protected String getResourceName();
 	

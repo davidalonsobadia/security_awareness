@@ -9,7 +9,9 @@ import javax.persistence.Entity;
 import org.junit.Test;
 import org.springframework.test.web.servlet.ResultActions;
 
-public class NotificationStatusRepositoryTest extends AbstractRepositoryTest{
+import com.example.config.AbstractMvcTest;
+
+public class NotificationStatusRepositoryTest extends AbstractMvcTest{
 
 	private static final String RESOURCE_NAME = "notificationStatuses";
 	

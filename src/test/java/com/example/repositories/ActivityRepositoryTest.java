@@ -9,7 +9,9 @@ import javax.persistence.Entity;
 import org.junit.Test;
 import org.springframework.test.web.servlet.ResultActions;
 
-public class ActivityRepositoryTest extends AbstractRepositoryTest{
+import com.example.config.AbstractMvcTest;
+
+public class ActivityRepositoryTest extends AbstractMvcTest{
 
 
 	private static String RESOURCE_NAME = "activities";

@@ -3,10 +3,10 @@ package com.example.test.controller;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.example.repositories.AbstractRepositoryTest;
+import com.example.config.AbstractMvcTest;
 import com.example.service.UserService;
 
-public class ChangePasswordTest extends AbstractRepositoryTest{
+public class ChangePasswordTest extends AbstractMvcTest{
 
 	private static final String RESOURCE_NAME = "changePassword";
 	

@@ -12,9 +12,10 @@ import org.json.JSONObject;
 import org.junit.Test;
 import org.springframework.test.web.servlet.ResultActions;
 
+import com.example.config.AbstractMvcTest;
 import com.example.model.User;
 
-public class UserRepositoryTest extends AbstractRepositoryTest{
+public class UserRepositoryTest extends AbstractMvcTest{
 	
 	private static final String NEW_USER_CONTENT = "{\n\t\"firstName\": \"Juan\", \n\t\"lastName\":"
     			+ " \"Palomo\",\n\t\"email\": \"palomo_50@mail.com\",\n\t\"password\":"

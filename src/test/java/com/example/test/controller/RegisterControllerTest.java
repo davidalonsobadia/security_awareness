@@ -2,10 +2,10 @@ package com.example.test.controller;
 
 import org.junit.Test;
 
-import com.example.repositories.AbstractRepositoryTest;
+import com.example.config.AbstractMvcTest;
 
 
-public class RegisterControllerTest extends AbstractRepositoryTest{
+public class RegisterControllerTest extends AbstractMvcTest{
 	
 	private final static String REGISTER_USER = "{\n\t\"firstName\": \"Victor\",\n\t\""
 			+ "lastName\": \"Pomareda\",\n\t\"email\": \"victor_50@mail.com\"\n}";

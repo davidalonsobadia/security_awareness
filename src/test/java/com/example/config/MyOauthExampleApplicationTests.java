@@ -4,6 +4,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 import com.example.repositories.ActivityRepositoryTest;
+import com.example.repositories.ResourceRepositoryTest;
 import com.example.repositories.UserRepositoryTest;
 import com.example.repository.NotificationStatusRepository;
 import com.example.test.security.OAuth2Test;
@@ -12,7 +13,8 @@ import com.example.test.security.OAuth2Test;
 @Suite.SuiteClasses({OAuth2Test.class, 
 	UserRepositoryTest.class, 
 	ActivityRepositoryTest.class,
-	NotificationStatusRepository.class})
+	NotificationStatusRepository.class,
+	ResourceRepositoryTest.class})
 public class MyOauthExampleApplicationTests {
 
 }

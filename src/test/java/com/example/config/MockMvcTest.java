@@ -1,4 +1,4 @@
-package com.example.repositories;
+package com.example.config;
 
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -13,8 +13,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.example.config.AuthenticationClient;
-import com.example.config.AuthenticationUser;
 import com.example.utils.OAuthHelper;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;

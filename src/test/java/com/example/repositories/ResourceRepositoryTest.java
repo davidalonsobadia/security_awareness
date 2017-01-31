@@ -1,14 +1,35 @@
 package com.example.repositories;
 
-import static org.junit.Assert.fail;
+import java.util.List;
 
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import org.springframework.test.web.servlet.ResultActions;
 
-public class ResourceRepositoryTest {
+import com.example.config.AbstractMvcTest;
+import com.example.model.Resource;
 
+public class ResourceRepositoryTest extends AbstractMvcTest{
+
+	private static final String RESOURCE_NAME = "resources";
+	
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void Should_GetAllRseourcesSorted_When_ValidUser() throws Exception{
+		String route = "search/findAllByOrderByCreationDateDesc";
+		ResultActions result = read(user(), route);
+		
+		@SuppressWarnings("unchecked")
+		List<Resource> resource = (List<Resource>) getEntitiesList(result.andReturn().getResponse().getContentAsString());
+		
+		assertEquals(resource.size(), 3);
 	}
+
+	@Override
+	protected String getResourceName() {
+		return RESOURCE_NAME;
+	}
+	
+	
+	
 
 }
