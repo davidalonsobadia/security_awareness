@@ -6,9 +6,22 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import com.example.annotations.PreAuthorizeAdmin;
 import com.example.model.Activity;
 
 public interface ActivityRepository extends CrudRepository<Activity, Long>{
+	
+	@PreAuthorizeAdmin
+	@Override
+	<S extends Activity> S save(S entity);
+
+	@PreAuthorizeAdmin
+	@Override
+	void delete(Activity entity);
+	
+	@PreAuthorizeAdmin
+	@Override
+	void deleteAll();
 	
 	@Query("SELECT a FROM Activity a "
 			+ "JOIN a.activitiesBlock ab "

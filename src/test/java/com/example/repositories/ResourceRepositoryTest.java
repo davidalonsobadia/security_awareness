@@ -22,7 +22,7 @@ public class ResourceRepositoryTest extends AbstractMvcTest{
 		
 		List<? extends Entity> resource = getEntitiesList(result.andReturn().getResponse().getContentAsString());
 		
-		assertEquals(resource.size(), 3);
+		assertEquals(resource.size(), 4);
 	}
 
 	@Override
