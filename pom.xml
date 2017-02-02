@@ -69,21 +69,20 @@
 		<dependency>
 		    <groupId>org.json</groupId>
 		    <artifactId>json</artifactId>
-		    <version>20090211</version>
 		</dependency>
 
 	</dependencies>
 
 	<build>
-		<plugins>
-			<plugin>
+		<plugins>	
+ 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 			    <artifactId>maven-compiler-plugin</artifactId>
 			    <configuration>
  			        <compilerArgument>-parameters</compilerArgument>
-			        <testCompilerArgument>-parameters</testCompilerArgument>
+			        <testCompilerArgument>-parameters</testCompilerArgument>			        
 			    </configuration>
-			</plugin>
+			</plugin>			
 		</plugins>
 	</build>
 

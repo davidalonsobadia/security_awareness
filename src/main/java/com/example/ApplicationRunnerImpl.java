@@ -80,6 +80,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 	private static final String JUAN = "juan_50@mail.com";
 	private static final String VICTOR = "victor_50@mail.com";
 	private static final String MARCOS = "marcos_50@mail.com";
+	private static final String ANNA = "anna@weappyou.com";
 	
 	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 	
@@ -121,6 +122,14 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 			resource3.setUrl("http://www.securityofthing.com");
 			resource3.setCreationDate(DATE_FORMAT.parse("02/01/2017 10:00"));
 			resourceRepository.save(resource3);
+			
+			Resource resource4 = new Resource();
+			resource4.setCreator(userRepository.findByEmail(ANNA));
+			resource4.setName("BUILD AN AWESOME ANDROID APP FROM SCRATCH");
+			resource4.setType(1);
+			resource4.setUrl("http://www.weappyou.com");
+			resource4.setCreationDate(DATE_FORMAT.parse("02/02/2017 10:00"));
+			resourceRepository.save(resource4);
 		
 			
 		} catch (ParseException e) {
@@ -202,6 +211,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 			Set<User> usersActivity1 = new HashSet<>();
 			usersActivity1.add(userRepository.findByEmail(GONZALO));
 			usersActivity1.add(userRepository.findByEmail(JUAN));
+			usersActivity1.add(userRepository.findByEmail(ANNA));
 			activity1.setUsers(usersActivity1);
 			activityService.save(activity1);
 			
@@ -234,6 +244,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 			activity3.setNumRepeats(3);
 			Set<User> usersActivity3 = new HashSet<>();
 			usersActivity3.add(userRepository.findByEmail(ALONSO));
+			usersActivity3.add(userRepository.findByEmail(ANNA));			
 			activity3.setUsers(usersActivity3);
 			activityService.save(activity3);
 			
@@ -252,6 +263,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 			usersActivity4.add(userRepository.findByEmail(GONZALO));
 			usersActivity4.add(userRepository.findByEmail(MARCOS));
 			usersActivity4.add(userRepository.findByEmail(MARIO));
+			usersActivity4.add(userRepository.findByEmail(ANNA));			
 			activity4.setUsers(usersActivity4);
 			activityService.save(activity4);
 		
@@ -278,6 +290,15 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 		User user3 = userRepository.findByEmail(MARIO);
 		user3.setZones(zones2);
 		userRepository.save(user3);
+		
+		User user4 = userRepository.findByEmail(ANNA);
+		Set<Zone> zones3 = new HashSet<>();
+		zones3.add(zoneRepository.findByName("Barcelona"));
+		zones3.add(zoneRepository.findByName("Girona"));
+		zones3.add(zoneRepository.findByName("Lleida"));
+		user4.setZones(zones3);
+		userRepository.save(user4);
+		
 		
 		
 				
@@ -422,6 +443,18 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				userConfigurationRepository.save(new UserConfiguration(0,0)));
 		user10.setCity("Barcelona");
 		userRepository.save(user10);
+		
+		
+		User user11 = new User(
+				"Anna",
+				"Noell",
+				new Password(passwordEncoder.encode("123456")),
+				ANNA,
+				anonymous,
+				userConfigurationRepository.save(new UserConfiguration(0,0)));
+		user11.setCity("Barcelona");
+		userRepository.save(user11);
+				
 	}
 	
 	void loadSecurityContext(){

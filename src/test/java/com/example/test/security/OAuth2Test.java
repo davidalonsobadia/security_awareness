@@ -37,7 +37,7 @@ public class OAuth2Test {
     
     @Autowired
     private FilterChainProxy springSecurityFilterChain;
-    
+     
     private MockMvc mvc;
     
     @Before
