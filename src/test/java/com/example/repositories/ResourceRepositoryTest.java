@@ -1,15 +1,15 @@
 package com.example.repositories;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.List;
 
 import javax.persistence.Entity;
 
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
 import org.springframework.test.web.servlet.ResultActions;
 
 import com.example.config.AbstractMvcTest;
-import com.example.model.Resource;
 
 public class ResourceRepositoryTest extends AbstractMvcTest{
 

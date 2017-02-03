@@ -1,5 +1,9 @@
 package com.example.repositories;
 
+import static com.example.config.ResultMatchersImpl.isCreated;
+import static com.example.config.ResultMatchersImpl.isForbidden;
+import static com.example.config.ResultMatchersImpl.isNoContent;
+import static com.example.config.ResultMatchersImpl.isOk;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;

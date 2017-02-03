@@ -7,7 +7,6 @@ import com.example.repositories.ActivityRepositoryTest;
 import com.example.repositories.NotificationStatusRepositoryTest;
 import com.example.repositories.ResourceRepositoryTest;
 import com.example.repositories.UserRepositoryTest;
-import com.example.test.security.OAuth2Test;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({UserRepositoryTest.class, 

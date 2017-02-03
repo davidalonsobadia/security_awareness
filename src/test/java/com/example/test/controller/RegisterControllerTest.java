@@ -1,13 +1,12 @@
 package com.example.test.controller;
 
+import static com.example.config.ResultMatchersImpl.isConflict;
+import static com.example.config.ResultMatchersImpl.isNoContent;
+import static com.example.config.ResultMatchersImpl.isNotFound;
+
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.config.AbstractMvcTest;
-import com.example.model.Role;
-import com.example.model.User;
-import com.example.service.AuthorityService;
-import com.example.service.UserService;
 
 public class RegisterControllerTest extends AbstractMvcTest{
 	
@@ -22,12 +21,7 @@ public class RegisterControllerTest extends AbstractMvcTest{
 
 	private final String RESOURCE_NAME = "register"; 
 	
-	@Autowired
-	private UserService userService;
-	
-	@Autowired
-	private AuthorityService authorityService;
-	
+
 	@Override
 	public String getResourceName(){
 		return RESOURCE_NAME;

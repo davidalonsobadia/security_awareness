@@ -1,8 +1,9 @@
 package com.example.repositories;
 
-import java.util.List;
-
+import static com.example.config.ResultMatchersImpl.isOk;
 import static org.junit.Assert.assertEquals;
+
+import java.util.List;
 
 import javax.persistence.Entity;
 

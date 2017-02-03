@@ -1,5 +1,6 @@
 package com.example.repositories;
 
+import static com.example.config.ResultMatchersImpl.isOk;
 import static org.junit.Assert.assertEquals;
 
 import java.util.List;

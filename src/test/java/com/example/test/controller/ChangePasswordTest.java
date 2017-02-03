@@ -1,13 +1,14 @@
 package com.example.test.controller;
 
-import org.junit.After;
+import static com.example.config.ResultMatchersImpl.isConflict;
+import static com.example.config.ResultMatchersImpl.isOk;
+import static com.example.config.ResultMatchersImpl.isUnauthorized;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.config.AbstractMvcTest;
 import com.example.service.UserService;
-
-import ch.qos.logback.classic.Logger;
 
 public class ChangePasswordTest extends AbstractMvcTest{
 

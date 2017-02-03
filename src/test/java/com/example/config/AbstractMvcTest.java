@@ -62,30 +62,4 @@ public abstract class AbstractMvcTest extends MockMvcTest{
     				.with(bearerToken)
     			);
 	}
-	
-	
-	/*
-	 * RESULT MATCHERS
-	 */
-	protected ResultMatcher isOk(){
-		return status().isOk();
-	}
-	protected ResultMatcher isCreated(){
-		return status().isCreated();
-	}
-	protected ResultMatcher isForbidden(){
-		return status().isForbidden();
-	}
-	protected ResultMatcher isNoContent(){
-		return status().isNoContent();
-	}
-	protected ResultMatcher isConflict(){
-		return status().isConflict();
-	}
-	protected ResultMatcher isNotFound(){
-		return status().isNotFound();
-	}
-	protected ResultMatcher isUnauthorized(){
-		return status().isUnauthorized();
-	}
 }
