@@ -6,7 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import com.example.annotations.PreAuthorizeAdmin;
-import com.example.model.Notification;
 import com.example.model.NotificationStatus;
 
 public interface NotificationStatusRepository extends CrudRepository<NotificationStatus, Long>{

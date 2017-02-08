@@ -4,7 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import com.example.annotations.PreAuthorizeAdmin;
-import com.example.model.NotificationStatus;
 import com.example.model.Password;
 
 @RepositoryRestResource(exported=false)

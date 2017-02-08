@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
 import com.example.annotations.PreAuthorizeAdmin;
-import com.example.model.Password;
 import com.example.model.Resource;
 
 public interface ResourceRepository extends CrudRepository<Resource, Long> {
