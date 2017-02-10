@@ -28,7 +28,7 @@ public class NotificationStatusRepositoryTest extends AbstractMvcTest{
 		String route = "search/findAllByUser_email?user=%s";
 		route = String.format(route, "gonzalo_50@mail.com");
 		
-		ResultActions results = read(user(), route);
+		ResultActions results = readWithVariables(user(), route);
 		verify(results, isOk());
 		
 		List<? extends Entity> notificationStatuses = getEntitiesList(results.andReturn().getResponse().getContentAsString());

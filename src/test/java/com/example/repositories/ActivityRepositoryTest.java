@@ -23,7 +23,7 @@ public class ActivityRepositoryTest extends AbstractMvcTest{
 		String params = "search/findAllByMonthAndYear?month=%d&year=%d";
 		params = String.format(params, 1, 2017);
 		
-		ResultActions action = read(user(), params);
+		ResultActions action = readWithVariables(user(), params);
 		verify(action, isOk());
 		
 		List<? extends Entity> activities = getEntitiesList(action.andReturn().getResponse().getContentAsString());
@@ -36,7 +36,7 @@ public class ActivityRepositoryTest extends AbstractMvcTest{
 		String params = "search/findAllByMonthAndYearAndZone?month=%d&year=%d&zone=%s";
 		params = String.format(params, 1, 2017, "Barcelona");
 		
-		ResultActions action = read(user(), params);
+		ResultActions action = readWithVariables(user(), params);
 		verify(action, isOk());
 		
 		List<? extends Entity> activities = getEntitiesList(action.andReturn().getResponse().getContentAsString());
@@ -49,7 +49,7 @@ public class ActivityRepositoryTest extends AbstractMvcTest{
 		String params = "search/findAllByMonthAndYearAndUserZones?month=%d&year=%d&user=%s";
 		params = String.format(params, 1, 2017, "gonzalo_50@mail.com");
 		
-		ResultActions action = read(user(), params);
+		ResultActions action = readWithVariables(user(), params);
 		verify(action, isOk());
 		
 		List<? extends Entity> activities = getEntitiesList(action.andReturn().getResponse().getContentAsString());
@@ -62,7 +62,7 @@ public class ActivityRepositoryTest extends AbstractMvcTest{
 		String params = "search/findAllByMonthAndYearAndUserZones?month=%d&year=%d&user=%s";
 		params = String.format(params, 1, 2017, "juan_50@mail.com");
 		
-		ResultActions action = read(user(), params);
+		ResultActions action = readWithVariables(user(), params);
 		verify(action, isOk());
 		
 		List<? extends Entity> activities = getEntitiesList(action.andReturn().getResponse().getContentAsString());

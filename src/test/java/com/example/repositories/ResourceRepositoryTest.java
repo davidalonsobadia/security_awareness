@@ -18,7 +18,7 @@ public class ResourceRepositoryTest extends AbstractMvcTest{
 	@Test
 	public void Should_GetAllRseourcesSorted_When_ValidUser() throws Exception{
 		String route = "search/findAllByOrderByCreationDateDesc";
-		ResultActions result = read(user(), route);
+		ResultActions result = readWithVariables(user(), route);
 		
 		List<? extends Entity> resource = getEntitiesList(result.andReturn().getResponse().getContentAsString());
 		

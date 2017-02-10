@@ -42,5 +42,5 @@ public class RegisterControllerTest extends AbstractMvcTest{
 	public void Should_NotFound_When_UserNotExists() throws Exception {
 		verify(create(anonymous(), NOT_REGISTER_USER), isNotFound());
 	}
-	
+		
 }

@@ -3,9 +3,11 @@ package com.example.config;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.persistence.Entity;
 
@@ -46,9 +48,29 @@ public abstract class AbstractMvcTest extends MockMvcTest{
     				.content(body)
     			);
 	}
-	protected ResultActions read(org.springframework.security.core.userdetails.User user, String... params) throws Exception{
+	protected ResultActions readWithVariables(org.springframework.security.core.userdetails.User user, String... variables) throws Exception{
     	RequestPostProcessor bearerToken = oauthHelper.bearerToken(client(), user);
-    	String route = params.length > 0 ? "/" + params[0] : "";
+    	String route = variables.length > 0 ? "/" + variables[0] : "";
+    	return mvc.perform(
+    			get("/" + getResourceName() + route)
+    				.with(bearerToken)
+    			);
+	}
+	
+	protected ResultActions readWithParams(org.springframework.security.core.userdetails.User user, @SuppressWarnings("unchecked") Map<String, Object>... params) throws Exception{
+    	RequestPostProcessor bearerToken = oauthHelper.bearerToken(client(), user);
+
+    	String route = "";    	
+    	if(params.length > 0){
+    		route = "?";
+    		Iterator<Entry<String, Object>> it = params[0].entrySet().iterator();
+    		while(it.hasNext()){
+    			Map.Entry<String, Object> entryMap = it.next();
+    			route += entryMap.getKey() + "=" + entryMap.getValue().toString();
+    			if(it.hasNext())
+    				route += "&";
+    		}    		
+    	}	
     	return mvc.perform(
     			get("/" + getResourceName() + route)
     				.with(bearerToken)

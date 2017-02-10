@@ -78,18 +78,17 @@
  			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 			    <artifactId>maven-compiler-plugin</artifactId>
+			    <version>3.1</version>
 			    <configuration>
- 			    	<compilerArgs>
+<!--   			    	<compilerArgs>
 			    		<compilerArg>-parameters</compilerArg>
-			    	</compilerArgs>
- 			        <!-- <compilerArgument>-parameters</compilerArgument> -->
-
-			        <!-- <testCompilerArgument>-parameters</testCompilerArgument> -->			        
+			    	</compilerArgs> -->
+ 			        <compilerArgument>-parameters</compilerArgument>
+			        <testCompilerArgument>-parameters</testCompilerArgument>			        
 			    </configuration>
-			</plugin>			
+			</plugin>				
 		</plugins>
 	</build>
-
 
 	<description>Security Awareness API Project</description>
 </project>

@@ -346,6 +346,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				superadmin,
 				userConfigurationRepository.save(new UserConfiguration(0,0)));
 		user1.setCity("Barcelona");
+		user1.setRegistered(true);
 		userRepository.save(user1);
 		
 		User user2 = new User(
@@ -356,6 +357,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				admin,
 				userConfigurationRepository.save(new UserConfiguration(0,0)));
 		user2.setCity("Madrid");
+		user2.setRegistered(true);
 		userRepository.save(user2);
 		
 		User user3 = new User(
@@ -366,6 +368,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				admin,
 				userConfigurationRepository.save(new UserConfiguration(0,0)));
 		user3.setCity("Fraga");
+		user3.setRegistered(true);
 		userRepository.save(user3);
 		
 		
@@ -377,6 +380,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				user,
 				userConfigurationRepository.save(new UserConfiguration(0,0)));
 		user4.setCity("Terrassa");
+		user4.setRegistered(true);
 		userRepository.save(user4);
 		
 		User user5 = new User(
@@ -387,6 +391,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				user,
 				userConfigurationRepository.save(new UserConfiguration(0,0)));
 		user5.setCity("Barcelona");
+		user5.setRegistered(true);
 		userRepository.save(user5);
 
 		
@@ -398,6 +403,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				user,
 				userConfigurationRepository.save(new UserConfiguration(0,0)));
 		user6.setCity("Barcelona");
+		user6.setRegistered(true);
 		userRepository.save(user6);
 		
 		
@@ -409,6 +415,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				user,
 				userConfigurationRepository.save(new UserConfiguration(0,0)));
 		user7.setCity("Barcelona");
+		user7.setRegistered(true);
 		userRepository.save(user7);
 
 		
@@ -420,6 +427,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				user,
 				userConfigurationRepository.save(new UserConfiguration(0,0)));
 		user8.setCity("Guipuzcoa");
+		user8.setRegistered(true);
 		userRepository.save(user8);
 
 		
@@ -431,6 +439,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				anonymous,
 				userConfigurationRepository.save(new UserConfiguration(0,0)));
 		user9.setCity("Montanya");
+		user9.setRegistered(false);
 		userRepository.save(user9);
 
 
@@ -442,6 +451,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				anonymous,
 				userConfigurationRepository.save(new UserConfiguration(0,0)));
 		user10.setCity("Barcelona");
+		user10.setRegistered(false);
 		userRepository.save(user10);
 		
 		
@@ -453,8 +463,8 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				anonymous,
 				userConfigurationRepository.save(new UserConfiguration(0,0)));
 		user11.setCity("Barcelona");
-		userRepository.save(user11);
-				
+		user11.setRegistered(false);
+		userRepository.save(user11);			
 	}
 	
 	void loadSecurityContext(){

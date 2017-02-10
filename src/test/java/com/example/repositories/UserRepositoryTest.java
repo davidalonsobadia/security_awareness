@@ -42,7 +42,7 @@ public class UserRepositoryTest extends AbstractMvcTest{
 	 */
     @Test
     public void Should_getUserDetails_When_UserWithRoleUser() throws Exception{
-    	verify(read(user()), isOk());
+    	verify(readWithVariables(user()), isOk());
     	
     }
     
@@ -51,7 +51,7 @@ public class UserRepositoryTest extends AbstractMvcTest{
 	 */
     @Test
     public void Should_getUserDetails_When_UserDetailsFromANotherUserWithRoleUser() throws Exception{
-    	verify(read(user(), "/1"), isOk());
+    	verify(readWithVariables(user(), "/1"), isOk());
     }
 	
 	/*
@@ -82,7 +82,7 @@ public class UserRepositoryTest extends AbstractMvcTest{
 	 */	
 	@Test
 	public void Should_getAllUserDetails_When_UserWithRoleAdmin() throws Exception{		
-		ResultActions result = read(admin());
+		ResultActions result = readWithVariables(admin());
 		
 		verify(result, isOk());
 		
@@ -97,7 +97,7 @@ public class UserRepositoryTest extends AbstractMvcTest{
 	 */
 	@Test
 	public void Should_getUserDetailsOfAnotherUser_When_UserWithRoleAdmin() throws Exception{
-		ResultActions result = read(admin(), "/4");
+		ResultActions result = readWithVariables(admin(), "/4");
 		
 		verify(result, isOk());
 		
@@ -123,7 +123,7 @@ public class UserRepositoryTest extends AbstractMvcTest{
 	 */
 	@Test
 	public void Should_deleteUser_When_UserWithRoleAdmin() throws Exception{
-		ResultActions result = read(admin(), "search/findByEmail?email="+"palomo_50@mail.com" );
+		ResultActions result = readWithVariables(admin(), "search/findByEmail?email="+"palomo_50@mail.com" );
     	
 		verify(result, isOk());
 		
