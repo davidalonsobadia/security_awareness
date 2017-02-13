@@ -59,10 +59,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 	
 	@Autowired
 	private NotificationStatusRepository notificationStatusRepository;
-	
-	@Autowired
-	private PasswordRepository passwordRepository;
-	
+		
 	@Autowired
 	private ActivityStatusRepository activityStatusRepository;
 	
@@ -82,6 +79,8 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 	private static final String VICTOR = "victor_50@mail.com";
 	private static final String MARCOS = "marcos_50@mail.com";
 	private static final String ANNA = "anna@weappyou.com";
+	private static final String TXEMA = "txema_50@mail.com";
+	
 	
 	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 	
@@ -127,6 +126,22 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 		activityStatus4.setInterested(true);
 		activityStatus4.setAssistant(true);
 		activityStatusRepository.save(activityStatus4);
+		
+		ActivityStatus activityStatus5 = new ActivityStatus();
+		activityStatus5.setActivity(activityService.findOne(1));
+		activityStatus5.setUser(userRepository.findByEmail(TXEMA));
+		activityStatus5.setInterested(true);
+		activityStatus5.setAssistant(false);
+		activityStatusRepository.save(activityStatus5);
+		
+		ActivityStatus activityStatus6 = new ActivityStatus();
+		activityStatus6.setActivity(activityService.findOne(2));
+		activityStatus6.setUser(userRepository.findByEmail(TXEMA));
+		activityStatus6.setInterested(true);
+		activityStatus6.setAssistant(false);
+		activityStatusRepository.save(activityStatus6);
+		
+		
 	}
 	
 	private void loadResources(){
@@ -455,7 +470,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				"Txema", 
 				"Romeria", 
 				new Password(passwordEncoder.encode("123456")), 
-				"txema_50@mail.com",
+				TXEMA,
 				user,
 				new UserConfiguration(0,0));
 		user8.setCity("Guipuzcoa");

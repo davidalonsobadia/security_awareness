@@ -50,4 +50,18 @@ public interface ActivityRepository extends CrudRepository<Activity, Long>{
 	Set<Activity> findAllByMonthAndYearAndUserZones(@Param("month") Integer month, 
 			@Param("year") Integer year, @Param("user") String user);
 	
+	
+	@Query("SELECT activity FROM Activity activity, ActivityStatus activityStatus "
+			+ "JOIN activityStatus.user u "
+			+ "WHERE u.email LIKE :user "
+			+ "AND activityStatus.interested = true "
+			+ "AND activity.id = activityStatus.activity.id")
+	Set<Activity> findAllByInterestedAndUser(@Param("user") String user);
+	
+	@Query("SELECT activity FROM Activity activity, ActivityStatus activityStatus "
+			+ "JOIN activityStatus.user u "
+			+ "WHERE u.email LIKE :user "
+			+ "AND activityStatus.assistant = true "
+			+ "AND activity.id = activityStatus.activity.id")
+	Set<Activity> findAllByAssistedAndUser(@Param("user") String user);
 }
