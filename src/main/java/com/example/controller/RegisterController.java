@@ -1,5 +1,10 @@
 package com.example.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +13,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,8 +25,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.example.model.Password;
 import com.example.model.Role;
 import com.example.model.User;
+import com.example.model.UserContext;
 import com.example.service.AuthorityService;
 import com.example.service.UserServiceImpl;
 
@@ -33,9 +45,13 @@ public class RegisterController {
 	
 	
     @RequestMapping(value= "/register",method = RequestMethod.POST)
-    public ResponseEntity<Void> register(@RequestBody User user,
-    		UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<Void> register(@RequestBody UserContext userContext,
+    		UriComponentsBuilder ucBuilder,
+    		HttpServletRequest request) {
     	    	
+    	User user = userContext.getUser();
+    	Password password = userContext.getPassword();
+    	
     	if (!userService.exists(user)){
     		logger.warn("User " + user.getEmail() + " NOT exists.");
     		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
@@ -53,34 +69,64 @@ public class RegisterController {
     	
     	userFromDatabase.setAuthority(authorityService.findByRole(Role.USER));
     	userFromDatabase.setRegistered(true);
+    	userFromDatabase.setCity(user.getCity());
+    	userFromDatabase.setFirstName(user.getFirstName());
+    	userFromDatabase.setLastName(user.getLastName());
+    	userFromDatabase.setCity(user.getCity());
+    	userFromDatabase.setPassword(password);
+    	userFromDatabase.setConfiguration(user.getConfiguration());
+    	
     	userService.save(userFromDatabase);
     	
     	HttpHeaders headers = new HttpHeaders();
     	headers.setLocation(ucBuilder.path("/users/{id}").buildAndExpand(userFromDatabase.getId()).toUri());
     	ResponseEntity<Void> response = new ResponseEntity<>(headers, HttpStatus.NO_CONTENT);
+    	
+    	// --- grant Authority for this Session
+    	
+//		@SuppressWarnings("unchecked")
+//		List<SimpleGrantedAuthority> oldAuthorities = (List<SimpleGrantedAuthority>)SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+//		SimpleGrantedAuthority authority = new SimpleGrantedAuthority(Role.USER.getRoleName());
+//		List<SimpleGrantedAuthority> updatedAuthorities = new ArrayList<SimpleGrantedAuthority>();
+//		updatedAuthorities.add(authority);
+//		updatedAuthorities.addAll(oldAuthorities);
+//
+//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//		
+//		System.out.println(
+//				SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString());
+//		
+//		SecurityContextHolder.getContext().setAuthentication(
+//		        new UsernamePasswordAuthenticationToken(
+//		        		auth.getPrincipal(),
+//		        		auth.getCredentials(),
+//		        		updatedAuthorities)
+//		);
+//		
+//		System.out.println(
+//				SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString());
+//		
+//		request.getSession().setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
+    	// --- end of this 	
+		
     	return response;
     }
     
     @RequestMapping(value= "/isRegistered", method = RequestMethod.GET)
     public ResponseEntity<String> isRegistered(
     		@RequestParam("email") String email) {
+    	
+		JSONObject jsonObject = new JSONObject();
+    	HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+    	
     	if(userService.findByEmail(email) == null){
     		return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
     	} else if(userService.findByEmail(email).isRegistered()){    		
-    		JSONObject jsonObject = new JSONObject();
     		jsonObject.put("registered", true);
-    		    		
-    		HttpHeaders headers = new HttpHeaders();
-    		headers.setContentType(MediaType.APPLICATION_JSON);
-    		    		
     		return new ResponseEntity<String>(jsonObject.toString(), headers, HttpStatus.OK);
     	} else {
-    		JSONObject jsonObject = new JSONObject();
     		jsonObject.put("registered", false);
-    		
-    		HttpHeaders headers = new HttpHeaders();
-    		headers.setContentType(MediaType.APPLICATION_JSON);
-    		
     		return new ResponseEntity<String>(jsonObject.toString(), headers, HttpStatus.OK);
     	}
     }

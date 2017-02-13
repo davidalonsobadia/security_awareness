@@ -61,11 +61,11 @@ public class User {
 	@OneToMany
 	private Set<Resource> resources;
 	
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
 	private UserConfiguration configuration;
 	
-	@OneToOne(cascade=CascadeType.PERSIST)
-	@JsonIgnore
+	@OneToOne(cascade= {CascadeType.PERSIST, CascadeType.REMOVE})
+	//@JsonIgnore
 	private Password password;
 		
 	@NotEmpty
@@ -109,6 +109,7 @@ public class User {
 		return id;
 	}
 
+	@JsonIgnore
 	public Password getPassword() {
 		return password;
 	}

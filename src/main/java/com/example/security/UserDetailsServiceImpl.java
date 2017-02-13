@@ -36,5 +36,4 @@ public class UserDetailsServiceImpl implements org.springframework.security.core
 		
 		return userDetails;
 	}
-
 }

@@ -1,5 +1,6 @@
 package com.example.model.projections;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.rest.core.config.Projection;
 
 import com.example.model.Notification;
@@ -13,4 +14,7 @@ public interface NotificationStatusesExpanded {
 	int getStatus();
 	User getUser();
 	Notification getNotification();
+	
+	@Value("#{target.getNotification().getSender()}")
+	User getNotification_Sender();
 }

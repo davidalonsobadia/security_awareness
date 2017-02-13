@@ -18,7 +18,6 @@ public class Password {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
-	@JsonIgnore
 	private String password;
 	
 	public Password(){
