@@ -4,6 +4,7 @@ import java.util.Set;
 
 import org.springframework.data.rest.core.config.Projection;
 
+import com.example.model.Authority;
 import com.example.model.User;
 import com.example.model.Zone;
 
@@ -16,5 +17,6 @@ public interface UsersExpanded {
 	boolean getRegistered();
 	
 	Set<Zone> getZones();
-		
+	
+	Authority getAuthority();
 }
