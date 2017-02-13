@@ -22,7 +22,6 @@ public class NotificationStatus {
 	private int status;
 	
 	@ManyToOne
-	@Embedded
 	private Notification notification;
 	
 	@ManyToOne

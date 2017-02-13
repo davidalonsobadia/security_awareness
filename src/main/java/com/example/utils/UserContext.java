@@ -1,4 +1,7 @@
-package com.example.model;
+package com.example.utils;
+
+import com.example.model.Password;
+import com.example.model.User;
 
 public class UserContext {
 	

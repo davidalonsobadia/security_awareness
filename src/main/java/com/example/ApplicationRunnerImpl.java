@@ -19,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.example.model.Activity;
+import com.example.model.ActivityStatus;
 import com.example.model.Authority;
 import com.example.model.Notification;
 import com.example.model.NotificationStatus;
@@ -28,12 +29,12 @@ import com.example.model.Role;
 import com.example.model.User;
 import com.example.model.UserConfiguration;
 import com.example.model.Zone;
+import com.example.repository.ActivityStatusRepository;
 import com.example.repository.AuthorityRepository;
 import com.example.repository.NotificationRepository;
 import com.example.repository.NotificationStatusRepository;
 import com.example.repository.PasswordRepository;
 import com.example.repository.ResourceRepository;
-import com.example.repository.UserConfigurationRepositry;
 import com.example.repository.UserRepository;
 import com.example.repository.ZoneRepository;
 import com.example.service.ActivityService;
@@ -60,7 +61,10 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 	private NotificationStatusRepository notificationStatusRepository;
 	
 	@Autowired
-	PasswordRepository passwordRepository;
+	private PasswordRepository passwordRepository;
+	
+	@Autowired
+	private ActivityStatusRepository activityStatusRepository;
 	
 	
 	@Autowired
@@ -89,8 +93,40 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 		loadZonesData();
 		loadUserZonesRelations();
 		loadActivities();
+		loadActivityStatus();
 		loadNotifications();
 		loadResources();
+	}
+	
+	private void loadActivityStatus(){
+		
+		ActivityStatus activityStatus1 = new ActivityStatus();
+		activityStatus1.setActivity(activityService.findOne(1));
+		activityStatus1.setUser(userRepository.findByEmail(SERGI));
+		activityStatus1.setInterested(true);
+		activityStatus1.setAssistant(false);
+		activityStatusRepository.save(activityStatus1);
+		
+		ActivityStatus activityStatus2 = new ActivityStatus();
+		activityStatus2.setActivity(activityService.findOne(2));
+		activityStatus2.setUser(userRepository.findByEmail(SERGI));
+		activityStatus2.setInterested(true);
+		activityStatus2.setAssistant(false);
+		activityStatusRepository.save(activityStatus2);
+		
+		ActivityStatus activityStatus3 = new ActivityStatus();
+		activityStatus3.setActivity(activityService.findOne(3));
+		activityStatus3.setUser(userRepository.findByEmail(SERGI));
+		activityStatus3.setInterested(true);
+		activityStatus3.setAssistant(false);
+		activityStatusRepository.save(activityStatus3);
+		
+		ActivityStatus activityStatus4 = new ActivityStatus();
+		activityStatus4.setActivity(activityService.findOne(4));
+		activityStatus4.setUser(userRepository.findByEmail(SERGI));
+		activityStatus4.setInterested(true);
+		activityStatus4.setAssistant(true);
+		activityStatusRepository.save(activityStatus4);
 	}
 	
 	private void loadResources(){
@@ -133,8 +169,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 			e.printStackTrace();
 		}
 	}
-	
-	
+		
 	private void loadNotifications(){
 		// Notification
 		try {

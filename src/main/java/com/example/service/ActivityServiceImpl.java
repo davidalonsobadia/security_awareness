@@ -62,6 +62,11 @@ public class ActivityServiceImpl implements ActivityService {
 		
 	}
 	
+	@Override
+	public Activity findOne(long id){
+		return activityRepository.findOne(id);
+	}
+	
 	private Date sumOneDay(Date date){
 		Calendar c = Calendar.getInstance(); 
 		c.setTime(date); 

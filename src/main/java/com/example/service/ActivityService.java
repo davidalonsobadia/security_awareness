@@ -8,6 +8,8 @@ public interface ActivityService {
 	
 	Iterable<Activity> findAll();
 	
+	Activity findOne(long id);
+	
 	Set<Activity> findByMonthAndyear(int month, int year);
 	
 	void save(Activity activity);

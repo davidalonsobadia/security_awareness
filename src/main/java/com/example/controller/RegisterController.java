@@ -28,9 +28,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.example.model.Password;
 import com.example.model.Role;
 import com.example.model.User;
-import com.example.model.UserContext;
 import com.example.service.AuthorityService;
 import com.example.service.UserServiceImpl;
+import com.example.utils.UserContext;
 
 @Controller
 public class RegisterController {
