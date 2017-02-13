@@ -23,5 +23,7 @@ public interface NotificationStatusRepository extends CrudRepository<Notificatio
 	void deleteAll();
 	
 	List<NotificationStatus> findAllByUser_email(@Param("user") String user);
+	
+	List<NotificationStatus> findAllByUser_emailOrderByNotification_DateDesc(@Param("user") String user);
 
 }

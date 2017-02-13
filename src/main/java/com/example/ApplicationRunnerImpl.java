@@ -49,10 +49,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 	
 	@Autowired
 	private ZoneRepository zoneRepository;
-	
-	@Autowired
-	private UserConfigurationRepositry userConfigurationRepository;
-		
+			
 	@Autowired
 	private NotificationRepository notificationRepository;
 	
