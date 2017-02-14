@@ -48,12 +48,9 @@ public class Activity {
 	
 	@ManyToOne
 	private User manager;
-	
-	@ManyToMany
-	@JoinTable(name="activity_user",
-		joinColumns=@JoinColumn(name="activity_id"),
-		inverseJoinColumns=@JoinColumn(name="user_id"))
-	private Set<User> users;
+		
+	@OneToMany(mappedBy="activity")
+	private List<ActivityStatus> activityStatus;
 
 	public String getName() {
 		return name;
@@ -119,14 +116,6 @@ public class Activity {
 		this.manager = manager;
 	}
 
-	public Set<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(Set<User> users) {
-		this.users = users;
-	}
-
 	public int getNumRepeats() {
 		return numRepeats;
 	}
@@ -145,5 +134,13 @@ public class Activity {
 
 	public void setActivitiesBlock(List<ActivityBlock> activitiesBlock) {
 		this.activitiesBlock = activitiesBlock;
+	}
+
+	public List<ActivityStatus> getActivityStatus() {
+		return activityStatus;
+	}
+
+	public void setActivityStatus(List<ActivityStatus> activityStatus) {
+		this.activityStatus = activityStatus;
 	}
 }

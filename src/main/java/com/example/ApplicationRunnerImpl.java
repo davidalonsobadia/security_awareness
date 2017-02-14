@@ -141,6 +141,26 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 		activityStatus6.setAssistant(false);
 		activityStatusRepository.save(activityStatus6);
 		
+		ActivityStatus activityStatus7 = new ActivityStatus();
+		activityStatus7.setActivity(activityService.findOne(3));
+		activityStatus7.setUser(userRepository.findByEmail(MARIO));
+		activityStatus7.setInterested(true);
+		activityStatus7.setAssistant(false);
+		activityStatusRepository.save(activityStatus7);
+		
+		ActivityStatus activityStatus8 = new ActivityStatus();
+		activityStatus8.setActivity(activityService.findOne(3));
+		activityStatus8.setUser(userRepository.findByEmail(ANNA));
+		activityStatus8.setInterested(true);
+		activityStatus8.setAssistant(false);
+		activityStatusRepository.save(activityStatus8);
+		
+		ActivityStatus activityStatus9 = new ActivityStatus();
+		activityStatus9.setActivity(activityService.findOne(3));
+		activityStatus9.setUser(userRepository.findByEmail(GONZALO));
+		activityStatus9.setInterested(true);
+		activityStatus9.setAssistant(false);
+		activityStatusRepository.save(activityStatus9);
 		
 	}
 	
@@ -255,11 +275,6 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 			activity1.setNumRepeats(4);
 			activity1.setDateTimeStart(DATE_FORMAT.parse("29/12/2016 18:00"));
 			activity1.setDateTimeEnd(DATE_FORMAT.parse("29/12/2016 21:00"));
-			Set<User> usersActivity1 = new HashSet<>();
-			usersActivity1.add(userRepository.findByEmail(GONZALO));
-			usersActivity1.add(userRepository.findByEmail(JUAN));
-			usersActivity1.add(userRepository.findByEmail(ANNA));
-			activity1.setUsers(usersActivity1);
 			activityService.save(activity1);
 			
 			// Activity 2		
@@ -272,10 +287,6 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 			activity2.setDateTimeEnd(DATE_FORMAT.parse("21/01/2017 12:00"));
 			activity2.setManager(userRepository.findByEmail(GONZALO));
 			activity2.setType(2);
-			Set<User> usersActivity2 = new HashSet<>();
-			usersActivity2.add(userRepository.findByEmail(VICTOR));
-			usersActivity2.add(userRepository.findByEmail(MARCOS));
-			activity2.setUsers(usersActivity2);
 			activityService.save(activity2);	
 			
 			// Activity 3	
@@ -289,10 +300,6 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 			activity3.setManager(userRepository.findByEmail(GONZALO));
 			activity3.setType(2);
 			activity3.setNumRepeats(3);
-			Set<User> usersActivity3 = new HashSet<>();
-			usersActivity3.add(userRepository.findByEmail(ALONSO));
-			usersActivity3.add(userRepository.findByEmail(ANNA));			
-			activity3.setUsers(usersActivity3);
 			activityService.save(activity3);
 			
 			// Activity 4	
@@ -306,12 +313,6 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 			activity4.setManager(userRepository.findByEmail(GONZALO));
 			activity4.setType(2);
 			activity4.setNumRepeats(3);
-			Set<User> usersActivity4 = new HashSet<>();
-			usersActivity4.add(userRepository.findByEmail(GONZALO));
-			usersActivity4.add(userRepository.findByEmail(MARCOS));
-			usersActivity4.add(userRepository.findByEmail(MARIO));
-			usersActivity4.add(userRepository.findByEmail(ANNA));			
-			activity4.setUsers(usersActivity4);
 			activityService.save(activity4);
 		
 		} catch (ParseException e) {
@@ -347,8 +348,24 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 		userRepository.save(user4);
 		
 		
+		User user5 = userRepository.findByEmail(SERGI);
+		Set<Zone> zones5 = new HashSet<>();
+		zones5.add(zoneRepository.findByName("Barcelona"));
+		user5.setZones(zones5);
+		userRepository.save(user5);
 		
-				
+		User user6 = userRepository.findByEmail(TXEMA);
+		Set<Zone> zones6 = new HashSet<>();
+		zones6.add(zoneRepository.findByName("Barcelona"));
+		user6.setZones(zones6);
+		userRepository.save(user6);
+		
+		User user7 = userRepository.findByEmail(VICTOR);
+		Set<Zone> zones7 = new HashSet<>();
+		zones7.add(zoneRepository.findByName("Girona"));
+		user7.setZones(zones7);
+		userRepository.save(user7);
+		
 	}
 
 	private void loadZonesData() {

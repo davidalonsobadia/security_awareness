@@ -54,10 +54,10 @@ public class User {
 	@JsonIgnore
 	private Set<NotificationStatus> notificationStatus;
 	
-	//Parent relation
-	@ManyToMany(mappedBy = "users")
-	private Set<Activity> activities;
-	
+	@OneToMany(mappedBy="user")
+	@JsonIgnore
+	private Set<ActivityStatus> activityStatus;
+		
 	@OneToMany
 	private Set<Resource> resources;
 	
@@ -158,14 +158,6 @@ public class User {
 		this.zones = zones;
 	}
 
-	public Set<Activity> getActivities() {
-		return activities;
-	}
-
-	public void setActivities(Set<Activity> activities) {
-		this.activities = activities;
-	}
-
 	public Set<Resource> getResources() {
 		return resources;
 	}
@@ -196,5 +188,13 @@ public class User {
 
 	public void setNotificationStatus(Set<NotificationStatus> notificationStatus) {
 		this.notificationStatus = notificationStatus;
+	}
+
+	public Set<ActivityStatus> getActivityStatus() {
+		return activityStatus;
+	}
+
+	public void setActivityStatus(Set<ActivityStatus> activityStatus) {
+		this.activityStatus = activityStatus;
 	}
 }
