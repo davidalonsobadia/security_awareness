@@ -13,6 +13,6 @@ public interface ResourceExpanded {
 	String getName();
 	String getUrl();
 	int getType();
-	Date getCcreationDate();
+	Date getCreationDate();
 	User getCreator();
 }
