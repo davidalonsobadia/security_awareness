@@ -7,7 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.example.utils.BCryptPasswordDeserializer;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @Entity

@@ -6,6 +6,8 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import com.example.annotations.PreAuthorizeAdmin;
 import com.example.model.Password;
 
+import springfox.documentation.annotations.ApiIgnore;
+
 @RepositoryRestResource(exported=false)
 public interface PasswordRepository extends CrudRepository<Password, Long> {
 	

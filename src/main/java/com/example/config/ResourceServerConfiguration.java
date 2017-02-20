@@ -24,6 +24,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     @Autowired
     private AccessDecisionManager accessDecisionManager;
     
+    
     @Override
     public void configure(HttpSecurity http) throws Exception {
 

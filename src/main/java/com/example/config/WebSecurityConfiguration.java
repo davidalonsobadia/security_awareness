@@ -38,13 +38,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
 
         web
-                .ignoring()
-                .antMatchers("/h2console/**")
-                .antMatchers("/api/register")
-                .antMatchers("/api/activate")
-                .antMatchers("/api/lostpassword")
-                .antMatchers("/api/resetpassword")
-                .antMatchers("/api/hello");
+        	.ignoring()
+        		// Swagger files to make Swagger accessible without authentication
+        		.antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources", 
+        				"/configuration/security", "/swagger-ui.html", "/webjars/**",
+        				"/swagger-resources/configuration/ui");
     }
     
 

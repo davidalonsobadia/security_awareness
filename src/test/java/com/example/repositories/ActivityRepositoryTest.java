@@ -5,12 +5,11 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-
 import org.junit.Test;
 import org.springframework.test.web.servlet.ResultActions;
 
 import com.example.config.AbstractMvcTest;
+import com.example.model.Activity;
 
 public class ActivityRepositoryTest extends AbstractMvcTest{
 
@@ -26,7 +25,9 @@ public class ActivityRepositoryTest extends AbstractMvcTest{
 		ResultActions action = readWithVariables(user(), params);
 		verify(action, isOk());
 		
-		List<? extends Entity> activities = getEntitiesList(action.andReturn().getResponse().getContentAsString());
+		List<Activity> activities = getEntitiesList(
+				action.andReturn().getResponse().getContentAsString(),
+				Activity.class);
 		assertEquals(activities.size(), 4);
 	}
 	
@@ -39,7 +40,9 @@ public class ActivityRepositoryTest extends AbstractMvcTest{
 		ResultActions action = readWithVariables(user(), params);
 		verify(action, isOk());
 		
-		List<? extends Entity> activities = getEntitiesList(action.andReturn().getResponse().getContentAsString());
+		List<Activity> activities = getEntitiesList(
+				action.andReturn().getResponse().getContentAsString(),
+				Activity.class);
 		assertEquals(activities.size(), 3);
 	}
 	
@@ -52,7 +55,9 @@ public class ActivityRepositoryTest extends AbstractMvcTest{
 		ResultActions action = readWithVariables(user(), params);
 		verify(action, isOk());
 		
-		List<? extends Entity> activities = getEntitiesList(action.andReturn().getResponse().getContentAsString());
+		List<Activity> activities = getEntitiesList(
+				action.andReturn().getResponse().getContentAsString(),
+				Activity.class);
 		assertEquals(activities.size(), 4);
 	}
 	
@@ -65,8 +70,44 @@ public class ActivityRepositoryTest extends AbstractMvcTest{
 		ResultActions action = readWithVariables(user(), params);
 		verify(action, isOk());
 		
-		List<? extends Entity> activities = getEntitiesList(action.andReturn().getResponse().getContentAsString());
+		List<Activity> activities = getEntitiesList(
+				action.andReturn().getResponse().getContentAsString(),
+				Activity.class);
 		assertEquals(activities.size(), 3);
+	}
+	
+	@Test
+	public void Should_getInterestedActivities_When_UserInterested() throws Exception {
+		StringBuilder route = new StringBuilder("search/findAllByInterestedAndUser");
+		route.append("?");
+		route.append("user=");
+		route.append("sergi_50@mail.com");
+		
+		ResultActions action = readWithVariables(user(), route.toString());
+		verify(action, isOk());
+		
+		List<Activity> activities = getEntitiesList(
+				action.andReturn().getResponse().getContentAsString(),
+				Activity.class);
+		assertEquals(activities.size(), 4);
+
+	}
+	
+	@Test
+	public void Should_getAssistantActivities_When_UserAssistant() throws Exception {
+		StringBuilder route = new StringBuilder("search/findAllByAssistantAndUser");
+		route.append("?");
+		route.append("user=");
+		route.append("sergi_50@mail.com");
+		
+		ResultActions action = readWithVariables(user(), route.toString());
+		verify(action, isOk());
+		
+		List<Activity> activities = getEntitiesList(
+				action.andReturn().getResponse().getContentAsString(),
+				Activity.class);
+		assertEquals(activities.size(), 1);
+
 	}
 
 	@Override

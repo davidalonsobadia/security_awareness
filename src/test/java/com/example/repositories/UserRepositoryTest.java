@@ -86,7 +86,9 @@ public class UserRepositoryTest extends AbstractMvcTest{
 		
 		verify(result, isOk());
 		
-		List<? extends Entity> users = getEntitiesList(result.andReturn().getResponse().getContentAsString());
+		List<User> users = getEntitiesList(
+				result.andReturn().getResponse().getContentAsString(),
+				User.class);
 		assertNotNull(users);
 		assertTrue(users.size() > 1);
 		

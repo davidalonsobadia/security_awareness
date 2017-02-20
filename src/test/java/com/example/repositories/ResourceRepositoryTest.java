@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.springframework.test.web.servlet.ResultActions;
 
 import com.example.config.AbstractMvcTest;
+import com.example.model.Resource;
 
 public class ResourceRepositoryTest extends AbstractMvcTest{
 
@@ -20,7 +21,9 @@ public class ResourceRepositoryTest extends AbstractMvcTest{
 		String route = "search/findAllByOrderByCreationDateDesc";
 		ResultActions result = readWithVariables(user(), route);
 		
-		List<? extends Entity> resource = getEntitiesList(result.andReturn().getResponse().getContentAsString());
+		List<Resource> resource = getEntitiesList(
+				result.andReturn().getResponse().getContentAsString(),
+				Resource.class);
 		
 		assertEquals(resource.size(), 4);
 	}

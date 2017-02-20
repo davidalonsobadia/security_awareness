@@ -14,8 +14,9 @@ public interface ActivityStatusesExpanded {
 	long getId();
 	boolean getInterested();
 	boolean getAssistant();
-	User getUser();
 	Activity getActivity();
+	
+	User getUser();
 	
 	@Value("#{target.getActivity().getZone()}")
 	Zone getZone();

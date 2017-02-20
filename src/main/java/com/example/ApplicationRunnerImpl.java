@@ -1,11 +1,11 @@
 package com.example;
+import static com.example.utils.Utils.newArrayList;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Random;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -29,14 +29,15 @@ import com.example.model.Role;
 import com.example.model.User;
 import com.example.model.UserConfiguration;
 import com.example.model.Zone;
+import com.example.model.ZoneStatus;
 import com.example.repository.ActivityStatusRepository;
 import com.example.repository.AuthorityRepository;
 import com.example.repository.NotificationRepository;
 import com.example.repository.NotificationStatusRepository;
-import com.example.repository.PasswordRepository;
 import com.example.repository.ResourceRepository;
 import com.example.repository.UserRepository;
 import com.example.repository.ZoneRepository;
+import com.example.repository.ZoneStatusRepository;
 import com.example.service.ActivityService;
 
 @Component
@@ -63,6 +64,9 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 	@Autowired
 	private ActivityStatusRepository activityStatusRepository;
 	
+	@Autowired
+	private ZoneStatusRepository zoneStatusRepository;
+	
 	
 	@Autowired
 	private ActivityService activityService;	
@@ -80,6 +84,15 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 	private static final String MARCOS = "marcos_50@mail.com";
 	private static final String ANNA = "anna@weappyou.com";
 	private static final String TXEMA = "txema_50@mail.com";
+	private static final String SAMUEL = "samuel_50@mail.com";
+	private static final String DIEGO = "diego_50@mail.com";
+	
+	private static final String BARCELONA = "Barcelona";
+	private static final String MADRID = "Madrid";
+	private static final String LLEIDA = "Lleida";
+	private static final String TARRAGONA = "Tarragona";
+	private static final String GIRONA = "Girona";
+	
 	
 	
 	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy hh:mm");
@@ -90,7 +103,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 		loadSecurityContext();
 		loadUsersData();
 		loadZonesData();
-		loadUserZonesRelations();
+		loadZoneStatus();
 		loadActivities();
 		loadActivityStatus();
 		loadNotifications();
@@ -269,7 +282,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 			activity1.setName("New years Eve Security!");
 			activity1.setDescription("Tech meeting");
 			activity1.setPlace("Barcelona Forum");
-			activity1.setZone(zoneRepository.findByName("Barcelona"));
+			activity1.setZone(zoneRepository.findByName(BARCELONA));
 			activity1.setManager(userRepository.findByEmail(ALONSO));
 			activity1.setType(2);
 			activity1.setNumRepeats(4);
@@ -282,7 +295,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 			activity2.setName("Hack a Car!");
 			activity2.setDescription("Tech congress");
 			activity2.setPlace("Barcelona Imagina Building");
-			activity2.setZone(zoneRepository.findByName("Barcelona"));
+			activity2.setZone(zoneRepository.findByName(BARCELONA));
 			activity2.setDateTimeStart(DATE_FORMAT.parse("21/01/2017 11:00"));
 			activity2.setDateTimeEnd(DATE_FORMAT.parse("21/01/2017 12:00"));
 			activity2.setManager(userRepository.findByEmail(GONZALO));
@@ -294,7 +307,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 			activity3.setName("Security Of Things");
 			activity3.setDescription("World conference");
 			activity3.setPlace("Barcelona Hall Congress");
-			activity3.setZone(zoneRepository.findByName("Barcelona"));
+			activity3.setZone(zoneRepository.findByName(BARCELONA));
 			activity3.setDateTimeStart(DATE_FORMAT.parse("23/01/2017 18:00"));
 			activity3.setDateTimeEnd(DATE_FORMAT.parse("23/01/2017 21:00"));
 			activity3.setManager(userRepository.findByEmail(GONZALO));
@@ -307,7 +320,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 			activity4.setName("Tech Capital Congress");
 			activity4.setDescription("Madrid capital");
 			activity4.setPlace("Madrid Palacio de Deportes");
-			activity4.setZone(zoneRepository.findByName("Madrid"));
+			activity4.setZone(zoneRepository.findByName(MADRID));
 			activity4.setDateTimeStart(DATE_FORMAT.parse("31/01/2017 09:00"));
 			activity4.setDateTimeEnd(DATE_FORMAT.parse("31/01/2017 14:00"));
 			activity4.setManager(userRepository.findByEmail(GONZALO));
@@ -321,73 +334,148 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 		}
 	}
 	
-	private void loadUserZonesRelations() {
-		User user = userRepository.findByEmail(GONZALO);
-		Set<Zone> zones = new HashSet<>();
-		zones.add(zoneRepository.findByName("Barcelona"));
-		zones.add(zoneRepository.findByName("Madrid"));
-		user.setZones(zones);
-		userRepository.save(user);
+	private void loadZoneStatus() {
 		
-		Set<Zone> zones2 = new HashSet<>();
-		zones2.add(zoneRepository.findByName("Barcelona"));
-		User user2 = userRepository.findByEmail(JUAN);
-		user2.setZones(zones2);
-		userRepository.save(user2);
+		User userGonzalo = userRepository.findByEmail(GONZALO);
+		User userMario = userRepository.findByEmail(MARIO);
+		User userDavid = userRepository.findByEmail(ALONSO);
+		User userDiego = userRepository.findByEmail(DIEGO);
+		User userJuan = userRepository.findByEmail(JUAN);
+		User userVictor = userRepository.findByEmail(VICTOR);
+		User userSamuel = userRepository.findByEmail(SAMUEL);
+		User userTxema = userRepository.findByEmail(TXEMA);
+		User userAnna = userRepository.findByEmail(ANNA);
+		User userSergi = userRepository.findByEmail(SERGI);
+		User userMarcos = userRepository.findByEmail(MARCOS);
 		
-		User user3 = userRepository.findByEmail(MARIO);
-		user3.setZones(zones2);
-		userRepository.save(user3);
+		Zone zoneBarcelona = zoneRepository.findByName(BARCELONA);
+		Zone zoneMadrid = zoneRepository.findByName(MADRID);
+		Zone zoneGirona = zoneRepository.findByName(GIRONA);
+		Zone zoneLleida = zoneRepository.findByName(LLEIDA);
+		Zone zoneTarragona = zoneRepository.findByName(TARRAGONA);
 		
-		User user4 = userRepository.findByEmail(ANNA);
-		Set<Zone> zones3 = new HashSet<>();
-		zones3.add(zoneRepository.findByName("Barcelona"));
-		zones3.add(zoneRepository.findByName("Girona"));
-		zones3.add(zoneRepository.findByName("Lleida"));
-		user4.setZones(zones3);
-		userRepository.save(user4);
+		ZoneStatus zoneStatus = new ZoneStatus();
+		zoneStatus.setStatus(0); // accepted
+		zoneStatus.setUser(userGonzalo);
+		zoneStatus.setZone(zoneBarcelona);
+		zoneStatusRepository.save(zoneStatus);
+
+		ZoneStatus zoneStatus1 = new ZoneStatus();
+		zoneStatus1.setStatus(0); // accepted
+		zoneStatus1.setUser(userGonzalo);
+		zoneStatus1.setZone(zoneMadrid);
+		zoneStatusRepository.save(zoneStatus1);
 		
+		ZoneStatus zoneStatus2 = new ZoneStatus();
+		zoneStatus2.setStatus(0); // accepted
+		zoneStatus2.setUser(userJuan);
+		zoneStatus2.setZone(zoneBarcelona);
+		zoneStatusRepository.save(zoneStatus2);
+
+		ZoneStatus zoneStatus3 = new ZoneStatus();
+		zoneStatus3.setStatus(0); // accepted
+		zoneStatus3.setUser(userMario);
+		zoneStatus3.setZone(zoneBarcelona);
+		zoneStatusRepository.save(zoneStatus3);
+
+		ZoneStatus zoneStatus4 = new ZoneStatus();
+		zoneStatus4.setStatus(0); // accepted
+		zoneStatus4.setUser(userAnna);
+		zoneStatus4.setZone(zoneBarcelona);
+		zoneStatusRepository.save(zoneStatus4);
+
+
+		ZoneStatus zoneStatus5 = new ZoneStatus();
+		zoneStatus5.setStatus(0); // accepted
+		zoneStatus5.setUser(userAnna);
+		zoneStatus5.setZone(zoneGirona);
+		zoneStatusRepository.save(zoneStatus5);
 		
-		User user5 = userRepository.findByEmail(SERGI);
-		Set<Zone> zones5 = new HashSet<>();
-		zones5.add(zoneRepository.findByName("Barcelona"));
-		user5.setZones(zones5);
-		userRepository.save(user5);
+		ZoneStatus zoneStatus6 = new ZoneStatus();
+		zoneStatus6.setStatus(0); // accepted
+		zoneStatus6.setUser(userAnna);
+		zoneStatus6.setZone(zoneLleida);
+		zoneStatusRepository.save(zoneStatus6);
 		
-		User user6 = userRepository.findByEmail(TXEMA);
-		Set<Zone> zones6 = new HashSet<>();
-		zones6.add(zoneRepository.findByName("Barcelona"));
-		user6.setZones(zones6);
-		userRepository.save(user6);
+		ZoneStatus zoneStatus7 = new ZoneStatus();
+		zoneStatus7.setStatus(0); // accepted
+		zoneStatus7.setUser(userAnna);
+		zoneStatus7.setZone(zoneTarragona);
+		zoneStatusRepository.save(zoneStatus7);
 		
-		User user7 = userRepository.findByEmail(VICTOR);
-		Set<Zone> zones7 = new HashSet<>();
-		zones7.add(zoneRepository.findByName("Girona"));
-		user7.setZones(zones7);
-		userRepository.save(user7);
+		ZoneStatus zoneStatus8 = new ZoneStatus();
+		zoneStatus8.setStatus(0); // accepted
+		zoneStatus8.setUser(userSergi);
+		zoneStatus8.setZone(zoneBarcelona);
+		zoneStatusRepository.save(zoneStatus8);
+
+		ZoneStatus zoneStatus9 = new ZoneStatus();
+		zoneStatus9.setStatus(0); // accepted
+		zoneStatus9.setUser(userTxema);
+		zoneStatus9.setZone(zoneBarcelona);
+		zoneStatusRepository.save(zoneStatus9);
 		
+		ZoneStatus zoneStatus10 = new ZoneStatus();
+		zoneStatus10.setStatus(0); // accepted
+		zoneStatus10.setUser(userVictor);
+		zoneStatus10.setZone(zoneGirona);
+		zoneStatusRepository.save(zoneStatus10);	
+		
+		ZoneStatus zoneStatus11 = new ZoneStatus();
+		zoneStatus11.setStatus(0); // accepted
+		zoneStatus11.setUser(userDavid);
+		zoneStatus11.setZone(zoneBarcelona);
+		zoneStatusRepository.save(zoneStatus11);
+		
+		ZoneStatus zoneStatus12 = new ZoneStatus();
+		zoneStatus12.setStatus(0); // accepted
+		zoneStatus12.setUser(userDiego);
+		zoneStatus12.setZone(zoneTarragona);
+		zoneStatusRepository.save(zoneStatus12);
+		
+		ZoneStatus zoneStatus13 = new ZoneStatus();
+		zoneStatus13.setStatus(0); // accepted
+		zoneStatus13.setUser(userDiego);
+		zoneStatus13.setZone(zoneBarcelona);
+		zoneStatusRepository.save(zoneStatus13);
+		
+		ZoneStatus zoneStatus14 = new ZoneStatus();
+		zoneStatus14.setStatus(0); // accepted
+		zoneStatus14.setUser(userSamuel);
+		zoneStatus14.setZone(zoneBarcelona);
+		zoneStatusRepository.save(zoneStatus14);
+		
+		ZoneStatus zoneStatus15 = new ZoneStatus();
+		zoneStatus15.setStatus(0); // accepted
+		zoneStatus15.setUser(userMarcos);
+		zoneStatus15.setZone(zoneBarcelona);
+		zoneStatusRepository.save(zoneStatus15);
 	}
 
 	private void loadZonesData() {
-		zoneRepository.save( new Zone("Barcelona"
-				, userRepository.findByEmail(GONZALO)
-				, null));
-		zoneRepository.save( new Zone("Girona"
-				, userRepository.findByEmail(GONZALO)
-				, null));
-		zoneRepository.save( new Zone("Madrid"
-				, userRepository.findByEmail(GONZALO)
-				, null));
-		zoneRepository.save( new Zone("Tarragona"
-				, userRepository.findByEmail(MARIO)
-				, null));
-		zoneRepository.save( new Zone("Lleida"
-				, userRepository.findByEmail(MARIO)
-				, null));
 		
+		Zone bar = new Zone(BARCELONA);
+		//bar.setManager(newArrayList(userRepository.findByEmail(GONZALO)));
+				
+		Zone gir = new Zone(GIRONA);
+		//gir.setManager(newArrayList(userRepository.findByEmail(GONZALO)));
+		
+		Zone tar = new Zone(TARRAGONA);
+		//tar.setManager(newArrayList(userRepository.findByEmail(MARIO)));
+		
+		Zone lle = new Zone(LLEIDA);
+		//lle.setManager(newArrayList(userRepository.findByEmail(MARIO)));
+		
+		Zone mad = new Zone(MADRID);
+		//mad.setManager(newArrayList(userRepository.findByEmail(MARIO)));
+
+		zoneRepository.save(bar);
+		zoneRepository.save(gir);
+		zoneRepository.save(tar);
+		zoneRepository.save(lle);
+		zoneRepository.save(mad);
 	}
-
-
+	
 	
 	private void loadUsersData(){
 						
@@ -409,7 +497,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				ALONSO, // email
 				superadmin,
 				new UserConfiguration(0,0));
-		user1.setCity("Barcelona");
+		user1.setCity(BARCELONA);
 		user1.setRegistered(true);
 		userRepository.save(user1);
 		
@@ -420,7 +508,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				GONZALO,
 				admin,
 				new UserConfiguration(0,0));
-		user2.setCity("Madrid");
+		user2.setCity(MADRID);
 		user2.setRegistered(true);
 		userRepository.save(user2);
 		
@@ -451,10 +539,10 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				"Samuel", 
 				"Exposito", 
 				new Password(passwordEncoder.encode("123456")), 
-				"samuel_50@mail.com",
+				SAMUEL,
 				user,
 				new UserConfiguration(0,0));
-		user5.setCity("Barcelona");
+		user5.setCity(BARCELONA);
 		user5.setRegistered(true);
 		userRepository.save(user5);
 
@@ -463,10 +551,10 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				"Diego", 
 				"Delgado", 
 				new Password(passwordEncoder.encode("123456")), 
-				"diego_50@mail.com",
+				DIEGO,
 				user,
 				new UserConfiguration(0,0));
-		user6.setCity("Barcelona");
+		user6.setCity(BARCELONA);
 		user6.setRegistered(true);
 		userRepository.save(user6);
 		
@@ -478,7 +566,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				MARCOS,
 				user,
 				new UserConfiguration(0,0));
-		user7.setCity("Barcelona");
+		user7.setCity(BARCELONA);
 		user7.setRegistered(true);
 		userRepository.save(user7);
 
@@ -514,7 +602,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				VICTOR,
 				anonymous,
 				new UserConfiguration(0,0));
-		user10.setCity("Barcelona");
+		user10.setCity(BARCELONA);
 		user10.setRegistered(false);
 		userRepository.save(user10);
 		
@@ -526,7 +614,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				ANNA,
 				anonymous,
 				new UserConfiguration(0,0));
-		user11.setCity("Barcelona");
+		user11.setCity(BARCELONA);
 		user11.setRegistered(false);
 		userRepository.save(user11);			
 	}

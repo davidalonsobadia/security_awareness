@@ -9,19 +9,19 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="notification_status", uniqueConstraints={@UniqueConstraint(columnNames={"user_id", "notification_id"}, 
-		name="UK_user_notification")})
-public class NotificationStatus {
-
+@Table(name="zone_status", uniqueConstraints={@UniqueConstraint(columnNames={"user_id", "zone_id"}, 
+name="UK_user_zone")})
+public class ZoneStatus {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
-	
-	// Deleted (0), Read(1), Not read(2)
+		
+	// Requested(0), Accepted/added(1), Admin(2)
 	private int status;
 	
-	@ManyToOne
-	private Notification notification;
+	@ManyToOne//(fetch=FetchType.EAGER, cascade?=)
+	private Zone zone;
 	
 	@ManyToOne
 	private User user;
@@ -34,12 +34,12 @@ public class NotificationStatus {
 		this.status = status;
 	}
 
-	public Notification getNotification() {
-		return notification;
+	public Zone getZone() {
+		return zone;
 	}
 
-	public void setNotification(Notification notification) {
-		this.notification = notification;
+	public void setZone(Zone zone) {
+		this.zone = zone;
 	}
 
 	public User getUser() {
@@ -53,5 +53,4 @@ public class NotificationStatus {
 	public long getId() {
 		return id;
 	}
-	
 }

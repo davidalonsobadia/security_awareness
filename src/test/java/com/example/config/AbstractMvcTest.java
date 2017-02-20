@@ -4,12 +4,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import javax.persistence.Entity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -18,17 +17,23 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.RequestPostProcessor;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-
 
 public abstract class AbstractMvcTest extends MockMvcTest{
 	
 	abstract protected String getResourceName();
 	
-    protected List<? extends Entity> getEntitiesList(String content) throws Exception{
+    protected <T> List<T> getEntitiesList(String content, Class<T> cls) throws Exception{
     	JSONObject json = new JSONObject(content);    	    	
     	JSONArray arrays = json.getJSONObject("_embedded").getJSONArray(getResourceName());
-    	return mapper.readValue(arrays.toString(), new TypeReference<List<?>>(){});
+    	
+    	List<T> listElements = new ArrayList<>();
+    	
+    	for(int i = 0 ; i < arrays.length() ; i++){
+    		JSONObject obj = arrays.getJSONObject(i);
+    		T element = mapper.readValue(obj.toString(), cls);
+    		listElements.add(element);
+    	}
+    	return listElements;
     }
     
     

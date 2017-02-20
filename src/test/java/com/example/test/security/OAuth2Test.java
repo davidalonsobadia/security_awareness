@@ -29,6 +29,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class OAuth2Test {
 	
     public static final String CLIENT_ID = "security_awareness_app";
+    public static final String CLIENT_SECRET = "secret";
     public static final String ADMIN_NAME = "alonso_50@mail.com";
     public static final String ADMIN_PASSWORD = "123456";
 
@@ -51,7 +52,7 @@ public class OAuth2Test {
 	 */
     @Test
 	public void Should_getValidTokens_When_ValidCredentials() throws Exception{
-    	OAuthTokenResponse tokenResponse = getAccessToken(ADMIN_NAME, ADMIN_PASSWORD, CLIENT_ID);
+    	OAuthTokenResponse tokenResponse = getAccessToken(ADMIN_NAME, ADMIN_PASSWORD, CLIENT_ID, CLIENT_SECRET);
     	
     	assertNotNull(tokenResponse.accessToken);
     	assertNotNull(tokenResponse.refreshToken);
@@ -66,7 +67,7 @@ public class OAuth2Test {
 	 */
 	@Test
 	public void Should_getInvalidCredentialsMessage_When_InvalidCredentials() throws Exception{
-		OAuthTokenResponse tokenResponse = getAccessToken(ADMIN_NAME, "wrongPassword", CLIENT_ID);
+		OAuthTokenResponse tokenResponse = getAccessToken(ADMIN_NAME, "wrongPassword", CLIENT_ID, CLIENT_SECRET);
     	
     	assertNull(tokenResponse.accessToken);
     	assertNull(tokenResponse.refreshToken);
@@ -83,7 +84,7 @@ public class OAuth2Test {
 	 */
 	@Test
 	public void Should_getInvalidCredentialsMessage_When_InvalidClientId() throws Exception{
-		OAuthTokenResponse tokenResponse = getAccessToken(ADMIN_NAME, ADMIN_PASSWORD, "wrongClientId");
+		OAuthTokenResponse tokenResponse = getAccessToken(ADMIN_NAME, ADMIN_PASSWORD, "wrongClientId", CLIENT_SECRET);
     	
     	assertNull(tokenResponse.accessToken);
     	assertNull(tokenResponse.refreshToken);
@@ -99,18 +100,19 @@ public class OAuth2Test {
 	 */
 	@Test(expected=JsonMappingException.class)
 	public void Should_getErrorMessage_When_MissingClientId() throws Exception{
-		getAccessToken(ADMIN_NAME, ADMIN_PASSWORD, null);
+		getAccessToken(ADMIN_NAME, ADMIN_PASSWORD, null, null);
     	
 	}
     
     
-    private OAuthTokenResponse getAccessToken(String username, String password, String clientId) throws Exception {    
+    private OAuthTokenResponse getAccessToken(String username, String password, String clientId, String clientSecret) throws Exception {    
         MockHttpServletResponse response = mvc
                 .perform(post("/oauth/token")
                         .param("username", username)
                         .param("password", password)
                         .param("grant_type", "password")
-                		.param("client_id", clientId))
+                		.param("client_id", clientId)
+                		.param("client_secret", clientSecret))
                 .andReturn().getResponse();
 
         ObjectMapper object = new ObjectMapper(); 

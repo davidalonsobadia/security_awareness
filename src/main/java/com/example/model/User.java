@@ -40,15 +40,15 @@ public class User {
 	
 	private boolean registered;
 	
-	@OneToOne
+	@ManyToOne
 	private User manager;
 	
-	// Child relation
-	@ManyToMany
-	@JoinTable(name="user_zone", 
-		joinColumns = @JoinColumn(name="user_id"), 
-		inverseJoinColumns = @JoinColumn(name="zone_id"))
-	private Set<Zone> zones;	
+	@OneToOne
+	private Zone zoneManager;
+		
+	@OneToMany(mappedBy="user")
+	@JsonIgnore
+	private Set<ZoneStatus> zoneStatus;
 	
 	@OneToMany(mappedBy="user")
 	@JsonIgnore
@@ -150,14 +150,6 @@ public class User {
 		this.manager = manager;
 	}
 
-	public Set<Zone> getZones() {
-		return zones;
-	}
-
-	public void setZones(Set<Zone> zones) {
-		this.zones = zones;
-	}
-
 	public Set<Resource> getResources() {
 		return resources;
 	}
@@ -196,5 +188,13 @@ public class User {
 
 	public void setActivityStatus(Set<ActivityStatus> activityStatus) {
 		this.activityStatus = activityStatus;
+	}
+
+	public Set<ZoneStatus> getZoneStatus() {
+		return zoneStatus;
+	}
+
+	public void setZoneStatus(Set<ZoneStatus> zoneStatus) {
+		this.zoneStatus = zoneStatus;
 	}
 }

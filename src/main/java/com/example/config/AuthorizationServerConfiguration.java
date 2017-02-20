@@ -55,13 +55,13 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients
-                .inMemory()
+        clients.inMemory()
                 .withClient(propertyResolver.getProperty(PROP_CLIENTID))
-                .scopes("read", "write")
-                .authorities("ROLE_ADMIN", "ROLE_USER")
-                .authorizedGrantTypes("password", "refresh_token")
-                .accessTokenValiditySeconds(propertyResolver.getProperty(PROP_TOKEN_VALIDITY_SECONDS, Integer.class, 1800));
+	                .secret("secret")
+	                .scopes("read", "write")
+	                .authorities("ROLE_CLIENT")
+	                .authorizedGrantTypes("password", "refresh_token")
+	                .accessTokenValiditySeconds(propertyResolver.getProperty(PROP_TOKEN_VALIDITY_SECONDS, Integer.class, 1800));
     }
 
     @Override

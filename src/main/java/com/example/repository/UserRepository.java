@@ -30,9 +30,9 @@ public interface UserRepository extends CrudRepository<User, Long> {
 	/**
 	select u.email from users u 
 	join user_zone uz on uz.user_id = u.id 
-	join zones z on z.id = uz.zone_id 
+	join zone_status z on z.id = uz.zone_id 
 	where z.name IN (
-		select z.name from zones z 
+		select z.name from zone_status z 
 		join user_zone uz on uz.zone_id = z.id 
 		join users u on u.id = uz.user_id 
 		where u.email like 'anna@weappyou.com'
@@ -40,10 +40,10 @@ public interface UserRepository extends CrudRepository<User, Long> {
 	group by u.email;
 	**/
 	@Query("SELECT u from User u "
-			+ "JOIN u.zones z "
+			+ "JOIN u.zoneStatus z "
 			+ "WHERE z IN ("
 				+ "SELECT subuz FROM User subu "
-				+ "JOIN subu.zones subuz "
+				+ "JOIN subu.zoneStatus subuz "
 				+ "WHERE subu.email LIKE :user "
 				+ ")")
 	Set<User> findAllByUserZones(@Param("user") String user);

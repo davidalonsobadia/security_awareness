@@ -9,6 +9,8 @@ import org.springframework.data.repository.query.Param;
 import com.example.annotations.PreAuthorizeAdmin;
 import com.example.model.Activity;
 
+import io.swagger.annotations.Api;
+
 public interface ActivityRepository extends CrudRepository<Activity, Long>{
 	
 	@PreAuthorizeAdmin
@@ -42,9 +44,10 @@ public interface ActivityRepository extends CrudRepository<Activity, Long>{
 	@Query("SELECT a FROM Activity a, User u "
 			+ "JOIN a.activitiesBlock ab "
 			+ "JOIN a.zone az "
-			+ "JOIN u.zones uz "
+			+ "JOIN u.zoneStatus uz "
+			+ "JOIN uz.zone z "
 			+ "WHERE MONTH(ab.startDate) = :month AND YEAR(ab.startDate) = :year "
-			+ "AND uz.name LIKE az.name "
+			+ "AND z.name LIKE az.name "
 			+ "AND u.email LIKE :user "
 			+ "ORDER BY ab.startDate ASC")
 	Set<Activity> findAllByMonthAndYearAndUserZones(@Param("month") Integer month, 
@@ -63,5 +66,5 @@ public interface ActivityRepository extends CrudRepository<Activity, Long>{
 			+ "WHERE u.email LIKE :user "
 			+ "AND activityStatus.assistant = true "
 			+ "AND activity.id = activityStatus.activity.id")
-	Set<Activity> findAllByAssistedAndUser(@Param("user") String user);
+	Set<Activity> findAllByAssistantAndUser(@Param("user") String user);
 }

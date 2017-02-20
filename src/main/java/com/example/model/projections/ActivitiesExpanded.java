@@ -22,6 +22,5 @@ public interface ActivitiesExpanded {
 	
 	Zone getZone();
 	User getManager();
-	Set<User> getUsers();
-	
+		
 }
