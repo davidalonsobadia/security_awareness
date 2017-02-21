@@ -22,7 +22,7 @@ public class RecoverPasswordTest extends AbstractMvcTest{
 	@SuppressWarnings("unchecked")
 	@Test
 	public void Should_OK_When_RightEmail() throws Exception{
-		String email = "david.alonso@eurecat.org";
+		String email = "txema_50@mail.com";
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("email", email);

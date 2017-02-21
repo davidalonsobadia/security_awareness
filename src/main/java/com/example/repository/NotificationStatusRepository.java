@@ -6,11 +6,12 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import com.example.annotations.PreAuthorizeAdmin;
+import com.example.annotations.PreAuthorizeAdminOrEntityWithUser;
 import com.example.model.NotificationStatus;
 
 public interface NotificationStatusRepository extends CrudRepository<NotificationStatus, Long>{
 	
-	@PreAuthorizeAdmin
+	@PreAuthorizeAdminOrEntityWithUser
 	@Override
 	<S extends NotificationStatus> S save(S entity);
 

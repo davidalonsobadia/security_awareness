@@ -13,7 +13,7 @@ import com.example.model.Role;
 @Component
 public class AuthenticationUser {
 	
-    public static final String ADMIN_NAME = "alonso_50@mail.com";
+    public static final String ADMIN_NAME = "david.alonso@eurecat.org";
     public static final String ADMIN_PASSWORD = "123456";
     public static final String USER_NAME = "txema_50@mail.com";
     public static final String USER_PASSWORD = "123456";
