@@ -1,6 +1,4 @@
 package com.example;
-import static com.example.utils.Utils.newArrayList;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -75,7 +73,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 	private PasswordEncoder passwordEncoder;
 	
 	
-	private static final String ALONSO = "alonso_50@mail.com";
+	private static final String ALONSO = "david.alonso@eurecat.org";
 	private static final String GONZALO = "gonzalo_50@mail.com";
 	private static final String MARIO = "mario_50@mail.com";
 	private static final String SERGI = "sergi_50@mail.com";
