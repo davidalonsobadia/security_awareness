@@ -11,5 +11,4 @@ public interface ZoneStatusProjection {
 	
 	String getStatus();
 	Zone getZone();
-	//User getUser();
 }

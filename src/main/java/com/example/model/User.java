@@ -42,10 +42,7 @@ public class User {
 	
 	@ManyToOne
 	private User manager;
-	
-	@OneToOne
-	private Zone zoneManager;
-		
+			
 	@OneToMany(mappedBy="user")
 	@JsonIgnore
 	private Set<ZoneStatus> zoneStatus;
@@ -61,11 +58,10 @@ public class User {
 	@OneToMany
 	private Set<Resource> resources;
 	
-	@OneToOne(cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
+	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
 	private UserConfiguration configuration;
 	
 	@OneToOne(cascade= {CascadeType.PERSIST, CascadeType.REMOVE})
-	//@JsonIgnore
 	private Password password;
 		
 	@NotEmpty
