@@ -610,7 +610,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				"Noell",
 				new Password(passwordEncoder.encode("123456")),
 				ANNA,
-				user,
+				anonymous,
 				new UserConfiguration(0,0));
 		user11.setCity(BARCELONA);
 		user11.setRegistered(false);

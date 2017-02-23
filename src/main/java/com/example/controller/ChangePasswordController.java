@@ -37,11 +37,6 @@ public class ChangePasswordController {
 	private AuthenticationManager authenticationManager;
 	
 	
-	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-	
-	
 	@RequestMapping(value= "/changePassword", method = RequestMethod.POST)
 	public ResponseEntity<Void> changePassword(
 			@RequestBody String jsonString) throws JSONException {

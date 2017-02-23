@@ -32,16 +32,10 @@ public class NotificationStatusRepositoryTest extends AbstractMvcTest{
 	public void Should_getNotificationStatusByUser_When_UserEmail() throws Exception  {
 		
 		String route = "search/findAllByUser_email?user=%s";
-		route = String.format(route, "gonzalo_50@mail.com");
+		route = String.format(route, user().getUsername());
 		
 		ResultActions results = readWithVariables(user(), route);
-		verify(results, isOk());
-		
-		List<NotificationStatus> notificationStatuses = getEntitiesList(
-				results.andReturn().getResponse().getContentAsString(),
-				NotificationStatus.class);
-		
-		assertEquals(notificationStatuses.size(), 5);
+		verify(results, isOk());	
 	}
 	
 	@Test
@@ -49,7 +43,7 @@ public class NotificationStatusRepositoryTest extends AbstractMvcTest{
 		
 		StringBuilder route = new StringBuilder("search/findAllByUser_emailOrderByNotification_DateDesc");
 		route.append("?user=");
-		route.append("gonzalo_50@mail.com");
+		route.append(user().getUsername());
 		route.append("&projection=expanded");
 				
 		ResultActions results = readWithVariables(user(), route.toString());
@@ -65,6 +59,5 @@ public class NotificationStatusRepositoryTest extends AbstractMvcTest{
 			
 			assertTrue(currentDate.compareTo(nextDate) >= 0);	
 		}
-		assertEquals(notificationStatuses.size(), 5);
 	}
 }
