@@ -50,7 +50,6 @@ public abstract class MockMvcTest {
 
     }
     
-    
     protected User admin() {
     	return authenticationUser.admin();
     }

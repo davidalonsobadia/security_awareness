@@ -2,6 +2,7 @@ package com.example.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
+import com.example.annotations.PostFilterOwnUser;
 import com.example.annotations.PreAuthorizeAdmin;
 import com.example.annotations.PreAuthorizeAdminOrEntityWithUser;
 import com.example.model.ZoneStatus;
@@ -19,5 +20,9 @@ public interface ZoneStatusRepository extends CrudRepository<ZoneStatus, Long> {
 	@PreAuthorizeAdmin
 	@Override
 	void deleteAll();
+	
+	@PostFilterOwnUser
+	@Override
+	Iterable<ZoneStatus> findAll();
 
 }

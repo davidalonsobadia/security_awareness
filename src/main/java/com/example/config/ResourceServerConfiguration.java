@@ -52,8 +52,13 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 	            		.hasRole(Role.USER.name())
 		            .antMatchers("/register")
 	            		.hasRole(Role.ANONYMOUS.name())
+	            	.antMatchers("/isRegistered")
+	            		.hasRole(Role.ANONYMOUS.name())
+			        .antMatchers("/**")
+	            		.hasRole(Role.USER.name())
 		            .anyRequest()
 	            		.authenticated();
-    }     
+    }
+    
 }
 

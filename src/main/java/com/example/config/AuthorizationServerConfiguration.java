@@ -8,6 +8,7 @@ import org.springframework.boot.bind.RelaxedPropertyResolver;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,6 +17,9 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
+import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
+import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
@@ -28,7 +32,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     private static final String PROP_TOKEN_VALIDITY_SECONDS = "tokenValidityInSeconds";
 
     private RelaxedPropertyResolver propertyResolver;
-
+    
     @Autowired
     private DataSource dataSource;
     
@@ -48,13 +52,33 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     public void configure(AuthorizationServerEndpointsConfigurer endpoints)
             throws Exception {
         endpoints
-                .tokenStore(tokenStore())
+                //.tokenServices(tokenServices())
+        		.tokenStore(tokenStore())
+        		.tokenEnhancer(tokenEnhancer())
                 .authenticationManager(authenticationManager)
                 .userDetailsService(userDetailsService);
     }
 
-    @Override
-    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+    /*@Bean
+    @Primary
+    public AuthorizationServerTokenServices tokenServices() {
+    	DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
+    	defaultTokenServices.setTokenEnhancer(tokenEnhancer());
+    	defaultTokenServices.setTokenStore(tokenStore());
+    	defaultTokenServices.setSupportRefreshToken(true);
+    	defaultTokenServices.setAccessTokenValiditySeconds(propertyResolver.getProperty(PROP_TOKEN_VALIDITY_SECONDS, Integer.class, 1800));
+    	defaultTokenServices.setReuseRefreshToken(true);
+
+        return defaultTokenServices;
+	}*/
+    
+    @Bean
+    public TokenEnhancer tokenEnhancer() {
+        return new CustomTokenEnhancer();
+    }
+
+	@Override
+    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {    	
         clients.inMemory()
                 .withClient(propertyResolver.getProperty(PROP_CLIENTID))
 	                .secret("secret")
@@ -71,7 +95,8 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     
     @Override
     public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
-        oauthServer.allowFormAuthenticationForClients();
+        oauthServer.
+        	allowFormAuthenticationForClients();        
     }
-
+    
 }

@@ -1,5 +1,8 @@
 package com.example.controller;
 
+import java.util.Collection;
+import java.util.Iterator;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.json.JSONObject;
@@ -10,6 +13,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.oauth2.common.OAuth2AccessToken;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,8 +29,6 @@ import com.example.service.AuthorityService;
 import com.example.service.UserServiceImpl;
 import com.example.utils.UserContext;
 
-import io.swagger.annotations.Api;
-
 @Controller
 public class RegisterController {
 	
@@ -37,6 +40,8 @@ public class RegisterController {
 	@Autowired
 	private AuthorityService authorityService;
 	
+	@Autowired
+	private TokenStore tokenStore;
 	
     @RequestMapping(value= "/register",method = RequestMethod.POST)
     public ResponseEntity<Void> register(@RequestBody UserContext userContext,
@@ -76,33 +81,25 @@ public class RegisterController {
     	headers.setLocation(ucBuilder.path("/users/{id}").buildAndExpand(userFromDatabase.getId()).toUri());
     	ResponseEntity<Void> response = new ResponseEntity<>(headers, HttpStatus.NO_CONTENT);
     	
-    	// --- grant Authority for this Session
+    	/*
+    	 * remove existing token
+    	 * 
+    	 */
     	
-//		@SuppressWarnings("unchecked")
-//		List<SimpleGrantedAuthority> oldAuthorities = (List<SimpleGrantedAuthority>)SecurityContextHolder.getContext().getAuthentication().getAuthorities();
-//		SimpleGrantedAuthority authority = new SimpleGrantedAuthority(Role.USER.getRoleName());
-//		List<SimpleGrantedAuthority> updatedAuthorities = new ArrayList<SimpleGrantedAuthority>();
-//		updatedAuthorities.add(authority);
-//		updatedAuthorities.addAll(oldAuthorities);
-//
-//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//		
-//		System.out.println(
-//				SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString());
-//		
-//		SecurityContextHolder.getContext().setAuthentication(
-//		        new UsernamePasswordAuthenticationToken(
-//		        		auth.getPrincipal(),
-//		        		auth.getCredentials(),
-//		        		updatedAuthorities)
-//		);
-//		
-//		System.out.println(
-//				SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString());
-//		
-//		request.getSession().setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
-    	// --- end of this 	
-		
+    	
+    	Collection<OAuth2AccessToken> accessTokens = tokenStore.findTokensByClientIdAndUserName(
+    			"security_awareness_app",
+    			user.getEmail());
+    	
+    	Iterator<OAuth2AccessToken> iterator = accessTokens.iterator();
+    	
+    	while(iterator.hasNext()){
+    		
+    		OAuth2AccessToken accessToken = iterator.next();
+    		tokenStore.removeAccessToken(accessToken);
+    	}
+    	    	
+    	
     	return response;
     }
     
