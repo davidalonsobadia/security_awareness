@@ -170,7 +170,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 		activityStatus9.setActivity(activityService.findOne(3));
 		activityStatus9.setUser(userRepository.findByEmail(GONZALO));
 		activityStatus9.setInterested(true);
-		activityStatus9.setAssistant(false);
+		activityStatus9.setAssistant(true);
 		activityStatusRepository.save(activityStatus9);
 		
 	}
@@ -353,98 +353,98 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 		Zone zoneTarragona = zoneRepository.findByName(TARRAGONA);
 		
 		ZoneStatus zoneStatus = new ZoneStatus();
-		zoneStatus.setStatus(0); // accepted
+		zoneStatus.setStatus(1); // accepted
 		zoneStatus.setUser(userGonzalo);
 		zoneStatus.setZone(zoneBarcelona);
 		zoneStatusRepository.save(zoneStatus);
 
 		ZoneStatus zoneStatus1 = new ZoneStatus();
-		zoneStatus1.setStatus(0); // accepted
+		zoneStatus1.setStatus(1); // accepted
 		zoneStatus1.setUser(userGonzalo);
 		zoneStatus1.setZone(zoneMadrid);
 		zoneStatusRepository.save(zoneStatus1);
 		
 		ZoneStatus zoneStatus2 = new ZoneStatus();
-		zoneStatus2.setStatus(0); // accepted
+		zoneStatus2.setStatus(1); // accepted
 		zoneStatus2.setUser(userJuan);
 		zoneStatus2.setZone(zoneBarcelona);
 		zoneStatusRepository.save(zoneStatus2);
 
 		ZoneStatus zoneStatus3 = new ZoneStatus();
-		zoneStatus3.setStatus(0); // accepted
+		zoneStatus3.setStatus(1); // accepted
 		zoneStatus3.setUser(userMario);
 		zoneStatus3.setZone(zoneBarcelona);
 		zoneStatusRepository.save(zoneStatus3);
 
 		ZoneStatus zoneStatus4 = new ZoneStatus();
-		zoneStatus4.setStatus(0); // accepted
+		zoneStatus4.setStatus(1); // accepted
 		zoneStatus4.setUser(userAnna);
 		zoneStatus4.setZone(zoneBarcelona);
 		zoneStatusRepository.save(zoneStatus4);
 
 
 		ZoneStatus zoneStatus5 = new ZoneStatus();
-		zoneStatus5.setStatus(0); // accepted
+		zoneStatus5.setStatus(1); // accepted
 		zoneStatus5.setUser(userAnna);
 		zoneStatus5.setZone(zoneGirona);
 		zoneStatusRepository.save(zoneStatus5);
 		
 		ZoneStatus zoneStatus6 = new ZoneStatus();
-		zoneStatus6.setStatus(0); // accepted
+		zoneStatus6.setStatus(1); // accepted
 		zoneStatus6.setUser(userAnna);
 		zoneStatus6.setZone(zoneLleida);
 		zoneStatusRepository.save(zoneStatus6);
 		
 		ZoneStatus zoneStatus7 = new ZoneStatus();
-		zoneStatus7.setStatus(0); // accepted
+		zoneStatus7.setStatus(1); // accepted
 		zoneStatus7.setUser(userAnna);
 		zoneStatus7.setZone(zoneTarragona);
 		zoneStatusRepository.save(zoneStatus7);
 		
 		ZoneStatus zoneStatus8 = new ZoneStatus();
-		zoneStatus8.setStatus(0); // accepted
+		zoneStatus8.setStatus(1); // accepted
 		zoneStatus8.setUser(userSergi);
 		zoneStatus8.setZone(zoneBarcelona);
 		zoneStatusRepository.save(zoneStatus8);
 
 		ZoneStatus zoneStatus9 = new ZoneStatus();
-		zoneStatus9.setStatus(0); // accepted
+		zoneStatus9.setStatus(1); // accepted
 		zoneStatus9.setUser(userTxema);
 		zoneStatus9.setZone(zoneBarcelona);
 		zoneStatusRepository.save(zoneStatus9);
 		
 		ZoneStatus zoneStatus10 = new ZoneStatus();
-		zoneStatus10.setStatus(0); // accepted
+		zoneStatus10.setStatus(1); // accepted
 		zoneStatus10.setUser(userVictor);
 		zoneStatus10.setZone(zoneGirona);
 		zoneStatusRepository.save(zoneStatus10);	
 		
 		ZoneStatus zoneStatus11 = new ZoneStatus();
-		zoneStatus11.setStatus(0); // accepted
+		zoneStatus11.setStatus(1); // accepted
 		zoneStatus11.setUser(userDavid);
 		zoneStatus11.setZone(zoneBarcelona);
 		zoneStatusRepository.save(zoneStatus11);
 		
 		ZoneStatus zoneStatus12 = new ZoneStatus();
-		zoneStatus12.setStatus(0); // accepted
+		zoneStatus12.setStatus(1); // accepted
 		zoneStatus12.setUser(userDiego);
 		zoneStatus12.setZone(zoneTarragona);
 		zoneStatusRepository.save(zoneStatus12);
 		
 		ZoneStatus zoneStatus13 = new ZoneStatus();
-		zoneStatus13.setStatus(0); // accepted
+		zoneStatus13.setStatus(1); // accepted
 		zoneStatus13.setUser(userDiego);
 		zoneStatus13.setZone(zoneBarcelona);
 		zoneStatusRepository.save(zoneStatus13);
 		
 		ZoneStatus zoneStatus14 = new ZoneStatus();
-		zoneStatus14.setStatus(0); // accepted
+		zoneStatus14.setStatus(1); // accepted
 		zoneStatus14.setUser(userSamuel);
 		zoneStatus14.setZone(zoneBarcelona);
 		zoneStatusRepository.save(zoneStatus14);
 		
 		ZoneStatus zoneStatus15 = new ZoneStatus();
-		zoneStatus15.setStatus(0); // accepted
+		zoneStatus15.setStatus(1); // accepted
 		zoneStatus15.setUser(userMarcos);
 		zoneStatus15.setZone(zoneBarcelona);
 		zoneStatusRepository.save(zoneStatus15);

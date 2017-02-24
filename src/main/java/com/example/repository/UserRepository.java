@@ -25,6 +25,9 @@ public interface UserRepository extends CrudRepository<User, Long> {
 	@Override
 	void deleteAll();
 	
+	@Override
+	Set<User> findAll();
+	
 	User findByEmail(@Param("email") String email);
 
 	/**
@@ -41,11 +44,13 @@ public interface UserRepository extends CrudRepository<User, Long> {
 	**/
 	@Query("SELECT u from User u "
 			+ "JOIN u.zoneStatus z "
-			+ "WHERE z IN ("
-				+ "SELECT subuz FROM User subu "
+			+ "WHERE z.zone IN ("
+				+ "SELECT subuz.zone FROM User subu "
 				+ "JOIN subu.zoneStatus subuz "
-				+ "WHERE subu.email LIKE :user "
-				+ ")")
+				+ "WHERE "
+				+ 	"subu.email LIKE :user "
+				+ ")"
+				+ "AND z.status > 0")
 	Set<User> findAllByUserZones(@Param("user") String user);
 	
 	

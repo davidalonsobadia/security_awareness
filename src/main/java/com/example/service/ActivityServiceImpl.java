@@ -26,13 +26,23 @@ public class ActivityServiceImpl implements ActivityService {
 	private ActivityBlockRepository activityBlockRepository; 
 	
 	@Override
-	public Iterable<Activity> findAll(){
+	public Set<Activity> findAll(){
 		return activityRepository.findAll();
 	}
 
 	@Override
 	public Set<Activity> findByMonthAndyear(int month, int year) {
 		return activityRepository.findAllByMonthAndYear(month, year);
+	}
+	
+	@Override
+	public Set<Activity> findAllByMonthAndYearAndUserZones(int month, int year, String email){
+		return activityRepository.findAllByMonthAndYearAndUserZones(month, year, email);
+	}
+	
+	@Override
+	public Set<Activity> findAllByMonthAndYearAndZone(int month, int year, long zone){
+		return activityRepository.findAllByMonthAndYearAndZone(month, year, zone);
 	}
 	
 	@Override

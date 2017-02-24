@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="activities")
 public class Activity {
@@ -23,8 +25,10 @@ public class Activity {
 	
 	private String name;
 	
+	@JsonIgnore
 	private Date dateTimeStart;
 	
+	@JsonIgnore
 	private Date dateTimeEnd;
 	
 	private String place;

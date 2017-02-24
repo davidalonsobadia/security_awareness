@@ -6,15 +6,20 @@ import static org.junit.Assert.assertEquals;
 import java.util.List;
 
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.ResultActions;
 
 import com.example.config.AbstractMvcTest;
 import com.example.model.Activity;
+import com.example.service.ZoneService;
 
 public class ActivityRepositoryTest extends AbstractMvcTest{
 
 
 	private static String RESOURCE_NAME = "activities";
+	
+	@Autowired
+	private ZoneService zoneService;
 	
 	@Test
 	public void Should_getActivitiesResult_When_MonthAndYear() throws Exception  {
@@ -34,8 +39,11 @@ public class ActivityRepositoryTest extends AbstractMvcTest{
 	@Test
 	public void Should_getActivitiesResult_When_MonthAndYearAndZone() throws Exception  {
 		
-		String params = "search/findAllByMonthAndYearAndZone?month=%d&year=%d&zone=%s";
-		params = String.format(params, 1, 2017, "Barcelona");
+		String params = "search/findAllByMonthAndYearAndZone?month=%d&year=%d&zone=%d";
+		
+		long zoneId = zoneService.findByName("Barcelona").getId();
+		
+		params = String.format(params, 1, 2017, zoneId);
 		
 		ResultActions action = readWithVariables(user(), params);
 		verify(action, isOk());
