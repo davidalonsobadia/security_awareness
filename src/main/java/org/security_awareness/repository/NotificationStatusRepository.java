@@ -15,7 +15,7 @@ public interface NotificationStatusRepository extends CrudRepository<Notificatio
 	@Override
 	<S extends NotificationStatus> S save(S entity);
 
-	@PreAuthorizeAdmin
+	@PreAuthorizeAdminOrEntityWithUser
 	@Override
 	void delete(NotificationStatus entity);
 	

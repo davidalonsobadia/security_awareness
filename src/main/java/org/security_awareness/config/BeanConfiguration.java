@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.data.projection.ProjectionFactory;
+import org.springframework.data.projection.SpelAwareProxyProjectionFactory;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDecisionVoter;
@@ -28,6 +30,11 @@ public class BeanConfiguration {
 	
 	@Autowired
     private Environment env;
+	
+	@Bean
+	public ProjectionFactory projectionFactory(){
+		return new SpelAwareProxyProjectionFactory();
+	}
 
     @Bean
     public RoleHierarchy roleHierarchy(){
