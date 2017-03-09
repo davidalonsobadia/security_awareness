@@ -42,7 +42,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         		// Swagger files to make Swagger accessible without authentication
         		.antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources", 
         				"/configuration/security", "/swagger-ui.html", "/webjars/**",
-        				"/swagger-resources/configuration/ui");
+        				"/swagger-resources/configuration/ui")
+        		//Recover password controller
+        		.antMatchers("/recoverPassword");
     }
     
 

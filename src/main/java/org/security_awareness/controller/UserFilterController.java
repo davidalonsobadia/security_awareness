@@ -4,6 +4,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -16,6 +17,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.projection.ProjectionFactory;
 import org.springframework.hateoas.Resources;
+import org.springframework.hateoas.core.EmbeddedWrapper;
+import org.springframework.hateoas.core.EmbeddedWrappers;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,7 +39,7 @@ public class UserFilterController {
 	
 	
 	@RequestMapping(method = RequestMethod.POST, value="/users/search/findByFilters")
-	public @ResponseBody Resources<UsersExpanded> getUsersFiltered(@RequestBody String jsonString){
+	public @ResponseBody Resources<EmbeddedWrapper> getUsersFiltered(@RequestBody String jsonString){
 		
 		JSONObject json = new JSONObject(jsonString);
 		boolean myZones = json.getBoolean("myZones");
@@ -51,10 +54,7 @@ public class UserFilterController {
 		
 		Set<User> allUsers = userService.findAll();
 		allUsers.remove(currentUser);
-		
-		//UsersExpanded expanded = projectionFactory.createProjection(UsersExpanded.class, currentUser);
-		//System.out.println(expanded.getAuthority().getRole().toString());
-		
+				
 		// 1. Check if MyZones is activated
 		if(myZones == true) {
 			Set<User> usersByZone = userService.findAllByUserZones(userEmail);
@@ -80,10 +80,12 @@ public class UserFilterController {
 			usersExpanded.add(projectionFactory.createProjection(UsersExpanded.class, user));
 		}
 		
-		Resources<UsersExpanded> resources = new Resources<UsersExpanded>(usersExpanded);
+		EmbeddedWrappers wrappers = new EmbeddedWrappers(false);
+		EmbeddedWrapper wrapper = (usersExpanded.size() == 0) ? wrappers.emptyCollectionOf(User.class) : wrappers.wrap(usersExpanded);
+
+		Resources<EmbeddedWrapper> resources = new Resources<>(Arrays.asList(wrapper));
 		resources.add(linkTo(methodOn(UserFilterController.class).getUsersFiltered("json")).withSelfRel());
-		
-		return resources;
+		return resources;		
 		
 	}
 }

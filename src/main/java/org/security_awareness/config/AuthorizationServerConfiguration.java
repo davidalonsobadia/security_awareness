@@ -49,25 +49,12 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     public void configure(AuthorizationServerEndpointsConfigurer endpoints)
             throws Exception {
         endpoints
-                //.tokenServices(tokenServices())
         		.tokenStore(tokenStore())
         		.tokenEnhancer(tokenEnhancer())
                 .authenticationManager(authenticationManager)
                 .userDetailsService(userDetailsService);
     }
 
-    /*@Bean
-    @Primary
-    public AuthorizationServerTokenServices tokenServices() {
-    	DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
-    	defaultTokenServices.setTokenEnhancer(tokenEnhancer());
-    	defaultTokenServices.setTokenStore(tokenStore());
-    	defaultTokenServices.setSupportRefreshToken(true);
-    	defaultTokenServices.setAccessTokenValiditySeconds(propertyResolver.getProperty(PROP_TOKEN_VALIDITY_SECONDS, Integer.class, 1800));
-    	defaultTokenServices.setReuseRefreshToken(true);
-
-        return defaultTokenServices;
-	}*/
     
     @Bean
     public TokenEnhancer tokenEnhancer() {
