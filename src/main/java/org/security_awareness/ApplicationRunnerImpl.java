@@ -345,6 +345,72 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 			activity5.setNumRepeats(2);
 			activityService.save(activity5);
 		
+			// Activity 6
+			Activity activity6 = new Activity();
+			activity6.setName("Amazing Internet World");
+			activity6.setDescription("Tech Congress");
+			activity6.setPlace("Barcelona Fira");
+			activity6.setZone(zoneRepository.findByName(BARCELONA));
+			activity6.setDateTimeStart(DATE_FORMAT.parse("10/03/2017 09:00"));
+			activity6.setDateTimeEnd(DATE_FORMAT.parse("10/03/2017 20:00"));
+			activity6.setManager(userRepository.findByEmail(ALONSO));
+			activity6.setType(2);
+			activity6.setNumRepeats(3);
+			activityService.save(activity6);
+			
+			// Activity 7
+			Activity activity7 = new Activity();
+			activity7.setName("Capital Hacking Conference");
+			activity7.setDescription("Tech Congress");
+			activity7.setPlace("Madrid Palacio de Deportes");
+			activity7.setZone(zoneRepository.findByName(MADRID));
+			activity7.setDateTimeStart(DATE_FORMAT.parse("20/03/2017 13:00"));
+			activity7.setDateTimeEnd(DATE_FORMAT.parse("20/03/2017 21:00"));
+			activity7.setManager(userRepository.findByEmail(GONZALO));
+			activity7.setType(2);
+			activity7.setNumRepeats(2);
+			activityService.save(activity7);
+			
+			
+			// Activity 8
+			Activity activity8 = new Activity();
+			activity8.setName("Girona Tour");
+			activity8.setDescription("Congress");
+			activity8.setPlace("Girona Centre");
+			activity8.setZone(zoneRepository.findByName(GIRONA));
+			activity8.setDateTimeStart(DATE_FORMAT.parse("24/03/2017 08:00"));
+			activity8.setDateTimeEnd(DATE_FORMAT.parse("24/03/2017 10:00"));
+			activity8.setManager(userRepository.findByEmail(ALONSO));
+			activity8.setType(3);
+			activity8.setNumRepeats(1);
+			activityService.save(activity8);
+			
+			// Activity 9
+			Activity activity9 = new Activity();
+			activity9.setName("Blockchain Global");
+			activity9.setDescription("Tech Congress");
+			activity9.setPlace("Barcelona Centre");
+			activity9.setZone(zoneRepository.findByName(BARCELONA));
+			activity9.setDateTimeStart(DATE_FORMAT.parse("01/04/2017 08:00"));
+			activity9.setDateTimeEnd(DATE_FORMAT.parse("01/04/2017 19:00"));
+			activity9.setManager(userRepository.findByEmail(MARIO));
+			activity9.setType(3);
+			activity9.setNumRepeats(4);
+			activityService.save(activity9);
+			
+			// Activity 10
+			Activity activity10 = new Activity();
+			activity10.setName("Identity Journey");
+			activity10.setDescription("Identity Journey Congress");
+			activity10.setPlace("Barcelona Fira");
+			activity10.setZone(zoneRepository.findByName(BARCELONA));
+			activity10.setDateTimeStart(DATE_FORMAT.parse("05/04/2017 08:30"));
+			activity10.setDateTimeEnd(DATE_FORMAT.parse("05/04/2017 20:00"));
+			activity10.setManager(userRepository.findByEmail(ALONSO));
+			activity10.setType(1);
+			activity10.setNumRepeats(1);
+			activityService.save(activity10);
+			
 		} catch (ParseException e) {
 			e.printStackTrace();
 			

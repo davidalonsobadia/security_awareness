@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="activity_status", uniqueConstraints={@UniqueConstraint(columnNames={"user_id", "activity_id"}, name="UK_user_activity")})
@@ -21,9 +22,11 @@ public class ActivityStatus {
 	private boolean assistant;
 	
 	@ManyToOne
+	@NotNull
 	private User user;
 	
 	@ManyToOne
+	@NotNull
 	private Activity activity;
 
 	public boolean isInterested() {
