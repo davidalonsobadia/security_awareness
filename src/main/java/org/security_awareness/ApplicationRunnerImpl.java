@@ -29,6 +29,7 @@ import org.security_awareness.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -38,6 +39,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
+@PropertySource("classpath:application.properties")
 public class ApplicationRunnerImpl implements ApplicationRunner{
 	
 	@Autowired
@@ -92,7 +94,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 	
 	
 	
-	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+	private static final SimpleDateFormat DATE_FORMAT = DateFormatSingleton.getDateFormat();
 	
 	
 	@Override

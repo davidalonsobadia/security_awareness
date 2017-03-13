@@ -18,4 +18,9 @@ public class ZoneServiceImpl implements ZoneService{
 	public Zone findByName(String name){
 		return zoneRepository.findByName(name);
 	}
+
+	@Override
+	public Zone findById(long id) {
+		return zoneRepository.findOne(id);
+	}
 }
