@@ -26,6 +26,7 @@ import org.security_awareness.repository.UserRepository;
 import org.security_awareness.repository.ZoneRepository;
 import org.security_awareness.repository.ZoneStatusRepository;
 import org.security_awareness.service.ActivityService;
+import org.security_awareness.utils.DateFormatSingleton;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;

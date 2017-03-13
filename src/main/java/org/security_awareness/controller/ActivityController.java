@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.security_awareness.DateFormatSingleton;
 import org.security_awareness.model.Activity;
 import org.security_awareness.model.User;
 import org.security_awareness.model.Zone;
@@ -12,6 +11,7 @@ import org.security_awareness.service.ActivityService;
 import org.security_awareness.service.UserService;
 import org.security_awareness.service.ZoneService;
 import org.security_awareness.utils.ActivityContext;
+import org.security_awareness.utils.DateFormatSingleton;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.rest.webmvc.RepositoryRestController;

@@ -1,4 +1,4 @@
-package org.security_awareness;
+package org.security_awareness.utils;
 
 import java.text.SimpleDateFormat;
 
