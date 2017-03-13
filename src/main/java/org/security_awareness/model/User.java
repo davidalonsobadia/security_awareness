@@ -29,6 +29,7 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
+	@NotNull
 	private String firstName;
 	
 	private String lastName;

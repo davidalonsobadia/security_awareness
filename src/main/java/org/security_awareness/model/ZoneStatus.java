@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="zone_status", uniqueConstraints={@UniqueConstraint(columnNames={"user_id", "zone_id"}, 
@@ -20,10 +21,12 @@ public class ZoneStatus {
 	// Requested(0), Accepted/added(1), Admin(2)
 	private int status;
 	
-	@ManyToOne//(fetch=FetchType.EAGER, cascade?=)
+	@ManyToOne
+	@NotNull
 	private Zone zone;
 	
 	@ManyToOne
+	@NotNull
 	private User user;
 
 	public int getStatus() {

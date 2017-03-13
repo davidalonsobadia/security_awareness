@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="notification_status", uniqueConstraints={@UniqueConstraint(columnNames={"user_id", "notification_id"}, 
@@ -21,9 +22,11 @@ public class NotificationStatus {
 	private int status;
 	
 	@ManyToOne
+	@NotNull
 	private Notification notification;
 	
 	@ManyToOne
+	@NotNull
 	private User user;
 
 	public int getStatus() {
