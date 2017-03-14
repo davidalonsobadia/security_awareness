@@ -13,7 +13,6 @@ import org.security_awareness.service.ZoneService;
 import org.security_awareness.utils.ActivityContext;
 import org.security_awareness.utils.DateFormatSingleton;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @RepositoryRestController
-@PropertySource("classpath:application.properties")
 public class ActivityController {
 	
 	@Autowired

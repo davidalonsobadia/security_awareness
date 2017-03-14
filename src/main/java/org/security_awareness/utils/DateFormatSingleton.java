@@ -9,7 +9,7 @@ import org.springframework.core.env.Environment;
 
 public class DateFormatSingleton {
 
-	private static String dateFormat = "dd/MM/yyyy hh:mm";
+	private static String dateFormat = "dd/MM/yyyy HH:mm";
 		
 	private static SimpleDateFormat simpleDateFormatSingleton;
 	

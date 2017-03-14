@@ -67,7 +67,6 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 	@Autowired
 	private ZoneStatusRepository zoneStatusRepository;
 	
-	
 	@Autowired
 	private ActivityService activityService;	
 	
