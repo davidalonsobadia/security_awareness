@@ -56,7 +56,8 @@ public abstract class AbstractMvcTest extends MockMvcTest{
     				.content(body)
     			);
 	}
-	protected ResultActions readWithVariables(org.springframework.security.core.userdetails.User user, String... variables) throws Exception{
+	protected ResultActions readWithVariables(org.springframework.security.core.userdetails.User user,
+			String... variables) throws Exception{
     	RequestPostProcessor bearerToken = oauthHelper.bearerToken(client(), user);
     	String route = variables.length > 0 ? "/" + variables[0] : "";
     	return mvc.perform(
