@@ -17,5 +17,6 @@ public class WebMvcConfiguration extends RepositoryRestMvcConfiguration{
 	public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config){
 		config.exposeIdsFor(User.class, Zone.class, Resource.class, 
 				Activity.class, Notification.class, NotificationStatus.class);
+		config.setReturnBodyOnCreate(true);
 	}
 }

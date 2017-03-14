@@ -16,10 +16,13 @@ import org.springframework.test.web.servlet.ResultActions;
 
 public class UserRepositoryTest extends AbstractMvcTest{
 	
-	private static final String NEW_USER_CONTENT = "{\n\t\"firstName\": \"Juan\", \n\t\"lastName\":"
-    			+ " \"Palomo\",\n\t\"email\": \"palomo_50@mail.com\",\n\t\"password\":"
-    			+ " \"123456\",\n\t\"authority\": "
-    			+ "\"http://localhost/authorities/2\"\n}";
+	private static final String NEW_USER_CONTENT = "{\r\n\t\"firstName\": \"Pau\",\r\n\t\"lastName\":"
+			+ " \"Li\",\r\n\t\"city\": \"Sant Cugat\",\r\n\t\"email\": \"pau_50@mail.com\","
+			+ "\r\n\t\"configuration\": {\r\n\t\t\"visibility\": 0,\r\n\t\t\"notificationsReceived\": 0\r\n\t},"
+			+ "\r\n\t\"manager\": 2,"
+			+ "\r\n\t\"authority\": \"user\"\r\n}";
+	
+	private static final String NEW_USER_EMAIL = "pau_50@mail.com";
 	
 	/**
 	 * TEST WITH ROLE: USER
@@ -120,9 +123,7 @@ public class UserRepositoryTest extends AbstractMvcTest{
 	 */
 	@Test
 	public void Should_deleteUser_When_UserWithRoleAdmin() throws Exception{
-		ResultActions result = readWithVariables(admin(), "search/findByEmail?email="+"palomo_50@mail.com" );
-    	
-		verify(result, isOk());
+		ResultActions result = readWithVariables(admin(), "search/findByEmail?email="+NEW_USER_EMAIL );
 		
     	JSONObject json = new JSONObject(result.andReturn().getResponse().getContentAsString());    	    	
     	String varId = String.valueOf(json.getInt("id"));

@@ -46,7 +46,7 @@ public class ActivityServiceImpl implements ActivityService {
 	}
 	
 	@Override
-	public void save(Activity activity){	
+	public Activity save(Activity activity){	
 		Date dateStart = activity.getDateTimeStart();
 		Date dateEnd = activity.getDateTimeEnd();
 		
@@ -68,7 +68,7 @@ public class ActivityServiceImpl implements ActivityService {
 		
 		activity.setActivitiesBlock(activityBlocks);
 		
-		activityRepository.save(activity);
+		return activityRepository.save(activity);
 		
 	}
 	

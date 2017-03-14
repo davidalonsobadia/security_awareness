@@ -12,7 +12,7 @@ public interface ActivityService {
 	
 	Set<Activity> findByMonthAndyear(int month, int year);
 	
-	void save(Activity activity);
+	Activity save(Activity activity);
 
 	Set<Activity> findAllByMonthAndYearAndUserZones(int month, int year, String email);
 

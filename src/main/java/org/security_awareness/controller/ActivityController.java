@@ -14,11 +14,14 @@ import org.security_awareness.utils.ActivityContext;
 import org.security_awareness.utils.DateFormatSingleton;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.mvc.BasicLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @RepositoryRestController
@@ -34,7 +37,8 @@ public class ActivityController {
 	private UserService userService;
 		
 	@RequestMapping(value="/activities", method =  RequestMethod.POST)
-	public ResponseEntity<Void> postActivity(
+	@ResponseBody
+	public ResponseEntity<Resource<Activity>> postActivity(
 			@RequestBody ActivityContext activityContext) throws Exception{
 		
 		Activity activity = new Activity();
@@ -46,7 +50,7 @@ public class ActivityController {
 		
 		activity.setType(activityContext.getType());
 		
-		int zoneId = objectParser(activity.getZone(), "Zone");
+		int zoneId = objectParser(activityContext.getZone(), "Zone");
 		Zone zone = zoneService.findById(zoneId);
 		activity.setZone(zone);
 		
@@ -54,7 +58,7 @@ public class ActivityController {
 		User manager = userService.findById(managerId);
 		activity.setManager(manager);
 		
-				
+
 		
 		String dateStartString = activityContext.getDateStart();
 		Date dateStart = DateFormatSingleton.getDateFormat().parse(dateStartString);
@@ -64,8 +68,15 @@ public class ActivityController {
 		Date dateEnd = DateFormatSingleton.getDateFormat().parse(dateEndString);
 		activity.setDateTimeEnd(dateEnd);
 		
-		activityService.save(activity);
-		return new ResponseEntity<Void>(HttpStatus.OK);
+		Activity activityStored = activityService.save(activity);
+		
+	    BasicLinkBuilder builder = BasicLinkBuilder.linkToCurrentMapping()
+	                                               .slash("activities")
+	                                               .slash(activityStored.getId());
+	    Resource<Activity> resource = new Resource<Activity>(activityStored,
+                builder.withSelfRel());
+	    
+		return new ResponseEntity<Resource<Activity>>(resource, HttpStatus.CREATED);
 	}
 	
 	
