@@ -41,15 +41,15 @@ public class User {
 	@ManyToOne
 	private User manager;
 			
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="user", cascade=CascadeType.REMOVE)
 	@JsonIgnore
 	private Set<ZoneStatus> zoneStatus;
 	
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="user", cascade=CascadeType.REMOVE)
 	@JsonIgnore
 	private Set<NotificationStatus> notificationStatus;
 	
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="user", cascade=CascadeType.REMOVE)
 	@JsonIgnore
 	private Set<ActivityStatus> activityStatus;
 		
