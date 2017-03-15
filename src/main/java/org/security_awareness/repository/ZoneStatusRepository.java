@@ -1,6 +1,6 @@
 package org.security_awareness.repository;
 
-import org.security_awareness.annotations.PostFilterOwnUser;
+import org.security_awareness.annotations.PostFilterEntityWithUser;
 import org.security_awareness.annotations.PreAuthorizeAdmin;
 import org.security_awareness.annotations.PreAuthorizeAdminOrEntityWithUser;
 import org.security_awareness.model.ZoneStatus;
@@ -20,7 +20,7 @@ public interface ZoneStatusRepository extends CrudRepository<ZoneStatus, Long> {
 	@Override
 	void deleteAll();
 	
-	@PostFilterOwnUser
+	@PostFilterEntityWithUser
 	@Override
 	Iterable<ZoneStatus> findAll();
 

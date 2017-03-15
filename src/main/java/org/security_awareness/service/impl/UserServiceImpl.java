@@ -63,4 +63,9 @@ public class UserServiceImpl implements UserService{
 	public Set<User> findAllByAssistedAndUser(String user){
 		return userRepository.findAllByAssistedAndUser(user);
 	}
+
+	@Override
+	public Set<User> findAllByVisibility(String email) {
+		return userRepository.findAllByVisibility(email);
+	}
 }

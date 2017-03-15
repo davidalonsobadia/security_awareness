@@ -17,6 +17,8 @@ public interface UserService {
 	public User findByEmail(String email);
 
 	Set<User> findAll();
+	
+	Set<User> findAllByVisibility(String email);
 
 	Set<User> findAllByUserZones(String user);
 

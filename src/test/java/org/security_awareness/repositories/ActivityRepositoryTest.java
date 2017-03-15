@@ -97,7 +97,7 @@ public class ActivityRepositoryTest extends AbstractMvcTest{
 		List<Activity> activities = getEntitiesList(
 				action.andReturn().getResponse().getContentAsString(),
 				Activity.class);
-		assertEquals(activities.size(), 4);
+		assertEquals(activities.size(), 5);
 
 	}
 	

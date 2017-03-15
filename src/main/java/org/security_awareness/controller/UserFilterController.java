@@ -52,7 +52,7 @@ public class UserFilterController {
 					);
 		String userEmail = currentUser.getEmail();
 		
-		Set<User> allUsers = userService.findAll();
+		Set<User> allUsers = userService.findAllByVisibility(userEmail);
 		allUsers.remove(currentUser);
 				
 		// 1. Check if MyZones is activated

@@ -181,6 +181,34 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 		activityStatus10.setAssistant(true);
 		activityStatusRepository.save(activityStatus10);
 		
+		ActivityStatus activityStatus11 = new ActivityStatus();
+		activityStatus11.setActivity(activityService.findOne(6));
+		activityStatus11.setUser(userRepository.findByEmail(DIEGO));
+		activityStatus11.setInterested(true);
+		activityStatus11.setAssistant(false);
+		activityStatusRepository.save(activityStatus11);
+		
+		ActivityStatus activityStatus12 = new ActivityStatus();
+		activityStatus12.setActivity(activityService.findOne(6));
+		activityStatus12.setUser(userRepository.findByEmail(SERGI));
+		activityStatus12.setInterested(true);
+		activityStatus12.setAssistant(false);
+		activityStatusRepository.save(activityStatus12);
+		
+		ActivityStatus activityStatus13 = new ActivityStatus();
+		activityStatus13.setActivity(activityService.findOne(4));
+		activityStatus13.setUser(userRepository.findByEmail(MARCOS));
+		activityStatus13.setInterested(false);
+		activityStatus13.setAssistant(true);
+		activityStatusRepository.save(activityStatus13);
+		
+		ActivityStatus activityStatus14 = new ActivityStatus();
+		activityStatus14.setActivity(activityService.findOne(4));
+		activityStatus14.setUser(userRepository.findByEmail(TXEMA));
+		activityStatus14.setInterested(false);
+		activityStatus14.setAssistant(true);
+		activityStatusRepository.save(activityStatus14);
+		
 	}
 	
 	private void loadResources(){
@@ -581,7 +609,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				new Password(passwordEncoder.encode("123456")), // password
 				ALONSO, // email
 				superadmin,
-				new UserConfiguration(0,0));
+				new UserConfiguration(4,4));
 		user1.setCity(BARCELONA);
 		user1.setRegistered(true);
 		userRepository.save(user1);
@@ -592,7 +620,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				new Password(passwordEncoder.encode("123456")), 
 				GONZALO,
 				admin,
-				new UserConfiguration(0,0));
+				new UserConfiguration(4,4));
 		user2.setCity(MADRID);
 		user2.setRegistered(true);
 		userRepository.save(user2);
@@ -603,7 +631,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				new Password(passwordEncoder.encode("123456")), 
 				MARIO,
 				admin,
-				new UserConfiguration(0,0));
+				new UserConfiguration(3,4));
 		user3.setCity("Fraga");
 		user3.setRegistered(true);
 		userRepository.save(user3);
@@ -615,7 +643,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				new Password(passwordEncoder.encode("123456")), 
 				SERGI,
 				user,
-				new UserConfiguration(0,0));
+				new UserConfiguration(3,4));
 		user4.setCity("Terrassa");
 		user4.setRegistered(true);
 		userRepository.save(user4);
@@ -626,7 +654,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				new Password(passwordEncoder.encode("123456")), 
 				SAMUEL,
 				user,
-				new UserConfiguration(0,0));
+				new UserConfiguration(3,4));
 		user5.setCity(BARCELONA);
 		user5.setRegistered(true);
 		userRepository.save(user5);
@@ -638,7 +666,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				new Password(passwordEncoder.encode("123456")), 
 				DIEGO,
 				user,
-				new UserConfiguration(0,0));
+				new UserConfiguration(2,0));
 		user6.setCity(BARCELONA);
 		user6.setRegistered(true);
 		userRepository.save(user6);
@@ -650,7 +678,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				new Password(passwordEncoder.encode("123456")), 
 				MARCOS,
 				user,
-				new UserConfiguration(0,0));
+				new UserConfiguration(1,0));
 		user7.setCity(BARCELONA);
 		user7.setRegistered(true);
 		userRepository.save(user7);
@@ -662,7 +690,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				new Password(passwordEncoder.encode("123456")), 
 				TXEMA,
 				user,
-				new UserConfiguration(0,0));
+				new UserConfiguration(1,0));
 		user8.setCity("Guipuzcoa");
 		user8.setRegistered(true);
 		userRepository.save(user8);
@@ -686,7 +714,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				new Password(passwordEncoder.encode("123456")),
 				VICTOR,
 				anonymous,
-				new UserConfiguration(0,0));
+				new UserConfiguration(3,4));
 		user10.setCity(BARCELONA);
 		user10.setRegistered(false);
 		userRepository.save(user10);

@@ -13,7 +13,7 @@ import org.springframework.security.access.prepost.PostFilter;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
-@PostFilter("hasRole('ADMIN') or filterObject.email == principal.username")
-public @interface PostFilterOwnUser {
+@PostFilter("hasRole('ADMIN') or filterObject.user.email == principal.username")
+public @interface PostFilterEntityWithUser {
 	
 }

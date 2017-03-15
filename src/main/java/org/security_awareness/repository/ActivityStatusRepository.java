@@ -1,6 +1,6 @@
 package org.security_awareness.repository;
 
-import org.security_awareness.annotations.PostFilterOwnUser;
+import org.security_awareness.annotations.PostFilterEntityWithUser;
 import org.security_awareness.annotations.PreAuthorizeAdmin;
 import org.security_awareness.annotations.PreAuthorizeAdminOrEntityWithUser;
 import org.security_awareness.model.ActivityStatus;
@@ -21,7 +21,7 @@ public interface ActivityStatusRepository extends CrudRepository<ActivityStatus,
 	@Override
 	void deleteAll();
 	
-	@PostFilterOwnUser
+	@PostFilterEntityWithUser
 	@Override
 	Iterable<ActivityStatus> findAll();
 
