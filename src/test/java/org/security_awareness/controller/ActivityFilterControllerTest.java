@@ -10,6 +10,9 @@ import org.springframework.test.web.servlet.ResultActions;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertEquals;
 
+import static org.security_awareness.config.ResultMatchersImpl.*;
+
+
 
 public class ActivityFilterControllerTest extends AbstractMvcTest{
 
@@ -33,6 +36,8 @@ public class ActivityFilterControllerTest extends AbstractMvcTest{
 		
 		assertNotNull(activities);
 		assertEquals(activities.size(), 1);
+		
+		verify(results, isOk());
 		
 	}
 

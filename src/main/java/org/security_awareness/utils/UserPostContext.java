@@ -1,6 +1,5 @@
 package org.security_awareness.utils;
 
-import org.security_awareness.model.Authority;
 import org.security_awareness.model.Password;
 import org.security_awareness.model.UserConfiguration;
 

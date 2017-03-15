@@ -30,4 +30,7 @@ public class ResultMatchersImpl {
 	public static ResultMatcher isUnauthorized(){
 		return status().isUnauthorized();
 	}
+	public static ResultMatcher isInternalServerError(){
+		return status().isInternalServerError();
+	}
 }
