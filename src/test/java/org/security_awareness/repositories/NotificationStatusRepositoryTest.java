@@ -1,6 +1,7 @@
 package org.security_awareness.repositories;
 
 import static org.junit.Assert.assertTrue;
+import static org.security_awareness.config.ResultMatchersImpl.isOk;
 
 import java.util.Date;
 import java.util.List;
@@ -11,8 +12,6 @@ import org.security_awareness.model.NotificationStatus;
 import org.security_awareness.repository.NotificationStatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.ResultActions;
-
-import static org.security_awareness.config.ResultMatchersImpl.*;
 
 public class NotificationStatusRepositoryTest extends AbstractMvcTest{
 	

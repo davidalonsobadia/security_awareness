@@ -1,9 +1,11 @@
 package org.security_awareness.controller;
 
+import static org.security_awareness.config.ResultMatchersImpl.isConflict;
+import static org.security_awareness.config.ResultMatchersImpl.isNoContent;
+import static org.security_awareness.config.ResultMatchersImpl.isNotFound;
+
 import org.junit.Test;
 import org.security_awareness.config.AbstractMvcTest;
-
-import static org.security_awareness.config.ResultMatchersImpl.*;
 
 public class RegisterControllerTest extends AbstractMvcTest{
 	

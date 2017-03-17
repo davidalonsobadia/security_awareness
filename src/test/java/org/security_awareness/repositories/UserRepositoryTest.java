@@ -3,8 +3,10 @@ package org.security_awareness.repositories;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-
-import static org.security_awareness.config.ResultMatchersImpl.*;
+import static org.security_awareness.config.ResultMatchersImpl.isCreated;
+import static org.security_awareness.config.ResultMatchersImpl.isForbidden;
+import static org.security_awareness.config.ResultMatchersImpl.isNoContent;
+import static org.security_awareness.config.ResultMatchersImpl.isOk;
 
 import java.util.List;
 

@@ -32,7 +32,7 @@ public class OAuth2Test {
     public static final String CLIENT_ID = "security_awareness_app";
     public static final String CLIENT_SECRET = "secret";
     public static final String ADMIN_NAME = "david.alonso@eurecat.org";
-    public static final String ADMIN_PASSWORD = "123456";
+    public static final String ADMIN_PASSWORD = "Awareness2017";
 
     @Autowired
     private WebApplicationContext context;

@@ -1,16 +1,15 @@
 package org.security_awareness.controller;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.security_awareness.config.ResultMatchersImpl.isOk;
+
 import java.util.List;
 
 import org.junit.Test;
 import org.security_awareness.config.AbstractMvcTest;
 import org.security_awareness.model.Activity;
 import org.springframework.test.web.servlet.ResultActions;
-
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertEquals;
-
-import static org.security_awareness.config.ResultMatchersImpl.*;
 
 
 

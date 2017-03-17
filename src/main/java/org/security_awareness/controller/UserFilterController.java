@@ -85,7 +85,6 @@ public class UserFilterController {
 
 		Resources<EmbeddedWrapper> resources = new Resources<>(Arrays.asList(wrapper));
 		resources.add(linkTo(methodOn(UserFilterController.class).getUsersFiltered("json")).withSelfRel());
-		return resources;		
-		
+		return resources;			
 	}
 }

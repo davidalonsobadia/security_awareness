@@ -1,11 +1,13 @@
 package org.security_awareness.controller;
 
+import static org.security_awareness.config.ResultMatchersImpl.isConflict;
+import static org.security_awareness.config.ResultMatchersImpl.isOk;
+import static org.security_awareness.config.ResultMatchersImpl.isUnauthorized;
+
 import org.junit.Test;
 import org.security_awareness.config.AbstractMvcTest;
 import org.security_awareness.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import static org.security_awareness.config.ResultMatchersImpl.*;
 
 public class ChangePasswordTest extends AbstractMvcTest{
 
@@ -18,7 +20,7 @@ public class ChangePasswordTest extends AbstractMvcTest{
 			+ "\n\t\"newPassword\": \"%s\","
 			+ "\n\t\"userId\": %d\n}";
 	
-	private String rightPassword = "123456";
+	private String rightPassword = "Awareness2017";
 	private String wrongPassword = "wrongPassword";
 	private String newPassword = "111111";
 	

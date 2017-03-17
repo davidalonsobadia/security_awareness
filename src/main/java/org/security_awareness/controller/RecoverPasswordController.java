@@ -1,13 +1,12 @@
 package org.security_awareness.controller;
 
-import java.util.UUID;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.security_awareness.model.Password;
 import org.security_awareness.model.User;
 import org.security_awareness.service.PasswordService;
 import org.security_awareness.service.UserService;
+import org.security_awareness.utils.RandomPasswordGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -46,7 +45,7 @@ public class RecoverPasswordController {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
 		
-		String randomPassword = UUID.randomUUID().toString();
+		String randomPassword = generatePassword();
 		
 		System.out.println("random Password: " + randomPassword);
 		
@@ -64,6 +63,8 @@ public class RecoverPasswordController {
 	
 	
 	
+
+
 	// ------------------- NON API -------------------
 	
 	private SimpleMailMessage createMailMessage(HttpServletRequest request, 
@@ -79,5 +80,16 @@ public class RecoverPasswordController {
 		mailMessage.setSubject("Security Awareness password recovery request");
 		mailMessage.setText(emailText);
 		return mailMessage;
+	}
+	
+	private String generatePassword() {
+		int noOfCAPSAlpha = 1;
+        int noOfDigits = 1;
+        int noOfSplChars = 0;
+        int minLen = 8;
+        int maxLen = 16;
+		char[] generatedPassword = RandomPasswordGenerator.generatePswd(minLen, maxLen,
+                noOfCAPSAlpha, noOfDigits, noOfSplChars);
+		return String.valueOf(generatedPassword);
 	}
 }

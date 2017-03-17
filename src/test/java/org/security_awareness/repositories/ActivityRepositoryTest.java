@@ -1,6 +1,7 @@
 package org.security_awareness.repositories;
 
 import static org.junit.Assert.assertEquals;
+import static org.security_awareness.config.ResultMatchersImpl.isOk;
 
 import java.util.List;
 
@@ -10,8 +11,6 @@ import org.security_awareness.model.Activity;
 import org.security_awareness.service.ZoneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.ResultActions;
-
-import static org.security_awareness.config.ResultMatchersImpl.*;
 
 public class ActivityRepositoryTest extends AbstractMvcTest{
 
@@ -97,8 +96,7 @@ public class ActivityRepositoryTest extends AbstractMvcTest{
 		List<Activity> activities = getEntitiesList(
 				action.andReturn().getResponse().getContentAsString(),
 				Activity.class);
-		assertEquals(activities.size(), 5);
-
+		assertEquals(activities.size(), 4);
 	}
 	
 	@Test
@@ -114,8 +112,7 @@ public class ActivityRepositoryTest extends AbstractMvcTest{
 		List<Activity> activities = getEntitiesList(
 				action.andReturn().getResponse().getContentAsString(),
 				Activity.class);
-		assertEquals(activities.size(), 1);
-
+		assertEquals(activities.size(), 2);
 	}
 
 	@Override

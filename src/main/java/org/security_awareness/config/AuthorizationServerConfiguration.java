@@ -26,6 +26,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     private static final String ENV_OAUTH = "authentication.oauth.";
     private static final String PROP_CLIENTID = "clientid";
+    private static final String PROP_CLIENT_SECRET = "secret";
     private static final String PROP_TOKEN_VALIDITY_SECONDS = "tokenValidityInSeconds";
 
     private RelaxedPropertyResolver propertyResolver;
@@ -65,7 +66,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {    	
         clients.inMemory()
                 .withClient(propertyResolver.getProperty(PROP_CLIENTID))
-	                .secret("secret")
+	                .secret(propertyResolver.getProperty(PROP_CLIENT_SECRET))
 	                .scopes("read", "write")
 	                .authorities("ROLE_CLIENT")
 	                .authorizedGrantTypes("password", "refresh_token")

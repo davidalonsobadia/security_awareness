@@ -1,8 +1,10 @@
 package org.security_awareness.controller;
 
+import static org.security_awareness.config.ResultMatchersImpl.isCreated;
+import static org.security_awareness.config.ResultMatchersImpl.isForbidden;
+
 import org.junit.Test;
 import org.security_awareness.config.AbstractMvcTest;
-import static org.security_awareness.config.ResultMatchersImpl.*;
 
 
 public class ActivityControllerTest extends AbstractMvcTest{

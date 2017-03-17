@@ -13,11 +13,11 @@ import org.springframework.stereotype.Component;
 public class AuthenticationUser {
 	
     public static final String ADMIN_NAME = "david.alonso@eurecat.org";
-    public static final String ADMIN_PASSWORD = "123456";
+    public static final String ADMIN_PASSWORD = "Awareness2017";
     public static final String USER_NAME = "txema_50@mail.com";
     public static final String USER_PASSWORD = "123456";
     public static final String ANONYMOUS_NAME = "victor_50@mail.com";;
-    public static final String ANONYMOUS_PASSWORD = "123456";
+    public static final String ANONYMOUS_PASSWORD = "Awareness2017";
     
 	public User admin(){
 		

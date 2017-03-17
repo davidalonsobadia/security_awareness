@@ -1,12 +1,13 @@
 package org.security_awareness.controller;
 
+import static org.security_awareness.config.ResultMatchersImpl.isNotFound;
+import static org.security_awareness.config.ResultMatchersImpl.isOk;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Test;
 import org.security_awareness.config.AbstractMvcTest;
-
-import static org.security_awareness.config.ResultMatchersImpl.*;
 public class RecoverPasswordTest extends AbstractMvcTest{
 
 	private final String RESOURCE_NAME = "recoverPassword";

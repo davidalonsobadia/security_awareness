@@ -1,6 +1,8 @@
 package org.security_awareness.controller;
 
 import static org.junit.Assert.assertTrue;
+import static org.security_awareness.config.ResultMatchersImpl.isNotFound;
+import static org.security_awareness.config.ResultMatchersImpl.isOk;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,8 +11,6 @@ import org.json.JSONObject;
 import org.junit.Test;
 import org.security_awareness.config.AbstractMvcTest;
 import org.springframework.test.web.servlet.ResultActions;
-
-import static org.security_awareness.config.ResultMatchersImpl.*;
 
 public class IsRegisteredControllerTest extends AbstractMvcTest{
 	

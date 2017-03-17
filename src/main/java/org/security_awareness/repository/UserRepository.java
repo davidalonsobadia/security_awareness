@@ -9,6 +9,7 @@ import org.security_awareness.model.User;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 public interface UserRepository extends CrudRepository<User, Long> {
 			
@@ -80,7 +81,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
 	Set<User> findAllByVisibility(@Param("user") String user);
 
 
-	@PreAuthorizeAdmin
+	@RestResource(exported=false)
 	@Query("SELECT u from User u "
 			+ "JOIN u.zoneStatus z "
 			+ "WHERE z.zone IN ("
@@ -92,7 +93,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
 				+ "AND z.status > 0")
 	Set<User> findAllByUserZones(@Param("user") String user);
 	
-	@PreAuthorizeAdmin
+	@RestResource(exported=false)
 	@Query("SELECT user FROM User user "
 			+ "JOIN user.activityStatus activity_status "
 			+ "WHERE activity_status.activity IN ("
@@ -103,7 +104,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
 				+ ")")
 	Set<User> findAllByInterestedAndUser(@Param("user") String user);
 	
-	@PreAuthorizeAdmin
+	@RestResource(exported=false)
 	@Query("SELECT user FROM User user "
 			+ "JOIN user.activityStatus activity_status "
 			+ "WHERE activity_status.activity IN ("
