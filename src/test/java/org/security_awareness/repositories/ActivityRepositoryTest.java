@@ -72,7 +72,7 @@ public class ActivityRepositoryTest extends AbstractMvcTest{
 	public void Should_get3ActivitiesResult_When_MonthAndYearAndUserZones() throws Exception  {
 		
 		String params = "search/findAllByMonthAndYearAndUserZones?month=%d&year=%d&user=%s";
-		params = String.format(params, 1, 2017, "juan_50@mail.com");
+		params = String.format(params, 1, 2017, "juan.caubet@eurecat.org");
 		
 		ResultActions action = readWithVariables(user(), params);
 		verify(action, isOk());

@@ -38,7 +38,7 @@ public class IsRegisteredControllerTest extends AbstractMvcTest{
 	@Test
 	public void Should_OKAndFalse_When_UserNotRegistered() throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("email", "juan_50@mail.com");
+		map.put("email", "juan.caubet@eurecat.org");
 		
 		ResultActions result = readWithParams(user(), map);
 		verify(result, isOk());
