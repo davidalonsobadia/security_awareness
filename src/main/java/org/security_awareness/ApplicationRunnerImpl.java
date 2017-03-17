@@ -78,7 +78,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 	private static final String GONZALO = "gonzalo_50@mail.com";
 	private static final String MARIO = "mario_50@mail.com";
 	private static final String SERGI = "sergi_50@mail.com";
-	private static final String JUAN = "juan_50@mail.com";
+	private static final String JUAN = "juan.caubet@eurecat.org";
 	private static final String VICTOR = "victor_50@mail.com";
 	private static final String MARCOS = "marcos_50@mail.com";
 	private static final String ANNA = "anna@weappyou.com";
