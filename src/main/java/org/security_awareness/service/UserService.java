@@ -25,4 +25,6 @@ public interface UserService {
 	Set<User> findAllByInterestedAndUser(String user);
 
 	Set<User> findAllByAssistedAndUser(String user);
+
+	Set<User> findAllByZone(long concreteZone);
 }

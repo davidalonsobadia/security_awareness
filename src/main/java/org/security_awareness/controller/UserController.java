@@ -6,6 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.security_awareness.model.Authority;
+import org.security_awareness.model.Password;
 import org.security_awareness.model.Role;
 import org.security_awareness.model.User;
 import org.security_awareness.service.AuthorityService;
@@ -52,10 +53,10 @@ public class UserController {
 		
 		Authority authority =authorityService.findByRole(
 				Role.valueOf(userContext.getAuthority().toUpperCase()));
-		boolean registered = authority.getRole().compareTo(Role.ANONYMOUS)==0 ? false : true; 
-		user.setRegistered(registered);
 		user.setAuthority(authority);
 			
+		user.setPassword(userContext.getPassword());
+					
 		User userSaved = userService.save(user);
 	
 	    BasicLinkBuilder builder = BasicLinkBuilder.linkToCurrentMapping()

@@ -46,6 +46,8 @@ public class UserFilterController {
 		boolean assistant = json.getBoolean("assistant");
 		boolean interested = json.getBoolean("interested");
 		
+		long concreteZone = json.getLong("concreteZone");
+		
 		User currentUser = userService.findByEmail(
 				SecurityContextHolder.getContext()
 					.getAuthentication().getName()
@@ -60,6 +62,9 @@ public class UserFilterController {
 			Set<User> usersByZone = userService.findAllByUserZones(userEmail);
 			allUsers.retainAll(usersByZone);
 			
+		} else if(concreteZone != 0){
+			Set<User> userOfAZone = userService.findAllByZone(concreteZone);
+			allUsers.retainAll(userOfAZone);
 		}
 		
 		// 2. Check interested filter

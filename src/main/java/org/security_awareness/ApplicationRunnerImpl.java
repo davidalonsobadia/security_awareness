@@ -86,6 +86,23 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 	private static final String SAMUEL = "samuel_50@mail.com";
 	private static final String DIEGO = "diego_50@mail.com";
 	
+	private static final String PAU = "pau.li@eurecat.org";
+	private static final String RAMSES = "ramses_50@mail.com";
+	private static final String SERGI_ROVIRA = "sergi.rovira@eurecat.org";
+	private static final String AITOR = "aitor_50@mail.com";
+	private static final String CARME = "carme.zambrana@eurecat.org";
+	private static final String MIREIA = "mireia.claramun@eurecat.org";
+	private static final String MARIONA = "mariona_50@mail.com";
+	private static final String ROSA = "rosa_50@mail.com";
+	private static final String JORDI = "jordi_50@mail.com";
+	private static final String CLARA = "clara_50@mail.com";
+	private static final String MONTSE = "montse_50@mail.com";
+	private static final String PABLO = "pablo_50@mail.com";
+	private static final String NURIA = "nuria_50@mail.com";
+	private static final String NEUS = "neus_50@mail.com";
+	private static final String ADRIAN = "adrian_50@mail.com";
+	private static final String CRISTINA = "cristina_50@mail.com";
+		
 	private static final String DEFAULT_PASSWORD = "Awareness2017";
 	
 	private static final String BARCELONA = "Barcelona";
@@ -94,20 +111,24 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 	private static final String TARRAGONA = "Tarragona";
 	private static final String GIRONA = "Girona";
 	
+	private static final String ZARAGOZA = "Zaragoza";
+	private static final String TERUEL = "Teruel";
+	private static final String VALENCIA = "Valencia";
+
 	
 	private static final SimpleDateFormat DATE_FORMAT = DateFormatSingleton.getDateFormat();
 	
 	
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
-		loadSecurityContext();
-		loadUsersData();
-		loadZonesData();
-		loadZoneStatus();
-		loadActivities();
-		loadActivityStatus();
-		loadNotifications();
-		loadResources();
+//		loadSecurityContext();
+//		loadUsersData();
+//		loadZonesData();
+//		loadZoneStatus();
+//		loadActivities();
+//		loadActivityStatus();
+//		loadNotifications();
+//		loadResources();
 	}
 	
 	private void loadActivityStatus(){
@@ -449,6 +470,58 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 			activity10.setNumRepeats(1);
 			activityService.save(activity10);
 			
+			// Activity 11
+			Activity activity11 = new Activity();
+			activity11.setName("How to grow your business with an API");
+			activity11.setDescription("Hey all! For the 2nd product manager meetup of the year, we’ll be focusing on API’s, and how to use them effectively to grow your business. API’s offers endless possibilities for your product, but which to use, what is right for your product and how to find them. With us we have the CTO of Hitch, Bruno Pedro, the startup that connects API’s and companies. He will share insights and experience as he’s working closely with both parties.");
+			activity11.setPlace("Eurecat Headquarters");
+			activity11.setZone(zoneRepository.findByName(BARCELONA));
+			activity11.setDateTimeStart(DATE_FORMAT.parse("01/04/2017 18:00"));
+			activity11.setDateTimeEnd(DATE_FORMAT.parse("01/04/2017 21:00"));
+			activity11.setManager(userRepository.findByEmail(ALONSO));
+			activity11.setType(2);
+			activity11.setNumRepeats(0);
+			activityService.save(activity11);
+			
+			// Activity 12
+			Activity activity12 = new Activity();
+			activity12.setName("Stack Tuesday");
+			activity12.setDescription("Description Here");
+			activity12.setPlace("Eurecat Headquarters");
+			activity12.setZone(zoneRepository.findByName(BARCELONA));
+			activity12.setDateTimeStart(DATE_FORMAT.parse("04/04/2017 15:30"));
+			activity12.setDateTimeEnd(DATE_FORMAT.parse("04/04/2017 20:00"));
+			activity12.setManager(userRepository.findByEmail(GONZALO));
+			activity12.setType(2);
+			activity12.setNumRepeats(0);
+			activityService.save(activity12);
+			
+			// Activity 13
+			Activity activity13 = new Activity();
+			activity13.setName("Tech Experience Conference Madrid");
+			activity13.setDescription("test of new Congress");
+			activity13.setPlace("Madrid");
+			activity13.setZone(zoneRepository.findByName(MADRID));
+			activity13.setDateTimeStart(DATE_FORMAT.parse("12/05/2017 09:00"));
+			activity13.setDateTimeEnd(DATE_FORMAT.parse("12/05/2017 19:00"));
+			activity13.setManager(userRepository.findByEmail(GONZALO));
+			activity13.setType(1);
+			activity13.setNumRepeats(5);
+			activityService.save(activity13);
+			
+			// Activity 14
+			Activity activity14 = new Activity();
+			activity14.setName("Maño Congress");
+			activity14.setDescription("Zaragoza Congress");
+			activity14.setPlace("Los pilares Restaurant");
+			activity14.setZone(zoneRepository.findByName(ZARAGOZA));
+			activity14.setDateTimeStart(DATE_FORMAT.parse("30/04/2017 06:45"));
+			activity14.setDateTimeEnd(DATE_FORMAT.parse("30/04/2017 19:00"));
+			activity14.setManager(userRepository.findByEmail(ALONSO));
+			activity14.setType(1);
+			activity14.setNumRepeats(3);
+			activityService.save(activity14);
+			
 		} catch (ParseException e) {
 			e.printStackTrace();
 			
@@ -468,12 +541,66 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 		User userAnna = userRepository.findByEmail(ANNA);
 		User userSergi = userRepository.findByEmail(SERGI);
 		User userMarcos = userRepository.findByEmail(MARCOS);
+		User userPau = userRepository.findByEmail(PAU);
+		User userRamses = userRepository.findByEmail(RAMSES);
+		User userSergiRovira = userRepository.findByEmail(SERGI_ROVIRA);
 		
 		Zone zoneBarcelona = zoneRepository.findByName(BARCELONA);
 		Zone zoneMadrid = zoneRepository.findByName(MADRID);
 		Zone zoneGirona = zoneRepository.findByName(GIRONA);
 		Zone zoneLleida = zoneRepository.findByName(LLEIDA);
 		Zone zoneTarragona = zoneRepository.findByName(TARRAGONA);
+		Zone zoneZaragoza= zoneRepository.findByName(ZARAGOZA);
+		Zone zoneTeruel = zoneRepository.findByName(TERUEL);
+		Zone zoneValencia= zoneRepository.findByName(VALENCIA);
+		
+		ZoneStatus zoneStatusAdmins = new ZoneStatus();
+		zoneStatusAdmins.setStatus(2); // admin
+		zoneStatusAdmins.setUser(userDavid);
+		zoneStatusAdmins.setZone(zoneBarcelona);
+		zoneStatusRepository.save(zoneStatusAdmins);
+		
+		ZoneStatus zoneStatusAdmins2 = new ZoneStatus();
+		zoneStatusAdmins2.setStatus(2); // admin
+		zoneStatusAdmins2.setUser(userGonzalo);
+		zoneStatusAdmins2.setZone(zoneMadrid);
+		zoneStatusRepository.save(zoneStatusAdmins2);
+		
+		ZoneStatus zoneStatusAdmins3 = new ZoneStatus();
+		zoneStatusAdmins3.setStatus(2); // admin
+		zoneStatusAdmins3.setUser(userMario);
+		zoneStatusAdmins3.setZone(zoneGirona);
+		zoneStatusRepository.save(zoneStatusAdmins3);
+		
+		ZoneStatus zoneStatusAdmins4 = new ZoneStatus();
+		zoneStatusAdmins4.setStatus(2); // admin
+		zoneStatusAdmins4.setUser(userDiego);
+		zoneStatusAdmins4.setZone(zoneLleida);
+		zoneStatusRepository.save(zoneStatusAdmins4);
+		
+		ZoneStatus zoneStatusAdmins5 = new ZoneStatus();
+		zoneStatusAdmins5.setStatus(2); // admin
+		zoneStatusAdmins5.setUser(userSamuel);
+		zoneStatusAdmins5.setZone(zoneTarragona);
+		zoneStatusRepository.save(zoneStatusAdmins5);
+		
+		ZoneStatus zoneStatusAdmins6 = new ZoneStatus();
+		zoneStatusAdmins6.setStatus(2); // admin
+		zoneStatusAdmins6.setUser(userPau);
+		zoneStatusAdmins6.setZone(zoneZaragoza);
+		zoneStatusRepository.save(zoneStatusAdmins6);
+		
+		ZoneStatus zoneStatusAdmins7 = new ZoneStatus();
+		zoneStatusAdmins7.setStatus(2); // admin
+		zoneStatusAdmins7.setUser(userRamses);
+		zoneStatusAdmins7.setZone(zoneTeruel);
+		zoneStatusRepository.save(zoneStatusAdmins7);
+		
+		ZoneStatus zoneStatusAdmins8 = new ZoneStatus();
+		zoneStatusAdmins8.setStatus(2); // admin
+		zoneStatusAdmins8.setUser(userSergiRovira);
+		zoneStatusAdmins8.setZone(zoneValencia);
+		zoneStatusRepository.save(zoneStatusAdmins8);
 		
 		ZoneStatus zoneStatus = new ZoneStatus();
 		zoneStatus.setStatus(1); // accepted
@@ -481,11 +608,11 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 		zoneStatus.setZone(zoneBarcelona);
 		zoneStatusRepository.save(zoneStatus);
 
-		ZoneStatus zoneStatus1 = new ZoneStatus();
-		zoneStatus1.setStatus(1); // accepted
-		zoneStatus1.setUser(userGonzalo);
-		zoneStatus1.setZone(zoneMadrid);
-		zoneStatusRepository.save(zoneStatus1);
+//		ZoneStatus zoneStatus1 = new ZoneStatus();
+//		zoneStatus1.setStatus(1); // accepted
+//		zoneStatus1.setUser(userGonzalo);
+//		zoneStatus1.setZone(zoneMadrid);
+//		zoneStatusRepository.save(zoneStatus1);
 		
 		ZoneStatus zoneStatus2 = new ZoneStatus();
 		zoneStatus2.setStatus(1); // accepted
@@ -542,11 +669,11 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 		zoneStatus10.setZone(zoneGirona);
 		zoneStatusRepository.save(zoneStatus10);	
 		
-		ZoneStatus zoneStatus11 = new ZoneStatus();
-		zoneStatus11.setStatus(1); // accepted
-		zoneStatus11.setUser(userDavid);
-		zoneStatus11.setZone(zoneBarcelona);
-		zoneStatusRepository.save(zoneStatus11);
+//		ZoneStatus zoneStatus11 = new ZoneStatus();
+//		zoneStatus11.setStatus(1); // accepted
+//		zoneStatus11.setUser(userDavid);
+//		zoneStatus11.setZone(zoneBarcelona);
+//		zoneStatusRepository.save(zoneStatus11);
 		
 		ZoneStatus zoneStatus12 = new ZoneStatus();
 		zoneStatus12.setStatus(1); // accepted
@@ -576,25 +703,22 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 	private void loadZonesData() {
 		
 		Zone bar = new Zone(BARCELONA);
-		//bar.setManager(newArrayList(userRepository.findByEmail(GONZALO)));
-				
 		Zone gir = new Zone(GIRONA);
-		//gir.setManager(newArrayList(userRepository.findByEmail(GONZALO)));
-		
 		Zone tar = new Zone(TARRAGONA);
-		//tar.setManager(newArrayList(userRepository.findByEmail(MARIO)));
-		
 		Zone lle = new Zone(LLEIDA);
-		//lle.setManager(newArrayList(userRepository.findByEmail(MARIO)));
-		
 		Zone mad = new Zone(MADRID);
-		//mad.setManager(newArrayList(userRepository.findByEmail(MARIO)));
+		Zone zar = new Zone(ZARAGOZA);
+		Zone ter = new Zone(TERUEL);
+		Zone val = new Zone(VALENCIA);
 
 		zoneRepository.save(bar);
 		zoneRepository.save(gir);
 		zoneRepository.save(tar);
 		zoneRepository.save(lle);
 		zoneRepository.save(mad);
+		zoneRepository.save(zar);
+		zoneRepository.save(ter);
+		zoneRepository.save(val);
 	}
 	
 	
@@ -619,7 +743,6 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				superadmin,
 				new UserConfiguration(4,4));
 		user1.setCity(BARCELONA);
-		user1.setRegistered(true);
 		userRepository.save(user1);
 		
 		User user2 = new User(
@@ -630,7 +753,6 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				admin,
 				new UserConfiguration(4,4));
 		user2.setCity(MADRID);
-		user2.setRegistered(true);
 		userRepository.save(user2);
 		
 		User user3 = new User(
@@ -641,7 +763,6 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				admin,
 				new UserConfiguration(3,4));
 		user3.setCity("Fraga");
-		user3.setRegistered(true);
 		userRepository.save(user3);
 		
 		
@@ -650,10 +771,9 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				"Alonso", 
 				new Password(passwordEncoder.encode(DEFAULT_PASSWORD)), 
 				SERGI,
-				user,
+				admin,
 				new UserConfiguration(3,4));
 		user4.setCity("Terrassa");
-		user4.setRegistered(true);
 		userRepository.save(user4);
 		
 		User user5 = new User(
@@ -661,10 +781,9 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				"Exposito", 
 				new Password(passwordEncoder.encode(DEFAULT_PASSWORD)), 
 				SAMUEL,
-				user,
+				admin,
 				new UserConfiguration(3,4));
 		user5.setCity(BARCELONA);
-		user5.setRegistered(true);
 		userRepository.save(user5);
 
 		
@@ -673,10 +792,9 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				"Delgado", 
 				new Password(passwordEncoder.encode(DEFAULT_PASSWORD)), 
 				DIEGO,
-				user,
+				admin,
 				new UserConfiguration(2,0));
 		user6.setCity(BARCELONA);
-		user6.setRegistered(true);
 		userRepository.save(user6);
 		
 		
@@ -685,10 +803,9 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				"Repolles", 
 				new Password(passwordEncoder.encode(DEFAULT_PASSWORD)), 
 				MARCOS,
-				user,
+				anonymous,
 				new UserConfiguration(1,0));
 		user7.setCity(BARCELONA);
-		user7.setRegistered(true);
 		userRepository.save(user7);
 
 		
@@ -700,7 +817,6 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				user,
 				new UserConfiguration(1,0));
 		user8.setCity("Guipuzcoa");
-		user8.setRegistered(true);
 		userRepository.save(user8);
 
 		
@@ -712,7 +828,6 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				anonymous,
 				new UserConfiguration(0,0));
 		user9.setCity("Montanya");
-		user9.setRegistered(false);
 		userRepository.save(user9);
 
 
@@ -724,7 +839,6 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				anonymous,
 				new UserConfiguration(4,4));
 		user10.setCity(GIRONA);
-		user10.setRegistered(false);
 		userRepository.save(user10);
 		
 		
@@ -733,11 +847,170 @@ public class ApplicationRunnerImpl implements ApplicationRunner{
 				"Noell",
 				new Password(passwordEncoder.encode(DEFAULT_PASSWORD)),
 				ANNA,
-				anonymous,
+				user,
 				new UserConfiguration(0,0));
 		user11.setCity(BARCELONA);
-		user11.setRegistered(false);
-		userRepository.save(user11);			
+		userRepository.save(user11);
+		
+		User user12 = new User(
+				"Pau",
+				"Li",
+				new Password(passwordEncoder.encode(DEFAULT_PASSWORD)),
+				PAU,
+				admin,
+				new UserConfiguration(4,1));
+		user12.setCity("Sant Cugat del Vallès");
+		userRepository.save(user12);	
+		
+		User user13 = new User(
+				"Ramses",
+				"Unknown",
+				new Password(passwordEncoder.encode(DEFAULT_PASSWORD)),
+				RAMSES,
+				admin,
+				new UserConfiguration(3,0));
+		user13.setCity(TARRAGONA);
+		userRepository.save(user13);	
+		
+		User user14 = new User(
+				"Sergi",
+				"Rovira",
+				new Password(passwordEncoder.encode(DEFAULT_PASSWORD)),
+				SERGI_ROVIRA,
+				admin,
+				new UserConfiguration(2,2));
+		user14.setCity(GIRONA);
+		userRepository.save(user14);	
+		
+		User user15 = new User(
+				"Aitor",
+				"Menta",
+				new Password(passwordEncoder.encode(DEFAULT_PASSWORD)),
+				AITOR,
+				user,
+				new UserConfiguration(4,4));
+		user15.setCity(TARRAGONA);
+		userRepository.save(user15);	
+		
+		User user16 = new User(
+				"Carme",
+				"Zambrana",
+				new Password(passwordEncoder.encode(DEFAULT_PASSWORD)),
+				CARME,
+				user,
+				new UserConfiguration(4,3));
+		user16.setCity("Palma de Mallorca");
+		userRepository.save(user16);	
+		
+		User user17 = new User(
+				"Mireia",
+				"Claramunt",
+				new Password(passwordEncoder.encode(DEFAULT_PASSWORD)),
+				MIREIA,
+				user,
+				new UserConfiguration(4,4));
+		user17.setCity(LLEIDA);
+		userRepository.save(user17);	
+		
+		User user18 = new User(
+				"Mariona",
+				"Garcia",
+				new Password(passwordEncoder.encode(DEFAULT_PASSWORD)),
+				MARIONA,
+				user,
+				new UserConfiguration(4,4));
+		user18.setCity("Badia del Valles");
+		userRepository.save(user18);	
+		
+		User user19 = new User(
+				"Rosa",
+				"Garcia",
+				new Password(passwordEncoder.encode(DEFAULT_PASSWORD)),
+				ROSA,
+				user,
+				new UserConfiguration(4,3));
+		user19.setCity("La Garriga");
+		userRepository.save(user19);	
+		
+		User user20 = new User(
+				"Jordi",
+				"Garcia",
+				new Password(passwordEncoder.encode(DEFAULT_PASSWORD)),
+				JORDI,
+				user,
+				new UserConfiguration(4,4));
+		user20.setCity(BARCELONA);
+		userRepository.save(user20);	
+		
+		User user21 = new User(
+				"Clara",
+				"Garcia",
+				new Password(passwordEncoder.encode(DEFAULT_PASSWORD)),
+				CLARA,
+				user,
+				new UserConfiguration(4,4));
+		user21.setCity("Reus");
+		userRepository.save(user21);	
+		
+		User user22 = new User(
+				"Montse",
+				"Martinez",
+				new Password(passwordEncoder.encode(DEFAULT_PASSWORD)),
+				MONTSE,
+				user,
+				new UserConfiguration(4,1));
+		user22.setCity("Blanes");
+		userRepository.save(user22);	
+		
+		User user23 = new User(
+				"Pablo",
+				"Badia",
+				new Password(passwordEncoder.encode(DEFAULT_PASSWORD)),
+				PABLO,
+				user,
+				new UserConfiguration(4,4));
+		user23.setCity("Castellar");
+		userRepository.save(user23);
+		
+		User user24 = new User(
+				"Nuria",
+				"Marcet",
+				new Password(passwordEncoder.encode(DEFAULT_PASSWORD)),
+				NURIA,
+				user,
+				new UserConfiguration(4,4));
+		user24.setCity("Rubi");
+		userRepository.save(user24);
+		
+		User user25 = new User(
+				"Neus",
+				"Castillo",
+				new Password(passwordEncoder.encode(DEFAULT_PASSWORD)),
+				NEUS,
+				anonymous,
+				new UserConfiguration(4,4));
+		user25.setCity("Sabadell");
+		userRepository.save(user25);
+		
+		User user26 = new User(
+				"Adrian",
+				"Caubet",
+				new Password(passwordEncoder.encode(DEFAULT_PASSWORD)),
+				ADRIAN,
+				anonymous,
+				new UserConfiguration(4,4));
+		user26.setCity("La Palma de Cervelló");
+		userRepository.save(user26);
+		
+		User user27 = new User(
+				"Cristina",
+				"Caubet",
+				new Password(passwordEncoder.encode(DEFAULT_PASSWORD)),
+				CRISTINA,
+				anonymous,
+				new UserConfiguration(4,4));
+		user27.setCity("La Palma de Cervelló");
+		userRepository.save(user27);
 	}
 	
 	void loadSecurityContext(){

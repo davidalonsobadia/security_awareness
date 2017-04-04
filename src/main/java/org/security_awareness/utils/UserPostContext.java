@@ -11,9 +11,7 @@ public class UserPostContext {
 	private String lastName;
 	
 	private String city;
-	
-	private boolean registered;
-	
+		
 	private Object manager;
 			
 	private UserConfiguration configuration;
@@ -46,14 +44,6 @@ public class UserPostContext {
 
 	public void setCity(String city) {
 		this.city = city;
-	}
-
-	public boolean isRegistered() {
-		return registered;
-	}
-
-	public void setRegistered(boolean registered) {
-		this.registered = registered;
 	}
 
 	public Object getManager() {

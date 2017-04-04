@@ -31,7 +31,13 @@ public interface UserRepository extends CrudRepository<User, Long> {
 	
 	User findByEmail(@Param("email") String email);
 	
-	// Visibility: null(0), by common assisted activities(1), by common interested activities(2), by common zones(3), all(4)
+	/* Visibility: 
+	 * 		null(0)
+	 * 		by common assisted activities(1)
+	 * 		by common interested or assisted activities(2)
+	 * 		by common zones(3)
+	 * 		all(4)
+	 * */
 	@Query("SELECT user from User user "
 			+ "JOIN user.configuration c "
 			// VISIBILITY = 4
@@ -59,7 +65,8 @@ public interface UserRepository extends CrudRepository<User, Long> {
 					+ "SELECT activity_status.activity from ActivityStatus activity_status "
 					+ "JOIN activity_status.user u "
 					+ "WHERE u.email LIKE :user "
-					+ "AND activity_status.interested = true"
+					+ "AND "
+						+ "(activity_status.interested = true OR activity_status.assistant = true)"
 					+ ")"
 				+ "AND c2.visibility = 2"
 			+")"
@@ -76,7 +83,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
 					+ ")"
 				+ "AND c1.visibility = 1"
 			+") "
-			+ "AND user.registered = true"
 			)
 	Set<User> findAllByVisibility(@Param("user") String user);
 
@@ -114,4 +120,15 @@ public interface UserRepository extends CrudRepository<User, Long> {
 				+ "AND activity_status.assistant = true"
 				+ ")")
 	Set<User> findAllByAssistedAndUser(@Param("user") String user);
+
+	@RestResource(exported=false)
+	@Query("SELECT u from User u "
+			+ "JOIN u.zoneStatus z "
+			+ "WHERE z.zone.id = :concreteZone "
+//				+ "SELECT * FROM Zone concreteZone"
+//				+ "WHERE "
+//				+ 	"concreteZone.id = :concreteZones"
+//				+ ""
+				+ "AND z.status > 0")
+	Set<User> findAllByZone(long concreteZone);
 }

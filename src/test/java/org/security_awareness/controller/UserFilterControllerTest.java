@@ -22,20 +22,20 @@ public class UserFilterControllerTest extends AbstractMvcTest {
 	
 	@Test
 	public void Should_GetAllPossibleUsers_When_NoFilters() throws Exception{
-		String body = "{\n\t\"myZones\": false,\n\t\"assistant\": false,\n\t\"interested\": false\n}";
+		String body = "{\n\t\"myZones\": false,\n\t\"assistant\": false,\n\t\"interested\": false,\n\t\"concreteZone\": 0\n}";
 		ResultActions results = create(user(), body, "/search/findByFilters");
 		List<User> users = getEntitiesList(
 				results.andReturn().getResponse().getContentAsString(),
 				User.class);
 		
 		assertNotNull(users);
-		assertEquals(users.size(), 6);
+		assertEquals(users.size(), 20);
 		verify(results, isOk());
 	}
 
 	@Test
 	public void Should_GetUsers_When_MyZonesFilter() throws Exception{
-		String body = "{\n\t\"myZones\": true,\n\t\"assistant\": false,\n\t\"interested\": false\n}";
+		String body = "{\n\t\"myZones\": true,\n\t\"assistant\": false,\n\t\"interested\": false,\n\t\"concreteZone\": 0\n}";
 		ResultActions results = create(user(), body, "/search/findByFilters");
 		List<User> users = getEntitiesList(
 				results.andReturn().getResponse().getContentAsString(),
@@ -47,8 +47,22 @@ public class UserFilterControllerTest extends AbstractMvcTest {
 	}
 	
 	@Test
+	public void Should_GetUsers_When_ConcreteZone() throws Exception{
+		// Zone: Madrid
+		String body = "{\n\t\"myZones\": false,\n\t\"assistant\": false,\n\t\"interested\": false,\n\t\"concreteZone\": 5\n}";
+		ResultActions results = create(user(), body, "/search/findByFilters");
+		List<User> users = getEntitiesList(
+				results.andReturn().getResponse().getContentAsString(),
+				User.class);
+		
+		assertNotNull(users);
+		assertEquals(users.size(), 1);
+		verify(results, isOk());
+	}
+	
+	@Test
 	public void Should_GetUsers_When_MyZonesAndInterestedFilters() throws Exception{
-		String body = "{\n\t\"myZones\": true,\n\t\"assistant\": false,\n\t\"interested\": true\n}";
+		String body = "{\n\t\"myZones\": true,\n\t\"assistant\": false,\n\t\"interested\": true,\n\t\"concreteZone\": 0\n}";
 		ResultActions results = create(user(), body, "/search/findByFilters");
 		List<User> users = getEntitiesList(
 				results.andReturn().getResponse().getContentAsString(),
@@ -61,7 +75,7 @@ public class UserFilterControllerTest extends AbstractMvcTest {
 	
 	@Test
 	public void Should_GetUsers_When_AllFilters() throws Exception{
-		String body = "{\n\t\"myZones\": true,\n\t\"assistant\": true,\n\t\"interested\": true\n}";
+		String body = "{\n\t\"myZones\": true,\n\t\"assistant\": true,\n\t\"interested\": true,\n\t\"concreteZone\": 0\n}";
 		ResultActions results = create(user(), body, "/search/findByFilters");
 		List<User> users = getEntitiesList(
 				results.andReturn().getResponse().getContentAsString(),

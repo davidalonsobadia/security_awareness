@@ -35,9 +35,7 @@ public class User {
 	private String lastName;
 	
 	private String city;
-	
-	private boolean registered;
-	
+		
 	@ManyToOne
 	private User manager;
 			
@@ -53,8 +51,6 @@ public class User {
 	@JsonIgnore
 	private Set<ActivityStatus> activityStatus;
 		
-	@OneToMany
-	private Set<Resource> resources;
 	
 	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
 	private UserConfiguration configuration;
@@ -144,14 +140,6 @@ public class User {
 		this.manager = manager;
 	}
 
-	public Set<Resource> getResources() {
-		return resources;
-	}
-
-	public void setResources(Set<Resource> resources) {
-		this.resources = resources;
-	}
-
 	public UserConfiguration getConfiguration() {
 		return configuration;
 	}
@@ -160,14 +148,6 @@ public class User {
 		this.configuration = configuration;
 	}
 	
-	public boolean isRegistered() {
-		return registered;
-	}
-
-	public void setRegistered(boolean registered) {
-		this.registered = registered;
-	}
-
 	public Set<NotificationStatus> getNotificationStatus() {
 		return notificationStatus;
 	}

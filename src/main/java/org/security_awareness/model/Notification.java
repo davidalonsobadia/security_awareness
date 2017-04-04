@@ -3,6 +3,7 @@ package org.security_awareness.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name="notifications")
@@ -25,12 +28,13 @@ public class Notification {
 	
 	private Date date;
 	
+	@Type(type="text")
 	private String description;
 	
 	@ManyToOne
 	private User sender;
 	
-	@OneToMany(mappedBy="notification")
+	@OneToMany(mappedBy="notification", cascade=CascadeType.REMOVE)
 	private List<NotificationStatus> notificationStatus;
 
 	public String getTitle() {

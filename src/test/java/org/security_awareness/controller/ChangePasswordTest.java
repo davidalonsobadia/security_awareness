@@ -31,7 +31,7 @@ public class ChangePasswordTest extends AbstractMvcTest{
 		
 		// RESET THE PASSWORD FOR USER. OTHERWISE NEXT TESTS COULDN'T WORK
 		String bodyTest2 = String.format(body,  newPassword, rightPassword, getUserId());
-		create(user(), bodyTest2);
+		verify(create(user(), bodyTest2), isOk());
 	}
 	
 	@Test

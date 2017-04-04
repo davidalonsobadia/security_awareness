@@ -2,6 +2,7 @@ package org.security_awareness.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,7 +19,7 @@ public class Zone {
 	
 	private String name;
 			
-	@OneToMany(mappedBy="zone")
+	@OneToMany(mappedBy="zone", cascade=CascadeType.REMOVE)
 	private List<ZoneStatus> zoneStatus;
 	
 	public Zone() {}

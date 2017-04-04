@@ -14,7 +14,6 @@ public interface UsersExpanded {
 	String getLastName();
 	String getEmail();
 	String getCity();
-	boolean getRegistered();
 	
 	UserConfiguration getConfiguration();
 

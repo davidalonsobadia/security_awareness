@@ -66,7 +66,6 @@ public class RegisterController {
     	}
     	
     	userFromDatabase.setAuthority(authorityService.findByRole(Role.USER));
-    	userFromDatabase.setRegistered(true);
     	userFromDatabase.setCity(user.getCity());
     	userFromDatabase.setFirstName(user.getFirstName());
     	userFromDatabase.setLastName(user.getLastName());
@@ -112,7 +111,7 @@ public class RegisterController {
     	
     	if(userService.findByEmail(email) == null){
     		return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
-    	} else if(userService.findByEmail(email).isRegistered()){    		
+    	} else if(userService.findByEmail(email).getAuthority().getRole().compareTo(Role.ANONYMOUS)!=0){    		
     		jsonObject.put("registered", true);
     		return new ResponseEntity<String>(jsonObject.toString(), headers, HttpStatus.OK);
     	} else {

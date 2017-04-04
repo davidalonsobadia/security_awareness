@@ -68,4 +68,9 @@ public class UserServiceImpl implements UserService{
 	public Set<User> findAllByVisibility(String email) {
 		return userRepository.findAllByVisibility(email);
 	}
+
+	@Override
+	public Set<User> findAllByZone(long concreteZone) {
+		return userRepository.findAllByZone(concreteZone);
+	}
 }
